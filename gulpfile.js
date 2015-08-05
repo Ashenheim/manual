@@ -1,6 +1,3 @@
-'use strict';
-
-
 /* ------------------------------------
     Dependencies
 ------------------------------------ */
@@ -8,6 +5,7 @@ var gulp            = require('gulp');
 var sass            = require('gulp-sass');
 var sourcemaps      = require('gulp-sourcemaps');
 var autoprefixer    = require('gulp-autoprefixer');
+var concat          = require('gulp-concat');
 var plumber         = require('gulp-plumber');
 var browserSync     = require('browser-sync');
 
@@ -27,6 +25,18 @@ var settings = {
     }
 };
 
+var paths = {
+  source: {
+    sass : '_source/sass/',
+    js   : '_source/js/'
+  },
+  assets: {
+    css : 'assets/css/',
+    js  : 'assets/js/'
+  },
+  bower: 'bower_components/'
+};
+
 var files = {
     html: {
         src: [
@@ -35,16 +45,22 @@ var files = {
     },
     sass: {
         src: [
-            'sass/**/*.{scss,sass}',
-            'sass/*.{scss,sass}'
+            '_source/sass/**/*.{scss,sass}',
+            '_source/sass/*.{scss,sass}'
         ],
-        dest: 'css/'
+        dest: 'assets/css/'
     },
     js: {
         src: [
-            'js/*.js',
-            'js/**/*.js'
-        ]
+            paths.bower + 'angular/angular.min.js',
+            paths.bower + 'angular-ui-router/release/angular-ui-router.min.js',
+            paths.bower + 'jquery/dist/jquery.min.js',
+
+            '_source/js/vendors/*.js',
+            '_source/js/partials/*.js',
+            '_source/js/init.js'
+        ],
+        dest: 'assets/js/'
     }
 };
 
@@ -77,10 +93,17 @@ gulp.task('sass', function() {
         .pipe(browserSync.stream());
 });
 
+gulp.task('scripts', function() {
+  browserSync.notify('<span style="color: grey">Running:</span> Javascript compiling');
+  gulp.src(files.js.src)
+    .pipe(concat('global.js'))
+    .pipe(gulp.dest(files.js.dest))
+    .pipe(browserSync.reload({stream:true}));
+});
 
 gulp.task('watch', function() {
-    gulp.watch( files.sass.src , ['sass']);
-    gulp.watch( files.js.src ).on('change', browserSync.reload);
+    gulp.watch( files.sass.src, ['sass']);
+    gulp.watch( files.js.src, ['scripts']);
     gulp.watch( files.html.src ).on('change', browserSync.reload);
 });
 
@@ -111,4 +134,4 @@ gulp.task('browser-sync', function() {
 
 
 // Bundled tasks
-gulp.task('default', ['sass', 'watch', 'browser-sync']);
+gulp.task('default', ['sass', 'scripts', 'watch', 'browser-sync']);

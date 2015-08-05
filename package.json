@@ -1,0 +1,32 @@
+{
+  "name": "manual",
+  "version": "1.0.0",
+  "description": "A quick self-lesson for creating a website powered by Angular",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ashenheim/manual.git"
+  },
+  "keywords": [
+    "angular",
+    "manual",
+    "routes"
+  ],
+  "author": "Patrick Gerritsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashenheim/manual/issues"
+  },
+  "homepage": "https://github.com/Ashenheim/manual",
+  "devDependencies": {
+    "browser-sync": "^2.8.2",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2"
+  }
+}

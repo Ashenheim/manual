@@ -1,5 +1,5 @@
 angular
-    .module('routerApp', ['ui.router'])
+    .module('routerApp', ['ui.router','ngSanitize'])
     .config(config)
     .controller('mainCtrl', mainCtrl)
     .controller('articleCtrl', articleCtrl);
@@ -46,6 +46,8 @@ function getFile($file) {
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
+    var _content;
+
     $urlRouterProvider.otherwise('/home');
 
     // Create pages
@@ -62,11 +64,22 @@ function config($stateProvider, $urlRouterProvider) {
     // Create content list
     for (var i=0; i < articles.length; i++) {
         var _item = articles[i];
+        var _file = 'articles/' + _item.name + '.md';
+
+        console.log(_file);
 
         $stateProvider.state( _item.name, {
             url: '/' + _item.name,
             templateUrl: 'page.html',
-            controller: 'articleCtrl'
+            controller: function($scope, $sce, $http) {
+                $http.get(_file)
+                    .success(function(res) {
+                        _content = markdown.toHTML(res);
+                        console.log(_content);
+                        $scope.title = _item.name;
+                        $scope.content = $sce.trustAsHtml(_content);
+                    });
+            }
         });
     }
 

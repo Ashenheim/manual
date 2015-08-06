@@ -40,7 +40,8 @@ var paths = {
 var files = {
     html: {
         src: [
-            '*.html'
+            '*.{html,md}',
+            '**/*.{html,md}'
         ]
     },
     sass: {

@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="routerApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Manual</title>
+	<meta charset="UTF-8">
+	<title>Manual</title>
 
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700'>
-    <link rel="stylesheet" href="/assets/css/global.css">
-    <link href="/favicon.ico" rel="icon" type="image/x-icon">
+	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700'>
+	<link rel="stylesheet" href="/assets/css/global.css">
+	<link href="/favicon.ico" rel="icon" type="image/x-icon">
 
 </head>
-<body>
+<body ng-controller="mainCtrl">
 
-    <h1>Hello world</h1>
+	<div class="site-wrap">
+		
+		<header class="main-header">
+			<nav class="navigation" role="navigation">
+				<ul>
+					<li ng-repeat="link in articleList">
+						<a ui-sref="{{link.name}}">{{link.name}}</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
 
-    <script src="/assets/js/global.js"></script>
+		<div class="main-content">
+			<div ui-view></div>
+		</div>
+		
+	</div>
+
+	<script src="/assets/js/global.js"></script>
 
 </body>
 </html>

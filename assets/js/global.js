@@ -301,6 +301,1817 @@ e.$validators.maxlength=function(a,c){return 0>f||e.$isEmpty(c)||c.length<=f}}}}
 return M.access(a,b,c)},removeData:function(a,b){M.remove(a,b)},_data:function(a,b,c){return L.access(a,b,c)},_removeData:function(a,b){L.remove(a,b)}}),n.fn.extend({data:function(a,b){var c,d,e,f=this[0],g=f&&f.attributes;if(void 0===a){if(this.length&&(e=M.get(f),1===f.nodeType&&!L.get(f,"hasDataAttrs"))){c=g.length;while(c--)g[c]&&(d=g[c].name,0===d.indexOf("data-")&&(d=n.camelCase(d.slice(5)),P(f,d,e[d])));L.set(f,"hasDataAttrs",!0)}return e}return"object"==typeof a?this.each(function(){M.set(this,a)}):J(this,function(b){var c,d=n.camelCase(a);if(f&&void 0===b){if(c=M.get(f,a),void 0!==c)return c;if(c=M.get(f,d),void 0!==c)return c;if(c=P(f,d,void 0),void 0!==c)return c}else this.each(function(){var c=M.get(this,d);M.set(this,d,b),-1!==a.indexOf("-")&&void 0!==c&&M.set(this,a,b)})},null,b,arguments.length>1,null,!0)},removeData:function(a){return this.each(function(){M.remove(this,a)})}}),n.extend({queue:function(a,b,c){var d;return a?(b=(b||"fx")+"queue",d=L.get(a,b),c&&(!d||n.isArray(c)?d=L.access(a,b,n.makeArray(c)):d.push(c)),d||[]):void 0},dequeue:function(a,b){b=b||"fx";var c=n.queue(a,b),d=c.length,e=c.shift(),f=n._queueHooks(a,b),g=function(){n.dequeue(a,b)};"inprogress"===e&&(e=c.shift(),d--),e&&("fx"===b&&c.unshift("inprogress"),delete f.stop,e.call(a,g,f)),!d&&f&&f.empty.fire()},_queueHooks:function(a,b){var c=b+"queueHooks";return L.get(a,c)||L.access(a,c,{empty:n.Callbacks("once memory").add(function(){L.remove(a,[b+"queue",c])})})}}),n.fn.extend({queue:function(a,b){var c=2;return"string"!=typeof a&&(b=a,a="fx",c--),arguments.length<c?n.queue(this[0],a):void 0===b?this:this.each(function(){var c=n.queue(this,a,b);n._queueHooks(this,a),"fx"===a&&"inprogress"!==c[0]&&n.dequeue(this,a)})},dequeue:function(a){return this.each(function(){n.dequeue(this,a)})},clearQueue:function(a){return this.queue(a||"fx",[])},promise:function(a,b){var c,d=1,e=n.Deferred(),f=this,g=this.length,h=function(){--d||e.resolveWith(f,[f])};"string"!=typeof a&&(b=a,a=void 0),a=a||"fx";while(g--)c=L.get(f[g],a+"queueHooks"),c&&c.empty&&(d++,c.empty.add(h));return h(),e.promise(b)}});var Q=/[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,R=["Top","Right","Bottom","Left"],S=function(a,b){return a=b||a,"none"===n.css(a,"display")||!n.contains(a.ownerDocument,a)},T=/^(?:checkbox|radio)$/i;!function(){var a=l.createDocumentFragment(),b=a.appendChild(l.createElement("div")),c=l.createElement("input");c.setAttribute("type","radio"),c.setAttribute("checked","checked"),c.setAttribute("name","t"),b.appendChild(c),k.checkClone=b.cloneNode(!0).cloneNode(!0).lastChild.checked,b.innerHTML="<textarea>x</textarea>",k.noCloneChecked=!!b.cloneNode(!0).lastChild.defaultValue}();var U="undefined";k.focusinBubbles="onfocusin"in a;var V=/^key/,W=/^(?:mouse|pointer|contextmenu)|click/,X=/^(?:focusinfocus|focusoutblur)$/,Y=/^([^.]*)(?:\.(.+)|)$/;function Z(){return!0}function $(){return!1}function _(){try{return l.activeElement}catch(a){}}n.event={global:{},add:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,o,p,q,r=L.get(a);if(r){c.handler&&(f=c,c=f.handler,e=f.selector),c.guid||(c.guid=n.guid++),(i=r.events)||(i=r.events={}),(g=r.handle)||(g=r.handle=function(b){return typeof n!==U&&n.event.triggered!==b.type?n.event.dispatch.apply(a,arguments):void 0}),b=(b||"").match(E)||[""],j=b.length;while(j--)h=Y.exec(b[j])||[],o=q=h[1],p=(h[2]||"").split(".").sort(),o&&(l=n.event.special[o]||{},o=(e?l.delegateType:l.bindType)||o,l=n.event.special[o]||{},k=n.extend({type:o,origType:q,data:d,handler:c,guid:c.guid,selector:e,needsContext:e&&n.expr.match.needsContext.test(e),namespace:p.join(".")},f),(m=i[o])||(m=i[o]=[],m.delegateCount=0,l.setup&&l.setup.call(a,d,p,g)!==!1||a.addEventListener&&a.addEventListener(o,g,!1)),l.add&&(l.add.call(a,k),k.handler.guid||(k.handler.guid=c.guid)),e?m.splice(m.delegateCount++,0,k):m.push(k),n.event.global[o]=!0)}},remove:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,o,p,q,r=L.hasData(a)&&L.get(a);if(r&&(i=r.events)){b=(b||"").match(E)||[""],j=b.length;while(j--)if(h=Y.exec(b[j])||[],o=q=h[1],p=(h[2]||"").split(".").sort(),o){l=n.event.special[o]||{},o=(d?l.delegateType:l.bindType)||o,m=i[o]||[],h=h[2]&&new RegExp("(^|\\.)"+p.join("\\.(?:.*\\.|)")+"(\\.|$)"),g=f=m.length;while(f--)k=m[f],!e&&q!==k.origType||c&&c.guid!==k.guid||h&&!h.test(k.namespace)||d&&d!==k.selector&&("**"!==d||!k.selector)||(m.splice(f,1),k.selector&&m.delegateCount--,l.remove&&l.remove.call(a,k));g&&!m.length&&(l.teardown&&l.teardown.call(a,p,r.handle)!==!1||n.removeEvent(a,o,r.handle),delete i[o])}else for(o in i)n.event.remove(a,o+b[j],c,d,!0);n.isEmptyObject(i)&&(delete r.handle,L.remove(a,"events"))}},trigger:function(b,c,d,e){var f,g,h,i,k,m,o,p=[d||l],q=j.call(b,"type")?b.type:b,r=j.call(b,"namespace")?b.namespace.split("."):[];if(g=h=d=d||l,3!==d.nodeType&&8!==d.nodeType&&!X.test(q+n.event.triggered)&&(q.indexOf(".")>=0&&(r=q.split("."),q=r.shift(),r.sort()),k=q.indexOf(":")<0&&"on"+q,b=b[n.expando]?b:new n.Event(q,"object"==typeof b&&b),b.isTrigger=e?2:3,b.namespace=r.join("."),b.namespace_re=b.namespace?new RegExp("(^|\\.)"+r.join("\\.(?:.*\\.|)")+"(\\.|$)"):null,b.result=void 0,b.target||(b.target=d),c=null==c?[b]:n.makeArray(c,[b]),o=n.event.special[q]||{},e||!o.trigger||o.trigger.apply(d,c)!==!1)){if(!e&&!o.noBubble&&!n.isWindow(d)){for(i=o.delegateType||q,X.test(i+q)||(g=g.parentNode);g;g=g.parentNode)p.push(g),h=g;h===(d.ownerDocument||l)&&p.push(h.defaultView||h.parentWindow||a)}f=0;while((g=p[f++])&&!b.isPropagationStopped())b.type=f>1?i:o.bindType||q,m=(L.get(g,"events")||{})[b.type]&&L.get(g,"handle"),m&&m.apply(g,c),m=k&&g[k],m&&m.apply&&n.acceptData(g)&&(b.result=m.apply(g,c),b.result===!1&&b.preventDefault());return b.type=q,e||b.isDefaultPrevented()||o._default&&o._default.apply(p.pop(),c)!==!1||!n.acceptData(d)||k&&n.isFunction(d[q])&&!n.isWindow(d)&&(h=d[k],h&&(d[k]=null),n.event.triggered=q,d[q](),n.event.triggered=void 0,h&&(d[k]=h)),b.result}},dispatch:function(a){a=n.event.fix(a);var b,c,e,f,g,h=[],i=d.call(arguments),j=(L.get(this,"events")||{})[a.type]||[],k=n.event.special[a.type]||{};if(i[0]=a,a.delegateTarget=this,!k.preDispatch||k.preDispatch.call(this,a)!==!1){h=n.event.handlers.call(this,a,j),b=0;while((f=h[b++])&&!a.isPropagationStopped()){a.currentTarget=f.elem,c=0;while((g=f.handlers[c++])&&!a.isImmediatePropagationStopped())(!a.namespace_re||a.namespace_re.test(g.namespace))&&(a.handleObj=g,a.data=g.data,e=((n.event.special[g.origType]||{}).handle||g.handler).apply(f.elem,i),void 0!==e&&(a.result=e)===!1&&(a.preventDefault(),a.stopPropagation()))}return k.postDispatch&&k.postDispatch.call(this,a),a.result}},handlers:function(a,b){var c,d,e,f,g=[],h=b.delegateCount,i=a.target;if(h&&i.nodeType&&(!a.button||"click"!==a.type))for(;i!==this;i=i.parentNode||this)if(i.disabled!==!0||"click"!==a.type){for(d=[],c=0;h>c;c++)f=b[c],e=f.selector+" ",void 0===d[e]&&(d[e]=f.needsContext?n(e,this).index(i)>=0:n.find(e,this,null,[i]).length),d[e]&&d.push(f);d.length&&g.push({elem:i,handlers:d})}return h<b.length&&g.push({elem:this,handlers:b.slice(h)}),g},props:"altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey target timeStamp view which".split(" "),fixHooks:{},keyHooks:{props:"char charCode key keyCode".split(" "),filter:function(a,b){return null==a.which&&(a.which=null!=b.charCode?b.charCode:b.keyCode),a}},mouseHooks:{props:"button buttons clientX clientY offsetX offsetY pageX pageY screenX screenY toElement".split(" "),filter:function(a,b){var c,d,e,f=b.button;return null==a.pageX&&null!=b.clientX&&(c=a.target.ownerDocument||l,d=c.documentElement,e=c.body,a.pageX=b.clientX+(d&&d.scrollLeft||e&&e.scrollLeft||0)-(d&&d.clientLeft||e&&e.clientLeft||0),a.pageY=b.clientY+(d&&d.scrollTop||e&&e.scrollTop||0)-(d&&d.clientTop||e&&e.clientTop||0)),a.which||void 0===f||(a.which=1&f?1:2&f?3:4&f?2:0),a}},fix:function(a){if(a[n.expando])return a;var b,c,d,e=a.type,f=a,g=this.fixHooks[e];g||(this.fixHooks[e]=g=W.test(e)?this.mouseHooks:V.test(e)?this.keyHooks:{}),d=g.props?this.props.concat(g.props):this.props,a=new n.Event(f),b=d.length;while(b--)c=d[b],a[c]=f[c];return a.target||(a.target=l),3===a.target.nodeType&&(a.target=a.target.parentNode),g.filter?g.filter(a,f):a},special:{load:{noBubble:!0},focus:{trigger:function(){return this!==_()&&this.focus?(this.focus(),!1):void 0},delegateType:"focusin"},blur:{trigger:function(){return this===_()&&this.blur?(this.blur(),!1):void 0},delegateType:"focusout"},click:{trigger:function(){return"checkbox"===this.type&&this.click&&n.nodeName(this,"input")?(this.click(),!1):void 0},_default:function(a){return n.nodeName(a.target,"a")}},beforeunload:{postDispatch:function(a){void 0!==a.result&&a.originalEvent&&(a.originalEvent.returnValue=a.result)}}},simulate:function(a,b,c,d){var e=n.extend(new n.Event,c,{type:a,isSimulated:!0,originalEvent:{}});d?n.event.trigger(e,null,b):n.event.dispatch.call(b,e),e.isDefaultPrevented()&&c.preventDefault()}},n.removeEvent=function(a,b,c){a.removeEventListener&&a.removeEventListener(b,c,!1)},n.Event=function(a,b){return this instanceof n.Event?(a&&a.type?(this.originalEvent=a,this.type=a.type,this.isDefaultPrevented=a.defaultPrevented||void 0===a.defaultPrevented&&a.returnValue===!1?Z:$):this.type=a,b&&n.extend(this,b),this.timeStamp=a&&a.timeStamp||n.now(),void(this[n.expando]=!0)):new n.Event(a,b)},n.Event.prototype={isDefaultPrevented:$,isPropagationStopped:$,isImmediatePropagationStopped:$,preventDefault:function(){var a=this.originalEvent;this.isDefaultPrevented=Z,a&&a.preventDefault&&a.preventDefault()},stopPropagation:function(){var a=this.originalEvent;this.isPropagationStopped=Z,a&&a.stopPropagation&&a.stopPropagation()},stopImmediatePropagation:function(){var a=this.originalEvent;this.isImmediatePropagationStopped=Z,a&&a.stopImmediatePropagation&&a.stopImmediatePropagation(),this.stopPropagation()}},n.each({mouseenter:"mouseover",mouseleave:"mouseout",pointerenter:"pointerover",pointerleave:"pointerout"},function(a,b){n.event.special[a]={delegateType:b,bindType:b,handle:function(a){var c,d=this,e=a.relatedTarget,f=a.handleObj;return(!e||e!==d&&!n.contains(d,e))&&(a.type=f.origType,c=f.handler.apply(this,arguments),a.type=b),c}}}),k.focusinBubbles||n.each({focus:"focusin",blur:"focusout"},function(a,b){var c=function(a){n.event.simulate(b,a.target,n.event.fix(a),!0)};n.event.special[b]={setup:function(){var d=this.ownerDocument||this,e=L.access(d,b);e||d.addEventListener(a,c,!0),L.access(d,b,(e||0)+1)},teardown:function(){var d=this.ownerDocument||this,e=L.access(d,b)-1;e?L.access(d,b,e):(d.removeEventListener(a,c,!0),L.remove(d,b))}}}),n.fn.extend({on:function(a,b,c,d,e){var f,g;if("object"==typeof a){"string"!=typeof b&&(c=c||b,b=void 0);for(g in a)this.on(g,b,c,a[g],e);return this}if(null==c&&null==d?(d=b,c=b=void 0):null==d&&("string"==typeof b?(d=c,c=void 0):(d=c,c=b,b=void 0)),d===!1)d=$;else if(!d)return this;return 1===e&&(f=d,d=function(a){return n().off(a),f.apply(this,arguments)},d.guid=f.guid||(f.guid=n.guid++)),this.each(function(){n.event.add(this,a,d,c,b)})},one:function(a,b,c,d){return this.on(a,b,c,d,1)},off:function(a,b,c){var d,e;if(a&&a.preventDefault&&a.handleObj)return d=a.handleObj,n(a.delegateTarget).off(d.namespace?d.origType+"."+d.namespace:d.origType,d.selector,d.handler),this;if("object"==typeof a){for(e in a)this.off(e,b,a[e]);return this}return(b===!1||"function"==typeof b)&&(c=b,b=void 0),c===!1&&(c=$),this.each(function(){n.event.remove(this,a,c,b)})},trigger:function(a,b){return this.each(function(){n.event.trigger(a,b,this)})},triggerHandler:function(a,b){var c=this[0];return c?n.event.trigger(a,b,c,!0):void 0}});var aa=/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,ba=/<([\w:]+)/,ca=/<|&#?\w+;/,da=/<(?:script|style|link)/i,ea=/checked\s*(?:[^=]|=\s*.checked.)/i,fa=/^$|\/(?:java|ecma)script/i,ga=/^true\/(.*)/,ha=/^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g,ia={option:[1,"<select multiple='multiple'>","</select>"],thead:[1,"<table>","</table>"],col:[2,"<table><colgroup>","</colgroup></table>"],tr:[2,"<table><tbody>","</tbody></table>"],td:[3,"<table><tbody><tr>","</tr></tbody></table>"],_default:[0,"",""]};ia.optgroup=ia.option,ia.tbody=ia.tfoot=ia.colgroup=ia.caption=ia.thead,ia.th=ia.td;function ja(a,b){return n.nodeName(a,"table")&&n.nodeName(11!==b.nodeType?b:b.firstChild,"tr")?a.getElementsByTagName("tbody")[0]||a.appendChild(a.ownerDocument.createElement("tbody")):a}function ka(a){return a.type=(null!==a.getAttribute("type"))+"/"+a.type,a}function la(a){var b=ga.exec(a.type);return b?a.type=b[1]:a.removeAttribute("type"),a}function ma(a,b){for(var c=0,d=a.length;d>c;c++)L.set(a[c],"globalEval",!b||L.get(b[c],"globalEval"))}function na(a,b){var c,d,e,f,g,h,i,j;if(1===b.nodeType){if(L.hasData(a)&&(f=L.access(a),g=L.set(b,f),j=f.events)){delete g.handle,g.events={};for(e in j)for(c=0,d=j[e].length;d>c;c++)n.event.add(b,e,j[e][c])}M.hasData(a)&&(h=M.access(a),i=n.extend({},h),M.set(b,i))}}function oa(a,b){var c=a.getElementsByTagName?a.getElementsByTagName(b||"*"):a.querySelectorAll?a.querySelectorAll(b||"*"):[];return void 0===b||b&&n.nodeName(a,b)?n.merge([a],c):c}function pa(a,b){var c=b.nodeName.toLowerCase();"input"===c&&T.test(a.type)?b.checked=a.checked:("input"===c||"textarea"===c)&&(b.defaultValue=a.defaultValue)}n.extend({clone:function(a,b,c){var d,e,f,g,h=a.cloneNode(!0),i=n.contains(a.ownerDocument,a);if(!(k.noCloneChecked||1!==a.nodeType&&11!==a.nodeType||n.isXMLDoc(a)))for(g=oa(h),f=oa(a),d=0,e=f.length;e>d;d++)pa(f[d],g[d]);if(b)if(c)for(f=f||oa(a),g=g||oa(h),d=0,e=f.length;e>d;d++)na(f[d],g[d]);else na(a,h);return g=oa(h,"script"),g.length>0&&ma(g,!i&&oa(a,"script")),h},buildFragment:function(a,b,c,d){for(var e,f,g,h,i,j,k=b.createDocumentFragment(),l=[],m=0,o=a.length;o>m;m++)if(e=a[m],e||0===e)if("object"===n.type(e))n.merge(l,e.nodeType?[e]:e);else if(ca.test(e)){f=f||k.appendChild(b.createElement("div")),g=(ba.exec(e)||["",""])[1].toLowerCase(),h=ia[g]||ia._default,f.innerHTML=h[1]+e.replace(aa,"<$1></$2>")+h[2],j=h[0];while(j--)f=f.lastChild;n.merge(l,f.childNodes),f=k.firstChild,f.textContent=""}else l.push(b.createTextNode(e));k.textContent="",m=0;while(e=l[m++])if((!d||-1===n.inArray(e,d))&&(i=n.contains(e.ownerDocument,e),f=oa(k.appendChild(e),"script"),i&&ma(f),c)){j=0;while(e=f[j++])fa.test(e.type||"")&&c.push(e)}return k},cleanData:function(a){for(var b,c,d,e,f=n.event.special,g=0;void 0!==(c=a[g]);g++){if(n.acceptData(c)&&(e=c[L.expando],e&&(b=L.cache[e]))){if(b.events)for(d in b.events)f[d]?n.event.remove(c,d):n.removeEvent(c,d,b.handle);L.cache[e]&&delete L.cache[e]}delete M.cache[c[M.expando]]}}}),n.fn.extend({text:function(a){return J(this,function(a){return void 0===a?n.text(this):this.empty().each(function(){(1===this.nodeType||11===this.nodeType||9===this.nodeType)&&(this.textContent=a)})},null,a,arguments.length)},append:function(){return this.domManip(arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=ja(this,a);b.appendChild(a)}})},prepend:function(){return this.domManip(arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=ja(this,a);b.insertBefore(a,b.firstChild)}})},before:function(){return this.domManip(arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this)})},after:function(){return this.domManip(arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this.nextSibling)})},remove:function(a,b){for(var c,d=a?n.filter(a,this):this,e=0;null!=(c=d[e]);e++)b||1!==c.nodeType||n.cleanData(oa(c)),c.parentNode&&(b&&n.contains(c.ownerDocument,c)&&ma(oa(c,"script")),c.parentNode.removeChild(c));return this},empty:function(){for(var a,b=0;null!=(a=this[b]);b++)1===a.nodeType&&(n.cleanData(oa(a,!1)),a.textContent="");return this},clone:function(a,b){return a=null==a?!1:a,b=null==b?a:b,this.map(function(){return n.clone(this,a,b)})},html:function(a){return J(this,function(a){var b=this[0]||{},c=0,d=this.length;if(void 0===a&&1===b.nodeType)return b.innerHTML;if("string"==typeof a&&!da.test(a)&&!ia[(ba.exec(a)||["",""])[1].toLowerCase()]){a=a.replace(aa,"<$1></$2>");try{for(;d>c;c++)b=this[c]||{},1===b.nodeType&&(n.cleanData(oa(b,!1)),b.innerHTML=a);b=0}catch(e){}}b&&this.empty().append(a)},null,a,arguments.length)},replaceWith:function(){var a=arguments[0];return this.domManip(arguments,function(b){a=this.parentNode,n.cleanData(oa(this)),a&&a.replaceChild(b,this)}),a&&(a.length||a.nodeType)?this:this.remove()},detach:function(a){return this.remove(a,!0)},domManip:function(a,b){a=e.apply([],a);var c,d,f,g,h,i,j=0,l=this.length,m=this,o=l-1,p=a[0],q=n.isFunction(p);if(q||l>1&&"string"==typeof p&&!k.checkClone&&ea.test(p))return this.each(function(c){var d=m.eq(c);q&&(a[0]=p.call(this,c,d.html())),d.domManip(a,b)});if(l&&(c=n.buildFragment(a,this[0].ownerDocument,!1,this),d=c.firstChild,1===c.childNodes.length&&(c=d),d)){for(f=n.map(oa(c,"script"),ka),g=f.length;l>j;j++)h=c,j!==o&&(h=n.clone(h,!0,!0),g&&n.merge(f,oa(h,"script"))),b.call(this[j],h,j);if(g)for(i=f[f.length-1].ownerDocument,n.map(f,la),j=0;g>j;j++)h=f[j],fa.test(h.type||"")&&!L.access(h,"globalEval")&&n.contains(i,h)&&(h.src?n._evalUrl&&n._evalUrl(h.src):n.globalEval(h.textContent.replace(ha,"")))}return this}}),n.each({appendTo:"append",prependTo:"prepend",insertBefore:"before",insertAfter:"after",replaceAll:"replaceWith"},function(a,b){n.fn[a]=function(a){for(var c,d=[],e=n(a),g=e.length-1,h=0;g>=h;h++)c=h===g?this:this.clone(!0),n(e[h])[b](c),f.apply(d,c.get());return this.pushStack(d)}});var qa,ra={};function sa(b,c){var d,e=n(c.createElement(b)).appendTo(c.body),f=a.getDefaultComputedStyle&&(d=a.getDefaultComputedStyle(e[0]))?d.display:n.css(e[0],"display");return e.detach(),f}function ta(a){var b=l,c=ra[a];return c||(c=sa(a,b),"none"!==c&&c||(qa=(qa||n("<iframe frameborder='0' width='0' height='0'/>")).appendTo(b.documentElement),b=qa[0].contentDocument,b.write(),b.close(),c=sa(a,b),qa.detach()),ra[a]=c),c}var ua=/^margin/,va=new RegExp("^("+Q+")(?!px)[a-z%]+$","i"),wa=function(b){return b.ownerDocument.defaultView.opener?b.ownerDocument.defaultView.getComputedStyle(b,null):a.getComputedStyle(b,null)};function xa(a,b,c){var d,e,f,g,h=a.style;return c=c||wa(a),c&&(g=c.getPropertyValue(b)||c[b]),c&&(""!==g||n.contains(a.ownerDocument,a)||(g=n.style(a,b)),va.test(g)&&ua.test(b)&&(d=h.width,e=h.minWidth,f=h.maxWidth,h.minWidth=h.maxWidth=h.width=g,g=c.width,h.width=d,h.minWidth=e,h.maxWidth=f)),void 0!==g?g+"":g}function ya(a,b){return{get:function(){return a()?void delete this.get:(this.get=b).apply(this,arguments)}}}!function(){var b,c,d=l.documentElement,e=l.createElement("div"),f=l.createElement("div");if(f.style){f.style.backgroundClip="content-box",f.cloneNode(!0).style.backgroundClip="",k.clearCloneStyle="content-box"===f.style.backgroundClip,e.style.cssText="border:0;width:0;height:0;top:0;left:-9999px;margin-top:1px;position:absolute",e.appendChild(f);function g(){f.style.cssText="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:block;margin-top:1%;top:1%;border:1px;padding:1px;width:4px;position:absolute",f.innerHTML="",d.appendChild(e);var g=a.getComputedStyle(f,null);b="1%"!==g.top,c="4px"===g.width,d.removeChild(e)}a.getComputedStyle&&n.extend(k,{pixelPosition:function(){return g(),b},boxSizingReliable:function(){return null==c&&g(),c},reliableMarginRight:function(){var b,c=f.appendChild(l.createElement("div"));return c.style.cssText=f.style.cssText="-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;display:block;margin:0;border:0;padding:0",c.style.marginRight=c.style.width="0",f.style.width="1px",d.appendChild(e),b=!parseFloat(a.getComputedStyle(c,null).marginRight),d.removeChild(e),f.removeChild(c),b}})}}(),n.swap=function(a,b,c,d){var e,f,g={};for(f in b)g[f]=a.style[f],a.style[f]=b[f];e=c.apply(a,d||[]);for(f in b)a.style[f]=g[f];return e};var za=/^(none|table(?!-c[ea]).+)/,Aa=new RegExp("^("+Q+")(.*)$","i"),Ba=new RegExp("^([+-])=("+Q+")","i"),Ca={position:"absolute",visibility:"hidden",display:"block"},Da={letterSpacing:"0",fontWeight:"400"},Ea=["Webkit","O","Moz","ms"];function Fa(a,b){if(b in a)return b;var c=b[0].toUpperCase()+b.slice(1),d=b,e=Ea.length;while(e--)if(b=Ea[e]+c,b in a)return b;return d}function Ga(a,b,c){var d=Aa.exec(b);return d?Math.max(0,d[1]-(c||0))+(d[2]||"px"):b}function Ha(a,b,c,d,e){for(var f=c===(d?"border":"content")?4:"width"===b?1:0,g=0;4>f;f+=2)"margin"===c&&(g+=n.css(a,c+R[f],!0,e)),d?("content"===c&&(g-=n.css(a,"padding"+R[f],!0,e)),"margin"!==c&&(g-=n.css(a,"border"+R[f]+"Width",!0,e))):(g+=n.css(a,"padding"+R[f],!0,e),"padding"!==c&&(g+=n.css(a,"border"+R[f]+"Width",!0,e)));return g}function Ia(a,b,c){var d=!0,e="width"===b?a.offsetWidth:a.offsetHeight,f=wa(a),g="border-box"===n.css(a,"boxSizing",!1,f);if(0>=e||null==e){if(e=xa(a,b,f),(0>e||null==e)&&(e=a.style[b]),va.test(e))return e;d=g&&(k.boxSizingReliable()||e===a.style[b]),e=parseFloat(e)||0}return e+Ha(a,b,c||(g?"border":"content"),d,f)+"px"}function Ja(a,b){for(var c,d,e,f=[],g=0,h=a.length;h>g;g++)d=a[g],d.style&&(f[g]=L.get(d,"olddisplay"),c=d.style.display,b?(f[g]||"none"!==c||(d.style.display=""),""===d.style.display&&S(d)&&(f[g]=L.access(d,"olddisplay",ta(d.nodeName)))):(e=S(d),"none"===c&&e||L.set(d,"olddisplay",e?c:n.css(d,"display"))));for(g=0;h>g;g++)d=a[g],d.style&&(b&&"none"!==d.style.display&&""!==d.style.display||(d.style.display=b?f[g]||"":"none"));return a}n.extend({cssHooks:{opacity:{get:function(a,b){if(b){var c=xa(a,"opacity");return""===c?"1":c}}}},cssNumber:{columnCount:!0,fillOpacity:!0,flexGrow:!0,flexShrink:!0,fontWeight:!0,lineHeight:!0,opacity:!0,order:!0,orphans:!0,widows:!0,zIndex:!0,zoom:!0},cssProps:{"float":"cssFloat"},style:function(a,b,c,d){if(a&&3!==a.nodeType&&8!==a.nodeType&&a.style){var e,f,g,h=n.camelCase(b),i=a.style;return b=n.cssProps[h]||(n.cssProps[h]=Fa(i,h)),g=n.cssHooks[b]||n.cssHooks[h],void 0===c?g&&"get"in g&&void 0!==(e=g.get(a,!1,d))?e:i[b]:(f=typeof c,"string"===f&&(e=Ba.exec(c))&&(c=(e[1]+1)*e[2]+parseFloat(n.css(a,b)),f="number"),null!=c&&c===c&&("number"!==f||n.cssNumber[h]||(c+="px"),k.clearCloneStyle||""!==c||0!==b.indexOf("background")||(i[b]="inherit"),g&&"set"in g&&void 0===(c=g.set(a,c,d))||(i[b]=c)),void 0)}},css:function(a,b,c,d){var e,f,g,h=n.camelCase(b);return b=n.cssProps[h]||(n.cssProps[h]=Fa(a.style,h)),g=n.cssHooks[b]||n.cssHooks[h],g&&"get"in g&&(e=g.get(a,!0,c)),void 0===e&&(e=xa(a,b,d)),"normal"===e&&b in Da&&(e=Da[b]),""===c||c?(f=parseFloat(e),c===!0||n.isNumeric(f)?f||0:e):e}}),n.each(["height","width"],function(a,b){n.cssHooks[b]={get:function(a,c,d){return c?za.test(n.css(a,"display"))&&0===a.offsetWidth?n.swap(a,Ca,function(){return Ia(a,b,d)}):Ia(a,b,d):void 0},set:function(a,c,d){var e=d&&wa(a);return Ga(a,c,d?Ha(a,b,d,"border-box"===n.css(a,"boxSizing",!1,e),e):0)}}}),n.cssHooks.marginRight=ya(k.reliableMarginRight,function(a,b){return b?n.swap(a,{display:"inline-block"},xa,[a,"marginRight"]):void 0}),n.each({margin:"",padding:"",border:"Width"},function(a,b){n.cssHooks[a+b]={expand:function(c){for(var d=0,e={},f="string"==typeof c?c.split(" "):[c];4>d;d++)e[a+R[d]+b]=f[d]||f[d-2]||f[0];return e}},ua.test(a)||(n.cssHooks[a+b].set=Ga)}),n.fn.extend({css:function(a,b){return J(this,function(a,b,c){var d,e,f={},g=0;if(n.isArray(b)){for(d=wa(a),e=b.length;e>g;g++)f[b[g]]=n.css(a,b[g],!1,d);return f}return void 0!==c?n.style(a,b,c):n.css(a,b)},a,b,arguments.length>1)},show:function(){return Ja(this,!0)},hide:function(){return Ja(this)},toggle:function(a){return"boolean"==typeof a?a?this.show():this.hide():this.each(function(){S(this)?n(this).show():n(this).hide()})}});function Ka(a,b,c,d,e){return new Ka.prototype.init(a,b,c,d,e)}n.Tween=Ka,Ka.prototype={constructor:Ka,init:function(a,b,c,d,e,f){this.elem=a,this.prop=c,this.easing=e||"swing",this.options=b,this.start=this.now=this.cur(),this.end=d,this.unit=f||(n.cssNumber[c]?"":"px")},cur:function(){var a=Ka.propHooks[this.prop];return a&&a.get?a.get(this):Ka.propHooks._default.get(this)},run:function(a){var b,c=Ka.propHooks[this.prop];return this.options.duration?this.pos=b=n.easing[this.easing](a,this.options.duration*a,0,1,this.options.duration):this.pos=b=a,this.now=(this.end-this.start)*b+this.start,this.options.step&&this.options.step.call(this.elem,this.now,this),c&&c.set?c.set(this):Ka.propHooks._default.set(this),this}},Ka.prototype.init.prototype=Ka.prototype,Ka.propHooks={_default:{get:function(a){var b;return null==a.elem[a.prop]||a.elem.style&&null!=a.elem.style[a.prop]?(b=n.css(a.elem,a.prop,""),b&&"auto"!==b?b:0):a.elem[a.prop]},set:function(a){n.fx.step[a.prop]?n.fx.step[a.prop](a):a.elem.style&&(null!=a.elem.style[n.cssProps[a.prop]]||n.cssHooks[a.prop])?n.style(a.elem,a.prop,a.now+a.unit):a.elem[a.prop]=a.now}}},Ka.propHooks.scrollTop=Ka.propHooks.scrollLeft={set:function(a){a.elem.nodeType&&a.elem.parentNode&&(a.elem[a.prop]=a.now)}},n.easing={linear:function(a){return a},swing:function(a){return.5-Math.cos(a*Math.PI)/2}},n.fx=Ka.prototype.init,n.fx.step={};var La,Ma,Na=/^(?:toggle|show|hide)$/,Oa=new RegExp("^(?:([+-])=|)("+Q+")([a-z%]*)$","i"),Pa=/queueHooks$/,Qa=[Va],Ra={"*":[function(a,b){var c=this.createTween(a,b),d=c.cur(),e=Oa.exec(b),f=e&&e[3]||(n.cssNumber[a]?"":"px"),g=(n.cssNumber[a]||"px"!==f&&+d)&&Oa.exec(n.css(c.elem,a)),h=1,i=20;if(g&&g[3]!==f){f=f||g[3],e=e||[],g=+d||1;do h=h||".5",g/=h,n.style(c.elem,a,g+f);while(h!==(h=c.cur()/d)&&1!==h&&--i)}return e&&(g=c.start=+g||+d||0,c.unit=f,c.end=e[1]?g+(e[1]+1)*e[2]:+e[2]),c}]};function Sa(){return setTimeout(function(){La=void 0}),La=n.now()}function Ta(a,b){var c,d=0,e={height:a};for(b=b?1:0;4>d;d+=2-b)c=R[d],e["margin"+c]=e["padding"+c]=a;return b&&(e.opacity=e.width=a),e}function Ua(a,b,c){for(var d,e=(Ra[b]||[]).concat(Ra["*"]),f=0,g=e.length;g>f;f++)if(d=e[f].call(c,b,a))return d}function Va(a,b,c){var d,e,f,g,h,i,j,k,l=this,m={},o=a.style,p=a.nodeType&&S(a),q=L.get(a,"fxshow");c.queue||(h=n._queueHooks(a,"fx"),null==h.unqueued&&(h.unqueued=0,i=h.empty.fire,h.empty.fire=function(){h.unqueued||i()}),h.unqueued++,l.always(function(){l.always(function(){h.unqueued--,n.queue(a,"fx").length||h.empty.fire()})})),1===a.nodeType&&("height"in b||"width"in b)&&(c.overflow=[o.overflow,o.overflowX,o.overflowY],j=n.css(a,"display"),k="none"===j?L.get(a,"olddisplay")||ta(a.nodeName):j,"inline"===k&&"none"===n.css(a,"float")&&(o.display="inline-block")),c.overflow&&(o.overflow="hidden",l.always(function(){o.overflow=c.overflow[0],o.overflowX=c.overflow[1],o.overflowY=c.overflow[2]}));for(d in b)if(e=b[d],Na.exec(e)){if(delete b[d],f=f||"toggle"===e,e===(p?"hide":"show")){if("show"!==e||!q||void 0===q[d])continue;p=!0}m[d]=q&&q[d]||n.style(a,d)}else j=void 0;if(n.isEmptyObject(m))"inline"===("none"===j?ta(a.nodeName):j)&&(o.display=j);else{q?"hidden"in q&&(p=q.hidden):q=L.access(a,"fxshow",{}),f&&(q.hidden=!p),p?n(a).show():l.done(function(){n(a).hide()}),l.done(function(){var b;L.remove(a,"fxshow");for(b in m)n.style(a,b,m[b])});for(d in m)g=Ua(p?q[d]:0,d,l),d in q||(q[d]=g.start,p&&(g.end=g.start,g.start="width"===d||"height"===d?1:0))}}function Wa(a,b){var c,d,e,f,g;for(c in a)if(d=n.camelCase(c),e=b[d],f=a[c],n.isArray(f)&&(e=f[1],f=a[c]=f[0]),c!==d&&(a[d]=f,delete a[c]),g=n.cssHooks[d],g&&"expand"in g){f=g.expand(f),delete a[d];for(c in f)c in a||(a[c]=f[c],b[c]=e)}else b[d]=e}function Xa(a,b,c){var d,e,f=0,g=Qa.length,h=n.Deferred().always(function(){delete i.elem}),i=function(){if(e)return!1;for(var b=La||Sa(),c=Math.max(0,j.startTime+j.duration-b),d=c/j.duration||0,f=1-d,g=0,i=j.tweens.length;i>g;g++)j.tweens[g].run(f);return h.notifyWith(a,[j,f,c]),1>f&&i?c:(h.resolveWith(a,[j]),!1)},j=h.promise({elem:a,props:n.extend({},b),opts:n.extend(!0,{specialEasing:{}},c),originalProperties:b,originalOptions:c,startTime:La||Sa(),duration:c.duration,tweens:[],createTween:function(b,c){var d=n.Tween(a,j.opts,b,c,j.opts.specialEasing[b]||j.opts.easing);return j.tweens.push(d),d},stop:function(b){var c=0,d=b?j.tweens.length:0;if(e)return this;for(e=!0;d>c;c++)j.tweens[c].run(1);return b?h.resolveWith(a,[j,b]):h.rejectWith(a,[j,b]),this}}),k=j.props;for(Wa(k,j.opts.specialEasing);g>f;f++)if(d=Qa[f].call(j,a,k,j.opts))return d;return n.map(k,Ua,j),n.isFunction(j.opts.start)&&j.opts.start.call(a,j),n.fx.timer(n.extend(i,{elem:a,anim:j,queue:j.opts.queue})),j.progress(j.opts.progress).done(j.opts.done,j.opts.complete).fail(j.opts.fail).always(j.opts.always)}n.Animation=n.extend(Xa,{tweener:function(a,b){n.isFunction(a)?(b=a,a=["*"]):a=a.split(" ");for(var c,d=0,e=a.length;e>d;d++)c=a[d],Ra[c]=Ra[c]||[],Ra[c].unshift(b)},prefilter:function(a,b){b?Qa.unshift(a):Qa.push(a)}}),n.speed=function(a,b,c){var d=a&&"object"==typeof a?n.extend({},a):{complete:c||!c&&b||n.isFunction(a)&&a,duration:a,easing:c&&b||b&&!n.isFunction(b)&&b};return d.duration=n.fx.off?0:"number"==typeof d.duration?d.duration:d.duration in n.fx.speeds?n.fx.speeds[d.duration]:n.fx.speeds._default,(null==d.queue||d.queue===!0)&&(d.queue="fx"),d.old=d.complete,d.complete=function(){n.isFunction(d.old)&&d.old.call(this),d.queue&&n.dequeue(this,d.queue)},d},n.fn.extend({fadeTo:function(a,b,c,d){return this.filter(S).css("opacity",0).show().end().animate({opacity:b},a,c,d)},animate:function(a,b,c,d){var e=n.isEmptyObject(a),f=n.speed(b,c,d),g=function(){var b=Xa(this,n.extend({},a),f);(e||L.get(this,"finish"))&&b.stop(!0)};return g.finish=g,e||f.queue===!1?this.each(g):this.queue(f.queue,g)},stop:function(a,b,c){var d=function(a){var b=a.stop;delete a.stop,b(c)};return"string"!=typeof a&&(c=b,b=a,a=void 0),b&&a!==!1&&this.queue(a||"fx",[]),this.each(function(){var b=!0,e=null!=a&&a+"queueHooks",f=n.timers,g=L.get(this);if(e)g[e]&&g[e].stop&&d(g[e]);else for(e in g)g[e]&&g[e].stop&&Pa.test(e)&&d(g[e]);for(e=f.length;e--;)f[e].elem!==this||null!=a&&f[e].queue!==a||(f[e].anim.stop(c),b=!1,f.splice(e,1));(b||!c)&&n.dequeue(this,a)})},finish:function(a){return a!==!1&&(a=a||"fx"),this.each(function(){var b,c=L.get(this),d=c[a+"queue"],e=c[a+"queueHooks"],f=n.timers,g=d?d.length:0;for(c.finish=!0,n.queue(this,a,[]),e&&e.stop&&e.stop.call(this,!0),b=f.length;b--;)f[b].elem===this&&f[b].queue===a&&(f[b].anim.stop(!0),f.splice(b,1));for(b=0;g>b;b++)d[b]&&d[b].finish&&d[b].finish.call(this);delete c.finish})}}),n.each(["toggle","show","hide"],function(a,b){var c=n.fn[b];n.fn[b]=function(a,d,e){return null==a||"boolean"==typeof a?c.apply(this,arguments):this.animate(Ta(b,!0),a,d,e)}}),n.each({slideDown:Ta("show"),slideUp:Ta("hide"),slideToggle:Ta("toggle"),fadeIn:{opacity:"show"},fadeOut:{opacity:"hide"},fadeToggle:{opacity:"toggle"}},function(a,b){n.fn[a]=function(a,c,d){return this.animate(b,a,c,d)}}),n.timers=[],n.fx.tick=function(){var a,b=0,c=n.timers;for(La=n.now();b<c.length;b++)a=c[b],a()||c[b]!==a||c.splice(b--,1);c.length||n.fx.stop(),La=void 0},n.fx.timer=function(a){n.timers.push(a),a()?n.fx.start():n.timers.pop()},n.fx.interval=13,n.fx.start=function(){Ma||(Ma=setInterval(n.fx.tick,n.fx.interval))},n.fx.stop=function(){clearInterval(Ma),Ma=null},n.fx.speeds={slow:600,fast:200,_default:400},n.fn.delay=function(a,b){return a=n.fx?n.fx.speeds[a]||a:a,b=b||"fx",this.queue(b,function(b,c){var d=setTimeout(b,a);c.stop=function(){clearTimeout(d)}})},function(){var a=l.createElement("input"),b=l.createElement("select"),c=b.appendChild(l.createElement("option"));a.type="checkbox",k.checkOn=""!==a.value,k.optSelected=c.selected,b.disabled=!0,k.optDisabled=!c.disabled,a=l.createElement("input"),a.value="t",a.type="radio",k.radioValue="t"===a.value}();var Ya,Za,$a=n.expr.attrHandle;n.fn.extend({attr:function(a,b){return J(this,n.attr,a,b,arguments.length>1)},removeAttr:function(a){return this.each(function(){n.removeAttr(this,a)})}}),n.extend({attr:function(a,b,c){var d,e,f=a.nodeType;if(a&&3!==f&&8!==f&&2!==f)return typeof a.getAttribute===U?n.prop(a,b,c):(1===f&&n.isXMLDoc(a)||(b=b.toLowerCase(),d=n.attrHooks[b]||(n.expr.match.bool.test(b)?Za:Ya)),
 void 0===c?d&&"get"in d&&null!==(e=d.get(a,b))?e:(e=n.find.attr(a,b),null==e?void 0:e):null!==c?d&&"set"in d&&void 0!==(e=d.set(a,c,b))?e:(a.setAttribute(b,c+""),c):void n.removeAttr(a,b))},removeAttr:function(a,b){var c,d,e=0,f=b&&b.match(E);if(f&&1===a.nodeType)while(c=f[e++])d=n.propFix[c]||c,n.expr.match.bool.test(c)&&(a[d]=!1),a.removeAttribute(c)},attrHooks:{type:{set:function(a,b){if(!k.radioValue&&"radio"===b&&n.nodeName(a,"input")){var c=a.value;return a.setAttribute("type",b),c&&(a.value=c),b}}}}}),Za={set:function(a,b,c){return b===!1?n.removeAttr(a,c):a.setAttribute(c,c),c}},n.each(n.expr.match.bool.source.match(/\w+/g),function(a,b){var c=$a[b]||n.find.attr;$a[b]=function(a,b,d){var e,f;return d||(f=$a[b],$a[b]=e,e=null!=c(a,b,d)?b.toLowerCase():null,$a[b]=f),e}});var _a=/^(?:input|select|textarea|button)$/i;n.fn.extend({prop:function(a,b){return J(this,n.prop,a,b,arguments.length>1)},removeProp:function(a){return this.each(function(){delete this[n.propFix[a]||a]})}}),n.extend({propFix:{"for":"htmlFor","class":"className"},prop:function(a,b,c){var d,e,f,g=a.nodeType;if(a&&3!==g&&8!==g&&2!==g)return f=1!==g||!n.isXMLDoc(a),f&&(b=n.propFix[b]||b,e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&&"get"in e&&null!==(d=e.get(a,b))?d:a[b]},propHooks:{tabIndex:{get:function(a){return a.hasAttribute("tabindex")||_a.test(a.nodeName)||a.href?a.tabIndex:-1}}}}),k.optSelected||(n.propHooks.selected={get:function(a){var b=a.parentNode;return b&&b.parentNode&&b.parentNode.selectedIndex,null}}),n.each(["tabIndex","readOnly","maxLength","cellSpacing","cellPadding","rowSpan","colSpan","useMap","frameBorder","contentEditable"],function(){n.propFix[this.toLowerCase()]=this});var ab=/[\t\r\n\f]/g;n.fn.extend({addClass:function(a){var b,c,d,e,f,g,h="string"==typeof a&&a,i=0,j=this.length;if(n.isFunction(a))return this.each(function(b){n(this).addClass(a.call(this,b,this.className))});if(h)for(b=(a||"").match(E)||[];j>i;i++)if(c=this[i],d=1===c.nodeType&&(c.className?(" "+c.className+" ").replace(ab," "):" ")){f=0;while(e=b[f++])d.indexOf(" "+e+" ")<0&&(d+=e+" ");g=n.trim(d),c.className!==g&&(c.className=g)}return this},removeClass:function(a){var b,c,d,e,f,g,h=0===arguments.length||"string"==typeof a&&a,i=0,j=this.length;if(n.isFunction(a))return this.each(function(b){n(this).removeClass(a.call(this,b,this.className))});if(h)for(b=(a||"").match(E)||[];j>i;i++)if(c=this[i],d=1===c.nodeType&&(c.className?(" "+c.className+" ").replace(ab," "):"")){f=0;while(e=b[f++])while(d.indexOf(" "+e+" ")>=0)d=d.replace(" "+e+" "," ");g=a?n.trim(d):"",c.className!==g&&(c.className=g)}return this},toggleClass:function(a,b){var c=typeof a;return"boolean"==typeof b&&"string"===c?b?this.addClass(a):this.removeClass(a):this.each(n.isFunction(a)?function(c){n(this).toggleClass(a.call(this,c,this.className,b),b)}:function(){if("string"===c){var b,d=0,e=n(this),f=a.match(E)||[];while(b=f[d++])e.hasClass(b)?e.removeClass(b):e.addClass(b)}else(c===U||"boolean"===c)&&(this.className&&L.set(this,"__className__",this.className),this.className=this.className||a===!1?"":L.get(this,"__className__")||"")})},hasClass:function(a){for(var b=" "+a+" ",c=0,d=this.length;d>c;c++)if(1===this[c].nodeType&&(" "+this[c].className+" ").replace(ab," ").indexOf(b)>=0)return!0;return!1}});var bb=/\r/g;n.fn.extend({val:function(a){var b,c,d,e=this[0];{if(arguments.length)return d=n.isFunction(a),this.each(function(c){var e;1===this.nodeType&&(e=d?a.call(this,c,n(this).val()):a,null==e?e="":"number"==typeof e?e+="":n.isArray(e)&&(e=n.map(e,function(a){return null==a?"":a+""})),b=n.valHooks[this.type]||n.valHooks[this.nodeName.toLowerCase()],b&&"set"in b&&void 0!==b.set(this,e,"value")||(this.value=e))});if(e)return b=n.valHooks[e.type]||n.valHooks[e.nodeName.toLowerCase()],b&&"get"in b&&void 0!==(c=b.get(e,"value"))?c:(c=e.value,"string"==typeof c?c.replace(bb,""):null==c?"":c)}}}),n.extend({valHooks:{option:{get:function(a){var b=n.find.attr(a,"value");return null!=b?b:n.trim(n.text(a))}},select:{get:function(a){for(var b,c,d=a.options,e=a.selectedIndex,f="select-one"===a.type||0>e,g=f?null:[],h=f?e+1:d.length,i=0>e?h:f?e:0;h>i;i++)if(c=d[i],!(!c.selected&&i!==e||(k.optDisabled?c.disabled:null!==c.getAttribute("disabled"))||c.parentNode.disabled&&n.nodeName(c.parentNode,"optgroup"))){if(b=n(c).val(),f)return b;g.push(b)}return g},set:function(a,b){var c,d,e=a.options,f=n.makeArray(b),g=e.length;while(g--)d=e[g],(d.selected=n.inArray(d.value,f)>=0)&&(c=!0);return c||(a.selectedIndex=-1),f}}}}),n.each(["radio","checkbox"],function(){n.valHooks[this]={set:function(a,b){return n.isArray(b)?a.checked=n.inArray(n(a).val(),b)>=0:void 0}},k.checkOn||(n.valHooks[this].get=function(a){return null===a.getAttribute("value")?"on":a.value})}),n.each("blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error contextmenu".split(" "),function(a,b){n.fn[b]=function(a,c){return arguments.length>0?this.on(b,null,a,c):this.trigger(b)}}),n.fn.extend({hover:function(a,b){return this.mouseenter(a).mouseleave(b||a)},bind:function(a,b,c){return this.on(a,null,b,c)},unbind:function(a,b){return this.off(a,null,b)},delegate:function(a,b,c,d){return this.on(b,a,c,d)},undelegate:function(a,b,c){return 1===arguments.length?this.off(a,"**"):this.off(b,a||"**",c)}});var cb=n.now(),db=/\?/;n.parseJSON=function(a){return JSON.parse(a+"")},n.parseXML=function(a){var b,c;if(!a||"string"!=typeof a)return null;try{c=new DOMParser,b=c.parseFromString(a,"text/xml")}catch(d){b=void 0}return(!b||b.getElementsByTagName("parsererror").length)&&n.error("Invalid XML: "+a),b};var eb=/#.*$/,fb=/([?&])_=[^&]*/,gb=/^(.*?):[ \t]*([^\r\n]*)$/gm,hb=/^(?:about|app|app-storage|.+-extension|file|res|widget):$/,ib=/^(?:GET|HEAD)$/,jb=/^\/\//,kb=/^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/,lb={},mb={},nb="*/".concat("*"),ob=a.location.href,pb=kb.exec(ob.toLowerCase())||[];function qb(a){return function(b,c){"string"!=typeof b&&(c=b,b="*");var d,e=0,f=b.toLowerCase().match(E)||[];if(n.isFunction(c))while(d=f[e++])"+"===d[0]?(d=d.slice(1)||"*",(a[d]=a[d]||[]).unshift(c)):(a[d]=a[d]||[]).push(c)}}function rb(a,b,c,d){var e={},f=a===mb;function g(h){var i;return e[h]=!0,n.each(a[h]||[],function(a,h){var j=h(b,c,d);return"string"!=typeof j||f||e[j]?f?!(i=j):void 0:(b.dataTypes.unshift(j),g(j),!1)}),i}return g(b.dataTypes[0])||!e["*"]&&g("*")}function sb(a,b){var c,d,e=n.ajaxSettings.flatOptions||{};for(c in b)void 0!==b[c]&&((e[c]?a:d||(d={}))[c]=b[c]);return d&&n.extend(!0,a,d),a}function tb(a,b,c){var d,e,f,g,h=a.contents,i=a.dataTypes;while("*"===i[0])i.shift(),void 0===d&&(d=a.mimeType||b.getResponseHeader("Content-Type"));if(d)for(e in h)if(h[e]&&h[e].test(d)){i.unshift(e);break}if(i[0]in c)f=i[0];else{for(e in c){if(!i[0]||a.converters[e+" "+i[0]]){f=e;break}g||(g=e)}f=f||g}return f?(f!==i[0]&&i.unshift(f),c[f]):void 0}function ub(a,b,c,d){var e,f,g,h,i,j={},k=a.dataTypes.slice();if(k[1])for(g in a.converters)j[g.toLowerCase()]=a.converters[g];f=k.shift();while(f)if(a.responseFields[f]&&(c[a.responseFields[f]]=b),!i&&d&&a.dataFilter&&(b=a.dataFilter(b,a.dataType)),i=f,f=k.shift())if("*"===f)f=i;else if("*"!==i&&i!==f){if(g=j[i+" "+f]||j["* "+f],!g)for(e in j)if(h=e.split(" "),h[1]===f&&(g=j[i+" "+h[0]]||j["* "+h[0]])){g===!0?g=j[e]:j[e]!==!0&&(f=h[0],k.unshift(h[1]));break}if(g!==!0)if(g&&a["throws"])b=g(b);else try{b=g(b)}catch(l){return{state:"parsererror",error:g?l:"No conversion from "+i+" to "+f}}}return{state:"success",data:b}}n.extend({active:0,lastModified:{},etag:{},ajaxSettings:{url:ob,type:"GET",isLocal:hb.test(pb[1]),global:!0,processData:!0,async:!0,contentType:"application/x-www-form-urlencoded; charset=UTF-8",accepts:{"*":nb,text:"text/plain",html:"text/html",xml:"application/xml, text/xml",json:"application/json, text/javascript"},contents:{xml:/xml/,html:/html/,json:/json/},responseFields:{xml:"responseXML",text:"responseText",json:"responseJSON"},converters:{"* text":String,"text html":!0,"text json":n.parseJSON,"text xml":n.parseXML},flatOptions:{url:!0,context:!0}},ajaxSetup:function(a,b){return b?sb(sb(a,n.ajaxSettings),b):sb(n.ajaxSettings,a)},ajaxPrefilter:qb(lb),ajaxTransport:qb(mb),ajax:function(a,b){"object"==typeof a&&(b=a,a=void 0),b=b||{};var c,d,e,f,g,h,i,j,k=n.ajaxSetup({},b),l=k.context||k,m=k.context&&(l.nodeType||l.jquery)?n(l):n.event,o=n.Deferred(),p=n.Callbacks("once memory"),q=k.statusCode||{},r={},s={},t=0,u="canceled",v={readyState:0,getResponseHeader:function(a){var b;if(2===t){if(!f){f={};while(b=gb.exec(e))f[b[1].toLowerCase()]=b[2]}b=f[a.toLowerCase()]}return null==b?null:b},getAllResponseHeaders:function(){return 2===t?e:null},setRequestHeader:function(a,b){var c=a.toLowerCase();return t||(a=s[c]=s[c]||a,r[a]=b),this},overrideMimeType:function(a){return t||(k.mimeType=a),this},statusCode:function(a){var b;if(a)if(2>t)for(b in a)q[b]=[q[b],a[b]];else v.always(a[v.status]);return this},abort:function(a){var b=a||u;return c&&c.abort(b),x(0,b),this}};if(o.promise(v).complete=p.add,v.success=v.done,v.error=v.fail,k.url=((a||k.url||ob)+"").replace(eb,"").replace(jb,pb[1]+"//"),k.type=b.method||b.type||k.method||k.type,k.dataTypes=n.trim(k.dataType||"*").toLowerCase().match(E)||[""],null==k.crossDomain&&(h=kb.exec(k.url.toLowerCase()),k.crossDomain=!(!h||h[1]===pb[1]&&h[2]===pb[2]&&(h[3]||("http:"===h[1]?"80":"443"))===(pb[3]||("http:"===pb[1]?"80":"443")))),k.data&&k.processData&&"string"!=typeof k.data&&(k.data=n.param(k.data,k.traditional)),rb(lb,k,b,v),2===t)return v;i=n.event&&k.global,i&&0===n.active++&&n.event.trigger("ajaxStart"),k.type=k.type.toUpperCase(),k.hasContent=!ib.test(k.type),d=k.url,k.hasContent||(k.data&&(d=k.url+=(db.test(d)?"&":"?")+k.data,delete k.data),k.cache===!1&&(k.url=fb.test(d)?d.replace(fb,"$1_="+cb++):d+(db.test(d)?"&":"?")+"_="+cb++)),k.ifModified&&(n.lastModified[d]&&v.setRequestHeader("If-Modified-Since",n.lastModified[d]),n.etag[d]&&v.setRequestHeader("If-None-Match",n.etag[d])),(k.data&&k.hasContent&&k.contentType!==!1||b.contentType)&&v.setRequestHeader("Content-Type",k.contentType),v.setRequestHeader("Accept",k.dataTypes[0]&&k.accepts[k.dataTypes[0]]?k.accepts[k.dataTypes[0]]+("*"!==k.dataTypes[0]?", "+nb+"; q=0.01":""):k.accepts["*"]);for(j in k.headers)v.setRequestHeader(j,k.headers[j]);if(k.beforeSend&&(k.beforeSend.call(l,v,k)===!1||2===t))return v.abort();u="abort";for(j in{success:1,error:1,complete:1})v[j](k[j]);if(c=rb(mb,k,b,v)){v.readyState=1,i&&m.trigger("ajaxSend",[v,k]),k.async&&k.timeout>0&&(g=setTimeout(function(){v.abort("timeout")},k.timeout));try{t=1,c.send(r,x)}catch(w){if(!(2>t))throw w;x(-1,w)}}else x(-1,"No Transport");function x(a,b,f,h){var j,r,s,u,w,x=b;2!==t&&(t=2,g&&clearTimeout(g),c=void 0,e=h||"",v.readyState=a>0?4:0,j=a>=200&&300>a||304===a,f&&(u=tb(k,v,f)),u=ub(k,u,v,j),j?(k.ifModified&&(w=v.getResponseHeader("Last-Modified"),w&&(n.lastModified[d]=w),w=v.getResponseHeader("etag"),w&&(n.etag[d]=w)),204===a||"HEAD"===k.type?x="nocontent":304===a?x="notmodified":(x=u.state,r=u.data,s=u.error,j=!s)):(s=x,(a||!x)&&(x="error",0>a&&(a=0))),v.status=a,v.statusText=(b||x)+"",j?o.resolveWith(l,[r,x,v]):o.rejectWith(l,[v,x,s]),v.statusCode(q),q=void 0,i&&m.trigger(j?"ajaxSuccess":"ajaxError",[v,k,j?r:s]),p.fireWith(l,[v,x]),i&&(m.trigger("ajaxComplete",[v,k]),--n.active||n.event.trigger("ajaxStop")))}return v},getJSON:function(a,b,c){return n.get(a,b,c,"json")},getScript:function(a,b){return n.get(a,void 0,b,"script")}}),n.each(["get","post"],function(a,b){n[b]=function(a,c,d,e){return n.isFunction(c)&&(e=e||d,d=c,c=void 0),n.ajax({url:a,type:b,dataType:e,data:c,success:d})}}),n._evalUrl=function(a){return n.ajax({url:a,type:"GET",dataType:"script",async:!1,global:!1,"throws":!0})},n.fn.extend({wrapAll:function(a){var b;return n.isFunction(a)?this.each(function(b){n(this).wrapAll(a.call(this,b))}):(this[0]&&(b=n(a,this[0].ownerDocument).eq(0).clone(!0),this[0].parentNode&&b.insertBefore(this[0]),b.map(function(){var a=this;while(a.firstElementChild)a=a.firstElementChild;return a}).append(this)),this)},wrapInner:function(a){return this.each(n.isFunction(a)?function(b){n(this).wrapInner(a.call(this,b))}:function(){var b=n(this),c=b.contents();c.length?c.wrapAll(a):b.append(a)})},wrap:function(a){var b=n.isFunction(a);return this.each(function(c){n(this).wrapAll(b?a.call(this,c):a)})},unwrap:function(){return this.parent().each(function(){n.nodeName(this,"body")||n(this).replaceWith(this.childNodes)}).end()}}),n.expr.filters.hidden=function(a){return a.offsetWidth<=0&&a.offsetHeight<=0},n.expr.filters.visible=function(a){return!n.expr.filters.hidden(a)};var vb=/%20/g,wb=/\[\]$/,xb=/\r?\n/g,yb=/^(?:submit|button|image|reset|file)$/i,zb=/^(?:input|select|textarea|keygen)/i;function Ab(a,b,c,d){var e;if(n.isArray(b))n.each(b,function(b,e){c||wb.test(a)?d(a,e):Ab(a+"["+("object"==typeof e?b:"")+"]",e,c,d)});else if(c||"object"!==n.type(b))d(a,b);else for(e in b)Ab(a+"["+e+"]",b[e],c,d)}n.param=function(a,b){var c,d=[],e=function(a,b){b=n.isFunction(b)?b():null==b?"":b,d[d.length]=encodeURIComponent(a)+"="+encodeURIComponent(b)};if(void 0===b&&(b=n.ajaxSettings&&n.ajaxSettings.traditional),n.isArray(a)||a.jquery&&!n.isPlainObject(a))n.each(a,function(){e(this.name,this.value)});else for(c in a)Ab(c,a[c],b,e);return d.join("&").replace(vb,"+")},n.fn.extend({serialize:function(){return n.param(this.serializeArray())},serializeArray:function(){return this.map(function(){var a=n.prop(this,"elements");return a?n.makeArray(a):this}).filter(function(){var a=this.type;return this.name&&!n(this).is(":disabled")&&zb.test(this.nodeName)&&!yb.test(a)&&(this.checked||!T.test(a))}).map(function(a,b){var c=n(this).val();return null==c?null:n.isArray(c)?n.map(c,function(a){return{name:b.name,value:a.replace(xb,"\r\n")}}):{name:b.name,value:c.replace(xb,"\r\n")}}).get()}}),n.ajaxSettings.xhr=function(){try{return new XMLHttpRequest}catch(a){}};var Bb=0,Cb={},Db={0:200,1223:204},Eb=n.ajaxSettings.xhr();a.attachEvent&&a.attachEvent("onunload",function(){for(var a in Cb)Cb[a]()}),k.cors=!!Eb&&"withCredentials"in Eb,k.ajax=Eb=!!Eb,n.ajaxTransport(function(a){var b;return k.cors||Eb&&!a.crossDomain?{send:function(c,d){var e,f=a.xhr(),g=++Bb;if(f.open(a.type,a.url,a.async,a.username,a.password),a.xhrFields)for(e in a.xhrFields)f[e]=a.xhrFields[e];a.mimeType&&f.overrideMimeType&&f.overrideMimeType(a.mimeType),a.crossDomain||c["X-Requested-With"]||(c["X-Requested-With"]="XMLHttpRequest");for(e in c)f.setRequestHeader(e,c[e]);b=function(a){return function(){b&&(delete Cb[g],b=f.onload=f.onerror=null,"abort"===a?f.abort():"error"===a?d(f.status,f.statusText):d(Db[f.status]||f.status,f.statusText,"string"==typeof f.responseText?{text:f.responseText}:void 0,f.getAllResponseHeaders()))}},f.onload=b(),f.onerror=b("error"),b=Cb[g]=b("abort");try{f.send(a.hasContent&&a.data||null)}catch(h){if(b)throw h}},abort:function(){b&&b()}}:void 0}),n.ajaxSetup({accepts:{script:"text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"},contents:{script:/(?:java|ecma)script/},converters:{"text script":function(a){return n.globalEval(a),a}}}),n.ajaxPrefilter("script",function(a){void 0===a.cache&&(a.cache=!1),a.crossDomain&&(a.type="GET")}),n.ajaxTransport("script",function(a){if(a.crossDomain){var b,c;return{send:function(d,e){b=n("<script>").prop({async:!0,charset:a.scriptCharset,src:a.url}).on("load error",c=function(a){b.remove(),c=null,a&&e("error"===a.type?404:200,a.type)}),l.head.appendChild(b[0])},abort:function(){c&&c()}}}});var Fb=[],Gb=/(=)\?(?=&|$)|\?\?/;n.ajaxSetup({jsonp:"callback",jsonpCallback:function(){var a=Fb.pop()||n.expando+"_"+cb++;return this[a]=!0,a}}),n.ajaxPrefilter("json jsonp",function(b,c,d){var e,f,g,h=b.jsonp!==!1&&(Gb.test(b.url)?"url":"string"==typeof b.data&&!(b.contentType||"").indexOf("application/x-www-form-urlencoded")&&Gb.test(b.data)&&"data");return h||"jsonp"===b.dataTypes[0]?(e=b.jsonpCallback=n.isFunction(b.jsonpCallback)?b.jsonpCallback():b.jsonpCallback,h?b[h]=b[h].replace(Gb,"$1"+e):b.jsonp!==!1&&(b.url+=(db.test(b.url)?"&":"?")+b.jsonp+"="+e),b.converters["script json"]=function(){return g||n.error(e+" was not called"),g[0]},b.dataTypes[0]="json",f=a[e],a[e]=function(){g=arguments},d.always(function(){a[e]=f,b[e]&&(b.jsonpCallback=c.jsonpCallback,Fb.push(e)),g&&n.isFunction(f)&&f(g[0]),g=f=void 0}),"script"):void 0}),n.parseHTML=function(a,b,c){if(!a||"string"!=typeof a)return null;"boolean"==typeof b&&(c=b,b=!1),b=b||l;var d=v.exec(a),e=!c&&[];return d?[b.createElement(d[1])]:(d=n.buildFragment([a],b,e),e&&e.length&&n(e).remove(),n.merge([],d.childNodes))};var Hb=n.fn.load;n.fn.load=function(a,b,c){if("string"!=typeof a&&Hb)return Hb.apply(this,arguments);var d,e,f,g=this,h=a.indexOf(" ");return h>=0&&(d=n.trim(a.slice(h)),a=a.slice(0,h)),n.isFunction(b)?(c=b,b=void 0):b&&"object"==typeof b&&(e="POST"),g.length>0&&n.ajax({url:a,type:e,dataType:"html",data:b}).done(function(a){f=arguments,g.html(d?n("<div>").append(n.parseHTML(a)).find(d):a)}).complete(c&&function(a,b){g.each(c,f||[a.responseText,b,a])}),this},n.each(["ajaxStart","ajaxStop","ajaxComplete","ajaxError","ajaxSuccess","ajaxSend"],function(a,b){n.fn[b]=function(a){return this.on(b,a)}}),n.expr.filters.animated=function(a){return n.grep(n.timers,function(b){return a===b.elem}).length};var Ib=a.document.documentElement;function Jb(a){return n.isWindow(a)?a:9===a.nodeType&&a.defaultView}n.offset={setOffset:function(a,b,c){var d,e,f,g,h,i,j,k=n.css(a,"position"),l=n(a),m={};"static"===k&&(a.style.position="relative"),h=l.offset(),f=n.css(a,"top"),i=n.css(a,"left"),j=("absolute"===k||"fixed"===k)&&(f+i).indexOf("auto")>-1,j?(d=l.position(),g=d.top,e=d.left):(g=parseFloat(f)||0,e=parseFloat(i)||0),n.isFunction(b)&&(b=b.call(a,c,h)),null!=b.top&&(m.top=b.top-h.top+g),null!=b.left&&(m.left=b.left-h.left+e),"using"in b?b.using.call(a,m):l.css(m)}},n.fn.extend({offset:function(a){if(arguments.length)return void 0===a?this:this.each(function(b){n.offset.setOffset(this,a,b)});var b,c,d=this[0],e={top:0,left:0},f=d&&d.ownerDocument;if(f)return b=f.documentElement,n.contains(b,d)?(typeof d.getBoundingClientRect!==U&&(e=d.getBoundingClientRect()),c=Jb(f),{top:e.top+c.pageYOffset-b.clientTop,left:e.left+c.pageXOffset-b.clientLeft}):e},position:function(){if(this[0]){var a,b,c=this[0],d={top:0,left:0};return"fixed"===n.css(c,"position")?b=c.getBoundingClientRect():(a=this.offsetParent(),b=this.offset(),n.nodeName(a[0],"html")||(d=a.offset()),d.top+=n.css(a[0],"borderTopWidth",!0),d.left+=n.css(a[0],"borderLeftWidth",!0)),{top:b.top-d.top-n.css(c,"marginTop",!0),left:b.left-d.left-n.css(c,"marginLeft",!0)}}},offsetParent:function(){return this.map(function(){var a=this.offsetParent||Ib;while(a&&!n.nodeName(a,"html")&&"static"===n.css(a,"position"))a=a.offsetParent;return a||Ib})}}),n.each({scrollLeft:"pageXOffset",scrollTop:"pageYOffset"},function(b,c){var d="pageYOffset"===c;n.fn[b]=function(e){return J(this,function(b,e,f){var g=Jb(b);return void 0===f?g?g[c]:b[e]:void(g?g.scrollTo(d?a.pageXOffset:f,d?f:a.pageYOffset):b[e]=f)},b,e,arguments.length,null)}}),n.each(["top","left"],function(a,b){n.cssHooks[b]=ya(k.pixelPosition,function(a,c){return c?(c=xa(a,b),va.test(c)?n(a).position()[b]+"px":c):void 0})}),n.each({Height:"height",Width:"width"},function(a,b){n.each({padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){var f=arguments.length&&(c||"boolean"!=typeof d),g=c||(d===!0||e===!0?"margin":"border");return J(this,function(b,c,d){var e;return n.isWindow(b)?b.document.documentElement["client"+a]:9===b.nodeType?(e=b.documentElement,Math.max(b.body["scroll"+a],e["scroll"+a],b.body["offset"+a],e["offset"+a],e["client"+a])):void 0===d?n.css(b,c,g):n.style(b,c,d,g)},b,f?d:void 0,f,null)}})}),n.fn.size=function(){return this.length},n.fn.andSelf=n.fn.addBack,"function"==typeof define&&define.amd&&define("jquery",[],function(){return n});var Kb=a.jQuery,Lb=a.$;return n.noConflict=function(b){return a.$===n&&(a.$=Lb),b&&a.jQuery===n&&(a.jQuery=Kb),n},typeof b===U&&(a.jQuery=a.$=n),n});
 //# sourceMappingURL=jquery.min.map
-$(document).ready(function() {
-    console.log("Hello world!");
-});
+// Released under MIT license
+// Copyright (c) 2009-2010 Dominic Baggott
+// Copyright (c) 2009-2010 Ash Berlin
+// Copyright (c) 2011 Christoph Dorn <christoph@christophdorn.com> (http://www.christophdorn.com)
+// Date: 2013-09-15T16:12Z
+
+(function(expose) {
+
+
+
+
+  var MarkdownHelpers = {};
+
+  // For Spidermonkey based engines
+  function mk_block_toSource() {
+    return "Markdown.mk_block( " +
+            uneval(this.toString()) +
+            ", " +
+            uneval(this.trailing) +
+            ", " +
+            uneval(this.lineNumber) +
+            " )";
+  }
+
+  // node
+  function mk_block_inspect() {
+    var util = require("util");
+    return "Markdown.mk_block( " +
+            util.inspect(this.toString()) +
+            ", " +
+            util.inspect(this.trailing) +
+            ", " +
+            util.inspect(this.lineNumber) +
+            " )";
+
+  }
+
+  MarkdownHelpers.mk_block = function(block, trail, line) {
+    // Be helpful for default case in tests.
+    if ( arguments.length === 1 )
+      trail = "\n\n";
+
+    // We actually need a String object, not a string primitive
+    /* jshint -W053 */
+    var s = new String(block);
+    s.trailing = trail;
+    // To make it clear its not just a string
+    s.inspect = mk_block_inspect;
+    s.toSource = mk_block_toSource;
+
+    if ( line !== undefined )
+      s.lineNumber = line;
+
+    return s;
+  };
+
+
+  var isArray = MarkdownHelpers.isArray = Array.isArray || function(obj) {
+    return Object.prototype.toString.call(obj) === "[object Array]";
+  };
+
+  // Don't mess with Array.prototype. Its not friendly
+  if ( Array.prototype.forEach ) {
+    MarkdownHelpers.forEach = function forEach( arr, cb, thisp ) {
+      return arr.forEach( cb, thisp );
+    };
+  }
+  else {
+    MarkdownHelpers.forEach = function forEach(arr, cb, thisp) {
+      for (var i = 0; i < arr.length; i++)
+        cb.call(thisp || arr, arr[i], i, arr);
+    };
+  }
+
+  MarkdownHelpers.isEmpty = function isEmpty( obj ) {
+    for ( var key in obj ) {
+      if ( hasOwnProperty.call( obj, key ) )
+        return false;
+    }
+    return true;
+  };
+
+  MarkdownHelpers.extract_attr = function extract_attr( jsonml ) {
+    return isArray(jsonml)
+        && jsonml.length > 1
+        && typeof jsonml[ 1 ] === "object"
+        && !( isArray(jsonml[ 1 ]) )
+        ? jsonml[ 1 ]
+        : undefined;
+  };
+
+
+
+
+ /**
+   *  class Markdown
+   *
+   *  Markdown processing in Javascript done right. We have very particular views
+   *  on what constitutes 'right' which include:
+   *
+   *  - produces well-formed HTML (this means that em and strong nesting is
+   *    important)
+   *
+   *  - has an intermediate representation to allow processing of parsed data (We
+   *    in fact have two, both as [JsonML]: a markdown tree and an HTML tree).
+   *
+   *  - is easily extensible to add new dialects without having to rewrite the
+   *    entire parsing mechanics
+   *
+   *  - has a good test suite
+   *
+   *  This implementation fulfills all of these (except that the test suite could
+   *  do with expanding to automatically run all the fixtures from other Markdown
+   *  implementations.)
+   *
+   *  ##### Intermediate Representation
+   *
+   *  *TODO* Talk about this :) Its JsonML, but document the node names we use.
+   *
+   *  [JsonML]: http://jsonml.org/ "JSON Markup Language"
+   **/
+  var Markdown = function(dialect) {
+    switch (typeof dialect) {
+    case "undefined":
+      this.dialect = Markdown.dialects.Gruber;
+      break;
+    case "object":
+      this.dialect = dialect;
+      break;
+    default:
+      if ( dialect in Markdown.dialects )
+        this.dialect = Markdown.dialects[dialect];
+      else
+        throw new Error("Unknown Markdown dialect '" + String(dialect) + "'");
+      break;
+    }
+    this.em_state = [];
+    this.strong_state = [];
+    this.debug_indent = "";
+  };
+
+  /**
+   * Markdown.dialects
+   *
+   * Namespace of built-in dialects.
+   **/
+  Markdown.dialects = {};
+
+
+
+
+  // Imported functions
+  var mk_block = Markdown.mk_block = MarkdownHelpers.mk_block,
+      isArray = MarkdownHelpers.isArray;
+
+  /**
+   *  parse( markdown, [dialect] ) -> JsonML
+   *  - markdown (String): markdown string to parse
+   *  - dialect (String | Dialect): the dialect to use, defaults to gruber
+   *
+   *  Parse `markdown` and return a markdown document as a Markdown.JsonML tree.
+   **/
+  Markdown.parse = function( source, dialect ) {
+    // dialect will default if undefined
+    var md = new Markdown( dialect );
+    return md.toTree( source );
+  };
+
+  function count_lines( str ) {
+    var n = 0,
+        i = -1;
+    while ( ( i = str.indexOf("\n", i + 1) ) !== -1 )
+      n++;
+    return n;
+  }
+
+  // Internal - split source into rough blocks
+  Markdown.prototype.split_blocks = function splitBlocks( input ) {
+    input = input.replace(/(\r\n|\n|\r)/g, "\n");
+    // [\s\S] matches _anything_ (newline or space)
+    // [^] is equivalent but doesn't work in IEs.
+    var re = /([\s\S]+?)($|\n#|\n(?:\s*\n|$)+)/g,
+        blocks = [],
+        m;
+
+    var line_no = 1;
+
+    if ( ( m = /^(\s*\n)/.exec(input) ) !== null ) {
+      // skip (but count) leading blank lines
+      line_no += count_lines( m[0] );
+      re.lastIndex = m[0].length;
+    }
+
+    while ( ( m = re.exec(input) ) !== null ) {
+      if (m[2] === "\n#") {
+        m[2] = "\n";
+        re.lastIndex--;
+      }
+      blocks.push( mk_block( m[1], m[2], line_no ) );
+      line_no += count_lines( m[0] );
+    }
+
+    return blocks;
+  };
+
+  /**
+   *  Markdown#processBlock( block, next ) -> undefined | [ JsonML, ... ]
+   *  - block (String): the block to process
+   *  - next (Array): the following blocks
+   *
+   * Process `block` and return an array of JsonML nodes representing `block`.
+   *
+   * It does this by asking each block level function in the dialect to process
+   * the block until one can. Succesful handling is indicated by returning an
+   * array (with zero or more JsonML nodes), failure by a false value.
+   *
+   * Blocks handlers are responsible for calling [[Markdown#processInline]]
+   * themselves as appropriate.
+   *
+   * If the blocks were split incorrectly or adjacent blocks need collapsing you
+   * can adjust `next` in place using shift/splice etc.
+   *
+   * If any of this default behaviour is not right for the dialect, you can
+   * define a `__call__` method on the dialect that will get invoked to handle
+   * the block processing.
+   */
+  Markdown.prototype.processBlock = function processBlock( block, next ) {
+    var cbs = this.dialect.block,
+        ord = cbs.__order__;
+
+    if ( "__call__" in cbs )
+      return cbs.__call__.call(this, block, next);
+
+    for ( var i = 0; i < ord.length; i++ ) {
+      //D:this.debug( "Testing", ord[i] );
+      var res = cbs[ ord[i] ].call( this, block, next );
+      if ( res ) {
+        //D:this.debug("  matched");
+        if ( !isArray(res) || ( res.length > 0 && !( isArray(res[0]) ) ) )
+          this.debug(ord[i], "didn't return a proper array");
+        //D:this.debug( "" );
+        return res;
+      }
+    }
+
+    // Uhoh! no match! Should we throw an error?
+    return [];
+  };
+
+  Markdown.prototype.processInline = function processInline( block ) {
+    return this.dialect.inline.__call__.call( this, String( block ) );
+  };
+
+  /**
+   *  Markdown#toTree( source ) -> JsonML
+   *  - source (String): markdown source to parse
+   *
+   *  Parse `source` into a JsonML tree representing the markdown document.
+   **/
+  // custom_tree means set this.tree to `custom_tree` and restore old value on return
+  Markdown.prototype.toTree = function toTree( source, custom_root ) {
+    var blocks = source instanceof Array ? source : this.split_blocks( source );
+
+    // Make tree a member variable so its easier to mess with in extensions
+    var old_tree = this.tree;
+    try {
+      this.tree = custom_root || this.tree || [ "markdown" ];
+
+      blocks_loop:
+      while ( blocks.length ) {
+        var b = this.processBlock( blocks.shift(), blocks );
+
+        // Reference blocks and the like won't return any content
+        if ( !b.length )
+          continue blocks_loop;
+
+        this.tree.push.apply( this.tree, b );
+      }
+      return this.tree;
+    }
+    finally {
+      if ( custom_root )
+        this.tree = old_tree;
+    }
+  };
+
+  // Noop by default
+  Markdown.prototype.debug = function () {
+    var args = Array.prototype.slice.call( arguments);
+    args.unshift(this.debug_indent);
+    if ( typeof print !== "undefined" )
+      print.apply( print, args );
+    if ( typeof console !== "undefined" && typeof console.log !== "undefined" )
+      console.log.apply( null, args );
+  };
+
+  Markdown.prototype.loop_re_over_block = function( re, block, cb ) {
+    // Dont use /g regexps with this
+    var m,
+        b = block.valueOf();
+
+    while ( b.length && (m = re.exec(b) ) !== null ) {
+      b = b.substr( m[0].length );
+      cb.call(this, m);
+    }
+    return b;
+  };
+
+  // Build default order from insertion order.
+  Markdown.buildBlockOrder = function(d) {
+    var ord = [];
+    for ( var i in d ) {
+      if ( i === "__order__" || i === "__call__" )
+        continue;
+      ord.push( i );
+    }
+    d.__order__ = ord;
+  };
+
+  // Build patterns for inline matcher
+  Markdown.buildInlinePatterns = function(d) {
+    var patterns = [];
+
+    for ( var i in d ) {
+      // __foo__ is reserved and not a pattern
+      if ( i.match( /^__.*__$/) )
+        continue;
+      var l = i.replace( /([\\.*+?|()\[\]{}])/g, "\\$1" )
+               .replace( /\n/, "\\n" );
+      patterns.push( i.length === 1 ? l : "(?:" + l + ")" );
+    }
+
+    patterns = patterns.join("|");
+    d.__patterns__ = patterns;
+    //print("patterns:", uneval( patterns ) );
+
+    var fn = d.__call__;
+    d.__call__ = function(text, pattern) {
+      if ( pattern !== undefined )
+        return fn.call(this, text, pattern);
+      else
+        return fn.call(this, text, patterns);
+    };
+  };
+
+
+
+
+  var extract_attr = MarkdownHelpers.extract_attr;
+
+  /**
+   *  renderJsonML( jsonml[, options] ) -> String
+   *  - jsonml (Array): JsonML array to render to XML
+   *  - options (Object): options
+   *
+   *  Converts the given JsonML into well-formed XML.
+   *
+   *  The options currently understood are:
+   *
+   *  - root (Boolean): wether or not the root node should be included in the
+   *    output, or just its children. The default `false` is to not include the
+   *    root itself.
+   */
+  Markdown.renderJsonML = function( jsonml, options ) {
+    options = options || {};
+    // include the root element in the rendered output?
+    options.root = options.root || false;
+
+    var content = [];
+
+    if ( options.root ) {
+      content.push( render_tree( jsonml ) );
+    }
+    else {
+      jsonml.shift(); // get rid of the tag
+      if ( jsonml.length && typeof jsonml[ 0 ] === "object" && !( jsonml[ 0 ] instanceof Array ) )
+        jsonml.shift(); // get rid of the attributes
+
+      while ( jsonml.length )
+        content.push( render_tree( jsonml.shift() ) );
+    }
+
+    return content.join( "\n\n" );
+  };
+
+
+  /**
+   *  toHTMLTree( markdown, [dialect] ) -> JsonML
+   *  toHTMLTree( md_tree ) -> JsonML
+   *  - markdown (String): markdown string to parse
+   *  - dialect (String | Dialect): the dialect to use, defaults to gruber
+   *  - md_tree (Markdown.JsonML): parsed markdown tree
+   *
+   *  Turn markdown into HTML, represented as a JsonML tree. If a string is given
+   *  to this function, it is first parsed into a markdown tree by calling
+   *  [[parse]].
+   **/
+  Markdown.toHTMLTree = function toHTMLTree( input, dialect , options ) {
+
+    // convert string input to an MD tree
+    if ( typeof input === "string" )
+      input = this.parse( input, dialect );
+
+    // Now convert the MD tree to an HTML tree
+
+    // remove references from the tree
+    var attrs = extract_attr( input ),
+        refs = {};
+
+    if ( attrs && attrs.references )
+      refs = attrs.references;
+
+    var html = convert_tree_to_html( input, refs , options );
+    merge_text_nodes( html );
+    return html;
+  };
+
+  /**
+   *  toHTML( markdown, [dialect]  ) -> String
+   *  toHTML( md_tree ) -> String
+   *  - markdown (String): markdown string to parse
+   *  - md_tree (Markdown.JsonML): parsed markdown tree
+   *
+   *  Take markdown (either as a string or as a JsonML tree) and run it through
+   *  [[toHTMLTree]] then turn it into a well-formated HTML fragment.
+   **/
+  Markdown.toHTML = function toHTML( source , dialect , options ) {
+    var input = this.toHTMLTree( source , dialect , options );
+
+    return this.renderJsonML( input );
+  };
+
+
+  function escapeHTML( text ) {
+    return text.replace( /&/g, "&amp;" )
+               .replace( /</g, "&lt;" )
+               .replace( />/g, "&gt;" )
+               .replace( /"/g, "&quot;" )
+               .replace( /'/g, "&#39;" );
+  }
+
+  function render_tree( jsonml ) {
+    // basic case
+    if ( typeof jsonml === "string" )
+      return escapeHTML( jsonml );
+
+    var tag = jsonml.shift(),
+        attributes = {},
+        content = [];
+
+    if ( jsonml.length && typeof jsonml[ 0 ] === "object" && !( jsonml[ 0 ] instanceof Array ) )
+      attributes = jsonml.shift();
+
+    while ( jsonml.length )
+      content.push( render_tree( jsonml.shift() ) );
+
+    var tag_attrs = "";
+    for ( var a in attributes )
+      tag_attrs += " " + a + '="' + escapeHTML( attributes[ a ] ) + '"';
+
+    // be careful about adding whitespace here for inline elements
+    if ( tag === "img" || tag === "br" || tag === "hr" )
+      return "<"+ tag + tag_attrs + "/>";
+    else
+      return "<"+ tag + tag_attrs + ">" + content.join( "" ) + "</" + tag + ">";
+  }
+
+  function convert_tree_to_html( tree, references, options ) {
+    var i;
+    options = options || {};
+
+    // shallow clone
+    var jsonml = tree.slice( 0 );
+
+    if ( typeof options.preprocessTreeNode === "function" )
+      jsonml = options.preprocessTreeNode(jsonml, references);
+
+    // Clone attributes if they exist
+    var attrs = extract_attr( jsonml );
+    if ( attrs ) {
+      jsonml[ 1 ] = {};
+      for ( i in attrs ) {
+        jsonml[ 1 ][ i ] = attrs[ i ];
+      }
+      attrs = jsonml[ 1 ];
+    }
+
+    // basic case
+    if ( typeof jsonml === "string" )
+      return jsonml;
+
+    // convert this node
+    switch ( jsonml[ 0 ] ) {
+    case "header":
+      jsonml[ 0 ] = "h" + jsonml[ 1 ].level;
+      delete jsonml[ 1 ].level;
+      break;
+    case "bulletlist":
+      jsonml[ 0 ] = "ul";
+      break;
+    case "numberlist":
+      jsonml[ 0 ] = "ol";
+      break;
+    case "listitem":
+      jsonml[ 0 ] = "li";
+      break;
+    case "para":
+      jsonml[ 0 ] = "p";
+      break;
+    case "markdown":
+      jsonml[ 0 ] = "html";
+      if ( attrs )
+        delete attrs.references;
+      break;
+    case "code_block":
+      jsonml[ 0 ] = "pre";
+      i = attrs ? 2 : 1;
+      var code = [ "code" ];
+      code.push.apply( code, jsonml.splice( i, jsonml.length - i ) );
+      jsonml[ i ] = code;
+      break;
+    case "inlinecode":
+      jsonml[ 0 ] = "code";
+      break;
+    case "img":
+      jsonml[ 1 ].src = jsonml[ 1 ].href;
+      delete jsonml[ 1 ].href;
+      break;
+    case "linebreak":
+      jsonml[ 0 ] = "br";
+      break;
+    case "link":
+      jsonml[ 0 ] = "a";
+      break;
+    case "link_ref":
+      jsonml[ 0 ] = "a";
+
+      // grab this ref and clean up the attribute node
+      var ref = references[ attrs.ref ];
+
+      // if the reference exists, make the link
+      if ( ref ) {
+        delete attrs.ref;
+
+        // add in the href and title, if present
+        attrs.href = ref.href;
+        if ( ref.title )
+          attrs.title = ref.title;
+
+        // get rid of the unneeded original text
+        delete attrs.original;
+      }
+      // the reference doesn't exist, so revert to plain text
+      else {
+        return attrs.original;
+      }
+      break;
+    case "img_ref":
+      jsonml[ 0 ] = "img";
+
+      // grab this ref and clean up the attribute node
+      var ref = references[ attrs.ref ];
+
+      // if the reference exists, make the link
+      if ( ref ) {
+        delete attrs.ref;
+
+        // add in the href and title, if present
+        attrs.src = ref.href;
+        if ( ref.title )
+          attrs.title = ref.title;
+
+        // get rid of the unneeded original text
+        delete attrs.original;
+      }
+      // the reference doesn't exist, so revert to plain text
+      else {
+        return attrs.original;
+      }
+      break;
+    }
+
+    // convert all the children
+    i = 1;
+
+    // deal with the attribute node, if it exists
+    if ( attrs ) {
+      // if there are keys, skip over it
+      for ( var key in jsonml[ 1 ] ) {
+        i = 2;
+        break;
+      }
+      // if there aren't, remove it
+      if ( i === 1 )
+        jsonml.splice( i, 1 );
+    }
+
+    for ( ; i < jsonml.length; ++i ) {
+      jsonml[ i ] = convert_tree_to_html( jsonml[ i ], references, options );
+    }
+
+    return jsonml;
+  }
+
+
+  // merges adjacent text nodes into a single node
+  function merge_text_nodes( jsonml ) {
+    // skip the tag name and attribute hash
+    var i = extract_attr( jsonml ) ? 2 : 1;
+
+    while ( i < jsonml.length ) {
+      // if it's a string check the next item too
+      if ( typeof jsonml[ i ] === "string" ) {
+        if ( i + 1 < jsonml.length && typeof jsonml[ i + 1 ] === "string" ) {
+          // merge the second string into the first and remove it
+          jsonml[ i ] += jsonml.splice( i + 1, 1 )[ 0 ];
+        }
+        else {
+          ++i;
+        }
+      }
+      // if it's not a string recurse
+      else {
+        merge_text_nodes( jsonml[ i ] );
+        ++i;
+      }
+    }
+  };
+
+
+
+  var DialectHelpers = {};
+  DialectHelpers.inline_until_char = function( text, want ) {
+    var consumed = 0,
+        nodes = [];
+
+    while ( true ) {
+      if ( text.charAt( consumed ) === want ) {
+        // Found the character we were looking for
+        consumed++;
+        return [ consumed, nodes ];
+      }
+
+      if ( consumed >= text.length ) {
+        // No closing char found. Abort.
+        return null;
+      }
+
+      var res = this.dialect.inline.__oneElement__.call(this, text.substr( consumed ) );
+      consumed += res[ 0 ];
+      // Add any returned nodes.
+      nodes.push.apply( nodes, res.slice( 1 ) );
+    }
+  };
+
+  // Helper function to make sub-classing a dialect easier
+  DialectHelpers.subclassDialect = function( d ) {
+    function Block() {}
+    Block.prototype = d.block;
+    function Inline() {}
+    Inline.prototype = d.inline;
+
+    return { block: new Block(), inline: new Inline() };
+  };
+
+
+
+
+  var forEach = MarkdownHelpers.forEach,
+      extract_attr = MarkdownHelpers.extract_attr,
+      mk_block = MarkdownHelpers.mk_block,
+      isEmpty = MarkdownHelpers.isEmpty,
+      inline_until_char = DialectHelpers.inline_until_char;
+
+  /**
+   * Gruber dialect
+   *
+   * The default dialect that follows the rules set out by John Gruber's
+   * markdown.pl as closely as possible. Well actually we follow the behaviour of
+   * that script which in some places is not exactly what the syntax web page
+   * says.
+   **/
+  var Gruber = {
+    block: {
+      atxHeader: function atxHeader( block, next ) {
+        var m = block.match( /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/ );
+
+        if ( !m )
+          return undefined;
+
+        var header = [ "header", { level: m[ 1 ].length } ];
+        Array.prototype.push.apply(header, this.processInline(m[ 2 ]));
+
+        if ( m[0].length < block.length )
+          next.unshift( mk_block( block.substr( m[0].length ), block.trailing, block.lineNumber + 2 ) );
+
+        return [ header ];
+      },
+
+      setextHeader: function setextHeader( block, next ) {
+        var m = block.match( /^(.*)\n([-=])\2\2+(?:\n|$)/ );
+
+        if ( !m )
+          return undefined;
+
+        var level = ( m[ 2 ] === "=" ) ? 1 : 2,
+            header = [ "header", { level : level }, m[ 1 ] ];
+
+        if ( m[0].length < block.length )
+          next.unshift( mk_block( block.substr( m[0].length ), block.trailing, block.lineNumber + 2 ) );
+
+        return [ header ];
+      },
+
+      code: function code( block, next ) {
+        // |    Foo
+        // |bar
+        // should be a code block followed by a paragraph. Fun
+        //
+        // There might also be adjacent code block to merge.
+
+        var ret = [],
+            re = /^(?: {0,3}\t| {4})(.*)\n?/;
+
+        // 4 spaces + content
+        if ( !block.match( re ) )
+          return undefined;
+
+        block_search:
+        do {
+          // Now pull out the rest of the lines
+          var b = this.loop_re_over_block(
+                    re, block.valueOf(), function( m ) { ret.push( m[1] ); } );
+
+          if ( b.length ) {
+            // Case alluded to in first comment. push it back on as a new block
+            next.unshift( mk_block(b, block.trailing) );
+            break block_search;
+          }
+          else if ( next.length ) {
+            // Check the next block - it might be code too
+            if ( !next[0].match( re ) )
+              break block_search;
+
+            // Pull how how many blanks lines follow - minus two to account for .join
+            ret.push ( block.trailing.replace(/[^\n]/g, "").substring(2) );
+
+            block = next.shift();
+          }
+          else {
+            break block_search;
+          }
+        } while ( true );
+
+        return [ [ "code_block", ret.join("\n") ] ];
+      },
+
+      horizRule: function horizRule( block, next ) {
+        // this needs to find any hr in the block to handle abutting blocks
+        var m = block.match( /^(?:([\s\S]*?)\n)?[ \t]*([-_*])(?:[ \t]*\2){2,}[ \t]*(?:\n([\s\S]*))?$/ );
+
+        if ( !m )
+          return undefined;
+
+        var jsonml = [ [ "hr" ] ];
+
+        // if there's a leading abutting block, process it
+        if ( m[ 1 ] ) {
+          var contained = mk_block( m[ 1 ], "", block.lineNumber );
+          jsonml.unshift.apply( jsonml, this.toTree( contained, [] ) );
+        }
+
+        // if there's a trailing abutting block, stick it into next
+        if ( m[ 3 ] )
+          next.unshift( mk_block( m[ 3 ], block.trailing, block.lineNumber + 1 ) );
+
+        return jsonml;
+      },
+
+      // There are two types of lists. Tight and loose. Tight lists have no whitespace
+      // between the items (and result in text just in the <li>) and loose lists,
+      // which have an empty line between list items, resulting in (one or more)
+      // paragraphs inside the <li>.
+      //
+      // There are all sorts weird edge cases about the original markdown.pl's
+      // handling of lists:
+      //
+      // * Nested lists are supposed to be indented by four chars per level. But
+      //   if they aren't, you can get a nested list by indenting by less than
+      //   four so long as the indent doesn't match an indent of an existing list
+      //   item in the 'nest stack'.
+      //
+      // * The type of the list (bullet or number) is controlled just by the
+      //    first item at the indent. Subsequent changes are ignored unless they
+      //    are for nested lists
+      //
+      lists: (function( ) {
+        // Use a closure to hide a few variables.
+        var any_list = "[*+-]|\\d+\\.",
+            bullet_list = /[*+-]/,
+            // Capture leading indent as it matters for determining nested lists.
+            is_list_re = new RegExp( "^( {0,3})(" + any_list + ")[ \t]+" ),
+            indent_re = "(?: {0,3}\\t| {4})";
+
+        // TODO: Cache this regexp for certain depths.
+        // Create a regexp suitable for matching an li for a given stack depth
+        function regex_for_depth( depth ) {
+
+          return new RegExp(
+            // m[1] = indent, m[2] = list_type
+            "(?:^(" + indent_re + "{0," + depth + "} {0,3})(" + any_list + ")\\s+)|" +
+            // m[3] = cont
+            "(^" + indent_re + "{0," + (depth-1) + "}[ ]{0,4})"
+          );
+        }
+        function expand_tab( input ) {
+          return input.replace( / {0,3}\t/g, "    " );
+        }
+
+        // Add inline content `inline` to `li`. inline comes from processInline
+        // so is an array of content
+        function add(li, loose, inline, nl) {
+          if ( loose ) {
+            li.push( [ "para" ].concat(inline) );
+            return;
+          }
+          // Hmmm, should this be any block level element or just paras?
+          var add_to = li[li.length -1] instanceof Array && li[li.length - 1][0] === "para"
+                     ? li[li.length -1]
+                     : li;
+
+          // If there is already some content in this list, add the new line in
+          if ( nl && li.length > 1 )
+            inline.unshift(nl);
+
+          for ( var i = 0; i < inline.length; i++ ) {
+            var what = inline[i],
+                is_str = typeof what === "string";
+            if ( is_str && add_to.length > 1 && typeof add_to[add_to.length-1] === "string" )
+              add_to[ add_to.length-1 ] += what;
+            else
+              add_to.push( what );
+          }
+        }
+
+        // contained means have an indent greater than the current one. On
+        // *every* line in the block
+        function get_contained_blocks( depth, blocks ) {
+
+          var re = new RegExp( "^(" + indent_re + "{" + depth + "}.*?\\n?)*$" ),
+              replace = new RegExp("^" + indent_re + "{" + depth + "}", "gm"),
+              ret = [];
+
+          while ( blocks.length > 0 ) {
+            if ( re.exec( blocks[0] ) ) {
+              var b = blocks.shift(),
+                  // Now remove that indent
+                  x = b.replace( replace, "");
+
+              ret.push( mk_block( x, b.trailing, b.lineNumber ) );
+            }
+            else
+              break;
+          }
+          return ret;
+        }
+
+        // passed to stack.forEach to turn list items up the stack into paras
+        function paragraphify(s, i, stack) {
+          var list = s.list;
+          var last_li = list[list.length-1];
+
+          if ( last_li[1] instanceof Array && last_li[1][0] === "para" )
+            return;
+          if ( i + 1 === stack.length ) {
+            // Last stack frame
+            // Keep the same array, but replace the contents
+            last_li.push( ["para"].concat( last_li.splice(1, last_li.length - 1) ) );
+          }
+          else {
+            var sublist = last_li.pop();
+            last_li.push( ["para"].concat( last_li.splice(1, last_li.length - 1) ), sublist );
+          }
+        }
+
+        // The matcher function
+        return function( block, next ) {
+          var m = block.match( is_list_re );
+          if ( !m )
+            return undefined;
+
+          function make_list( m ) {
+            var list = bullet_list.exec( m[2] )
+                     ? ["bulletlist"]
+                     : ["numberlist"];
+
+            stack.push( { list: list, indent: m[1] } );
+            return list;
+          }
+
+
+          var stack = [], // Stack of lists for nesting.
+              list = make_list( m ),
+              last_li,
+              loose = false,
+              ret = [ stack[0].list ],
+              i;
+
+          // Loop to search over block looking for inner block elements and loose lists
+          loose_search:
+          while ( true ) {
+            // Split into lines preserving new lines at end of line
+            var lines = block.split( /(?=\n)/ );
+
+            // We have to grab all lines for a li and call processInline on them
+            // once as there are some inline things that can span lines.
+            var li_accumulate = "", nl = "";
+
+            // Loop over the lines in this block looking for tight lists.
+            tight_search:
+            for ( var line_no = 0; line_no < lines.length; line_no++ ) {
+              nl = "";
+              var l = lines[line_no].replace(/^\n/, function(n) { nl = n; return ""; });
+
+
+              // TODO: really should cache this
+              var line_re = regex_for_depth( stack.length );
+
+              m = l.match( line_re );
+              //print( "line:", uneval(l), "\nline match:", uneval(m) );
+
+              // We have a list item
+              if ( m[1] !== undefined ) {
+                // Process the previous list item, if any
+                if ( li_accumulate.length ) {
+                  add( last_li, loose, this.processInline( li_accumulate ), nl );
+                  // Loose mode will have been dealt with. Reset it
+                  loose = false;
+                  li_accumulate = "";
+                }
+
+                m[1] = expand_tab( m[1] );
+                var wanted_depth = Math.floor(m[1].length/4)+1;
+                //print( "want:", wanted_depth, "stack:", stack.length);
+                if ( wanted_depth > stack.length ) {
+                  // Deep enough for a nested list outright
+                  //print ( "new nested list" );
+                  list = make_list( m );
+                  last_li.push( list );
+                  last_li = list[1] = [ "listitem" ];
+                }
+                else {
+                  // We aren't deep enough to be strictly a new level. This is
+                  // where Md.pl goes nuts. If the indent matches a level in the
+                  // stack, put it there, else put it one deeper then the
+                  // wanted_depth deserves.
+                  var found = false;
+                  for ( i = 0; i < stack.length; i++ ) {
+                    if ( stack[ i ].indent !== m[1] )
+                      continue;
+
+                    list = stack[ i ].list;
+                    stack.splice( i+1, stack.length - (i+1) );
+                    found = true;
+                    break;
+                  }
+
+                  if (!found) {
+                    //print("not found. l:", uneval(l));
+                    wanted_depth++;
+                    if ( wanted_depth <= stack.length ) {
+                      stack.splice(wanted_depth, stack.length - wanted_depth);
+                      //print("Desired depth now", wanted_depth, "stack:", stack.length);
+                      list = stack[wanted_depth-1].list;
+                      //print("list:", uneval(list) );
+                    }
+                    else {
+                      //print ("made new stack for messy indent");
+                      list = make_list(m);
+                      last_li.push(list);
+                    }
+                  }
+
+                  //print( uneval(list), "last", list === stack[stack.length-1].list );
+                  last_li = [ "listitem" ];
+                  list.push(last_li);
+                } // end depth of shenegains
+                nl = "";
+              }
+
+              // Add content
+              if ( l.length > m[0].length )
+                li_accumulate += nl + l.substr( m[0].length );
+            } // tight_search
+
+            if ( li_accumulate.length ) {
+              add( last_li, loose, this.processInline( li_accumulate ), nl );
+              // Loose mode will have been dealt with. Reset it
+              loose = false;
+              li_accumulate = "";
+            }
+
+            // Look at the next block - we might have a loose list. Or an extra
+            // paragraph for the current li
+            var contained = get_contained_blocks( stack.length, next );
+
+            // Deal with code blocks or properly nested lists
+            if ( contained.length > 0 ) {
+              // Make sure all listitems up the stack are paragraphs
+              forEach( stack, paragraphify, this);
+
+              last_li.push.apply( last_li, this.toTree( contained, [] ) );
+            }
+
+            var next_block = next[0] && next[0].valueOf() || "";
+
+            if ( next_block.match(is_list_re) || next_block.match( /^ / ) ) {
+              block = next.shift();
+
+              // Check for an HR following a list: features/lists/hr_abutting
+              var hr = this.dialect.block.horizRule( block, next );
+
+              if ( hr ) {
+                ret.push.apply(ret, hr);
+                break;
+              }
+
+              // Make sure all listitems up the stack are paragraphs
+              forEach( stack, paragraphify, this);
+
+              loose = true;
+              continue loose_search;
+            }
+            break;
+          } // loose_search
+
+          return ret;
+        };
+      })(),
+
+      blockquote: function blockquote( block, next ) {
+        if ( !block.match( /^>/m ) )
+          return undefined;
+
+        var jsonml = [];
+
+        // separate out the leading abutting block, if any. I.e. in this case:
+        //
+        //  a
+        //  > b
+        //
+        if ( block[ 0 ] !== ">" ) {
+          var lines = block.split( /\n/ ),
+              prev = [],
+              line_no = block.lineNumber;
+
+          // keep shifting lines until you find a crotchet
+          while ( lines.length && lines[ 0 ][ 0 ] !== ">" ) {
+            prev.push( lines.shift() );
+            line_no++;
+          }
+
+          var abutting = mk_block( prev.join( "\n" ), "\n", block.lineNumber );
+          jsonml.push.apply( jsonml, this.processBlock( abutting, [] ) );
+          // reassemble new block of just block quotes!
+          block = mk_block( lines.join( "\n" ), block.trailing, line_no );
+        }
+
+
+        // if the next block is also a blockquote merge it in
+        while ( next.length && next[ 0 ][ 0 ] === ">" ) {
+          var b = next.shift();
+          block = mk_block( block + block.trailing + b, b.trailing, block.lineNumber );
+        }
+
+        // Strip off the leading "> " and re-process as a block.
+        var input = block.replace( /^> ?/gm, "" ),
+            old_tree = this.tree,
+            processedBlock = this.toTree( input, [ "blockquote" ] ),
+            attr = extract_attr( processedBlock );
+
+        // If any link references were found get rid of them
+        if ( attr && attr.references ) {
+          delete attr.references;
+          // And then remove the attribute object if it's empty
+          if ( isEmpty( attr ) )
+            processedBlock.splice( 1, 1 );
+        }
+
+        jsonml.push( processedBlock );
+        return jsonml;
+      },
+
+      referenceDefn: function referenceDefn( block, next) {
+        var re = /^\s*\[(.*?)\]:\s*(\S+)(?:\s+(?:(['"])(.*?)\3|\((.*?)\)))?\n?/;
+        // interesting matches are [ , ref_id, url, , title, title ]
+
+        if ( !block.match(re) )
+          return undefined;
+
+        // make an attribute node if it doesn't exist
+        if ( !extract_attr( this.tree ) )
+          this.tree.splice( 1, 0, {} );
+
+        var attrs = extract_attr( this.tree );
+
+        // make a references hash if it doesn't exist
+        if ( attrs.references === undefined )
+          attrs.references = {};
+
+        var b = this.loop_re_over_block(re, block, function( m ) {
+
+          if ( m[2] && m[2][0] === "<" && m[2][m[2].length-1] === ">" )
+            m[2] = m[2].substring( 1, m[2].length - 1 );
+
+          var ref = attrs.references[ m[1].toLowerCase() ] = {
+            href: m[2]
+          };
+
+          if ( m[4] !== undefined )
+            ref.title = m[4];
+          else if ( m[5] !== undefined )
+            ref.title = m[5];
+
+        } );
+
+        if ( b.length )
+          next.unshift( mk_block( b, block.trailing ) );
+
+        return [];
+      },
+
+      para: function para( block ) {
+        // everything's a para!
+        return [ ["para"].concat( this.processInline( block ) ) ];
+      }
+    },
+
+    inline: {
+
+      __oneElement__: function oneElement( text, patterns_or_re, previous_nodes ) {
+        var m,
+            res;
+
+        patterns_or_re = patterns_or_re || this.dialect.inline.__patterns__;
+        var re = new RegExp( "([\\s\\S]*?)(" + (patterns_or_re.source || patterns_or_re) + ")" );
+
+        m = re.exec( text );
+        if (!m) {
+          // Just boring text
+          return [ text.length, text ];
+        }
+        else if ( m[1] ) {
+          // Some un-interesting text matched. Return that first
+          return [ m[1].length, m[1] ];
+        }
+
+        var res;
+        if ( m[2] in this.dialect.inline ) {
+          res = this.dialect.inline[ m[2] ].call(
+                    this,
+                    text.substr( m.index ), m, previous_nodes || [] );
+        }
+        // Default for now to make dev easier. just slurp special and output it.
+        res = res || [ m[2].length, m[2] ];
+        return res;
+      },
+
+      __call__: function inline( text, patterns ) {
+
+        var out = [],
+            res;
+
+        function add(x) {
+          //D:self.debug("  adding output", uneval(x));
+          if ( typeof x === "string" && typeof out[out.length-1] === "string" )
+            out[ out.length-1 ] += x;
+          else
+            out.push(x);
+        }
+
+        while ( text.length > 0 ) {
+          res = this.dialect.inline.__oneElement__.call(this, text, patterns, out );
+          text = text.substr( res.shift() );
+          forEach(res, add );
+        }
+
+        return out;
+      },
+
+      // These characters are intersting elsewhere, so have rules for them so that
+      // chunks of plain text blocks don't include them
+      "]": function () {},
+      "}": function () {},
+
+      __escape__ : /^\\[\\`\*_{}\[\]()#\+.!\-]/,
+
+      "\\": function escaped( text ) {
+        // [ length of input processed, node/children to add... ]
+        // Only esacape: \ ` * _ { } [ ] ( ) # * + - . !
+        if ( this.dialect.inline.__escape__.exec( text ) )
+          return [ 2, text.charAt( 1 ) ];
+        else
+          // Not an esacpe
+          return [ 1, "\\" ];
+      },
+
+      "![": function image( text ) {
+
+        // Unlike images, alt text is plain text only. no other elements are
+        // allowed in there
+
+        // ![Alt text](/path/to/img.jpg "Optional title")
+        //      1          2            3       4         <--- captures
+        var m = text.match( /^!\[(.*?)\][ \t]*\([ \t]*([^")]*?)(?:[ \t]+(["'])(.*?)\3)?[ \t]*\)/ );
+
+        if ( m ) {
+          if ( m[2] && m[2][0] === "<" && m[2][m[2].length-1] === ">" )
+            m[2] = m[2].substring( 1, m[2].length - 1 );
+
+          m[2] = this.dialect.inline.__call__.call( this, m[2], /\\/ )[0];
+
+          var attrs = { alt: m[1], href: m[2] || "" };
+          if ( m[4] !== undefined)
+            attrs.title = m[4];
+
+          return [ m[0].length, [ "img", attrs ] ];
+        }
+
+        // ![Alt text][id]
+        m = text.match( /^!\[(.*?)\][ \t]*\[(.*?)\]/ );
+
+        if ( m ) {
+          // We can't check if the reference is known here as it likely wont be
+          // found till after. Check it in md tree->hmtl tree conversion
+          return [ m[0].length, [ "img_ref", { alt: m[1], ref: m[2].toLowerCase(), original: m[0] } ] ];
+        }
+
+        // Just consume the '!['
+        return [ 2, "![" ];
+      },
+
+      "[": function link( text ) {
+
+        var orig = String(text);
+        // Inline content is possible inside `link text`
+        var res = inline_until_char.call( this, text.substr(1), "]" );
+
+        // No closing ']' found. Just consume the [
+        if ( !res )
+          return [ 1, "[" ];
+
+        var consumed = 1 + res[ 0 ],
+            children = res[ 1 ],
+            link,
+            attrs;
+
+        // At this point the first [...] has been parsed. See what follows to find
+        // out which kind of link we are (reference or direct url)
+        text = text.substr( consumed );
+
+        // [link text](/path/to/img.jpg "Optional title")
+        //                 1            2       3         <--- captures
+        // This will capture up to the last paren in the block. We then pull
+        // back based on if there a matching ones in the url
+        //    ([here](/url/(test))
+        // The parens have to be balanced
+        var m = text.match( /^\s*\([ \t]*([^"']*)(?:[ \t]+(["'])(.*?)\2)?[ \t]*\)/ );
+        if ( m ) {
+          var url = m[1];
+          consumed += m[0].length;
+
+          if ( url && url[0] === "<" && url[url.length-1] === ">" )
+            url = url.substring( 1, url.length - 1 );
+
+          // If there is a title we don't have to worry about parens in the url
+          if ( !m[3] ) {
+            var open_parens = 1; // One open that isn't in the capture
+            for ( var len = 0; len < url.length; len++ ) {
+              switch ( url[len] ) {
+              case "(":
+                open_parens++;
+                break;
+              case ")":
+                if ( --open_parens === 0) {
+                  consumed -= url.length - len;
+                  url = url.substring(0, len);
+                }
+                break;
+              }
+            }
+          }
+
+          // Process escapes only
+          url = this.dialect.inline.__call__.call( this, url, /\\/ )[0];
+
+          attrs = { href: url || "" };
+          if ( m[3] !== undefined)
+            attrs.title = m[3];
+
+          link = [ "link", attrs ].concat( children );
+          return [ consumed, link ];
+        }
+
+        // [Alt text][id]
+        // [Alt text] [id]
+        m = text.match( /^\s*\[(.*?)\]/ );
+
+        if ( m ) {
+
+          consumed += m[ 0 ].length;
+
+          // [links][] uses links as its reference
+          attrs = { ref: ( m[ 1 ] || String(children) ).toLowerCase(),  original: orig.substr( 0, consumed ) };
+
+          link = [ "link_ref", attrs ].concat( children );
+
+          // We can't check if the reference is known here as it likely wont be
+          // found till after. Check it in md tree->hmtl tree conversion.
+          // Store the original so that conversion can revert if the ref isn't found.
+          return [ consumed, link ];
+        }
+
+        // [id]
+        // Only if id is plain (no formatting.)
+        if ( children.length === 1 && typeof children[0] === "string" ) {
+
+          attrs = { ref: children[0].toLowerCase(),  original: orig.substr( 0, consumed ) };
+          link = [ "link_ref", attrs, children[0] ];
+          return [ consumed, link ];
+        }
+
+        // Just consume the "["
+        return [ 1, "[" ];
+      },
+
+
+      "<": function autoLink( text ) {
+        var m;
+
+        if ( ( m = text.match( /^<(?:((https?|ftp|mailto):[^>]+)|(.*?@.*?\.[a-zA-Z]+))>/ ) ) !== null ) {
+          if ( m[3] )
+            return [ m[0].length, [ "link", { href: "mailto:" + m[3] }, m[3] ] ];
+          else if ( m[2] === "mailto" )
+            return [ m[0].length, [ "link", { href: m[1] }, m[1].substr("mailto:".length ) ] ];
+          else
+            return [ m[0].length, [ "link", { href: m[1] }, m[1] ] ];
+        }
+
+        return [ 1, "<" ];
+      },
+
+      "`": function inlineCode( text ) {
+        // Inline code block. as many backticks as you like to start it
+        // Always skip over the opening ticks.
+        var m = text.match( /(`+)(([\s\S]*?)\1)/ );
+
+        if ( m && m[2] )
+          return [ m[1].length + m[2].length, [ "inlinecode", m[3] ] ];
+        else {
+          // TODO: No matching end code found - warn!
+          return [ 1, "`" ];
+        }
+      },
+
+      "  \n": function lineBreak() {
+        return [ 3, [ "linebreak" ] ];
+      }
+
+    }
+  };
+
+  // Meta Helper/generator method for em and strong handling
+  function strong_em( tag, md ) {
+
+    var state_slot = tag + "_state",
+        other_slot = tag === "strong" ? "em_state" : "strong_state";
+
+    function CloseTag(len) {
+      this.len_after = len;
+      this.name = "close_" + md;
+    }
+
+    return function ( text ) {
+
+      if ( this[state_slot][0] === md ) {
+        // Most recent em is of this type
+        //D:this.debug("closing", md);
+        this[state_slot].shift();
+
+        // "Consume" everything to go back to the recrusion in the else-block below
+        return[ text.length, new CloseTag(text.length-md.length) ];
+      }
+      else {
+        // Store a clone of the em/strong states
+        var other = this[other_slot].slice(),
+            state = this[state_slot].slice();
+
+        this[state_slot].unshift(md);
+
+        //D:this.debug_indent += "  ";
+
+        // Recurse
+        var res = this.processInline( text.substr( md.length ) );
+        //D:this.debug_indent = this.debug_indent.substr(2);
+
+        var last = res[res.length - 1];
+
+        //D:this.debug("processInline from", tag + ": ", uneval( res ) );
+
+        var check = this[state_slot].shift();
+        if ( last instanceof CloseTag ) {
+          res.pop();
+          // We matched! Huzzah.
+          var consumed = text.length - last.len_after;
+          return [ consumed, [ tag ].concat(res) ];
+        }
+        else {
+          // Restore the state of the other kind. We might have mistakenly closed it.
+          this[other_slot] = other;
+          this[state_slot] = state;
+
+          // We can't reuse the processed result as it could have wrong parsing contexts in it.
+          return [ md.length, md ];
+        }
+      }
+    }; // End returned function
+  }
+
+  Gruber.inline["**"] = strong_em("strong", "**");
+  Gruber.inline["__"] = strong_em("strong", "__");
+  Gruber.inline["*"]  = strong_em("em", "*");
+  Gruber.inline["_"]  = strong_em("em", "_");
+
+  Markdown.dialects.Gruber = Gruber;
+  Markdown.buildBlockOrder ( Markdown.dialects.Gruber.block );
+  Markdown.buildInlinePatterns( Markdown.dialects.Gruber.inline );
+
+
+
+  var Maruku = DialectHelpers.subclassDialect( Gruber ),
+      extract_attr = MarkdownHelpers.extract_attr,
+      forEach = MarkdownHelpers.forEach;
+
+  Maruku.processMetaHash = function processMetaHash( meta_string ) {
+    var meta = split_meta_hash( meta_string ),
+        attr = {};
+
+    for ( var i = 0; i < meta.length; ++i ) {
+      // id: #foo
+      if ( /^#/.test( meta[ i ] ) )
+        attr.id = meta[ i ].substring( 1 );
+      // class: .foo
+      else if ( /^\./.test( meta[ i ] ) ) {
+        // if class already exists, append the new one
+        if ( attr["class"] )
+          attr["class"] = attr["class"] + meta[ i ].replace( /./, " " );
+        else
+          attr["class"] = meta[ i ].substring( 1 );
+      }
+      // attribute: foo=bar
+      else if ( /\=/.test( meta[ i ] ) ) {
+        var s = meta[ i ].split( /\=/ );
+        attr[ s[ 0 ] ] = s[ 1 ];
+      }
+    }
+
+    return attr;
+  };
+
+  function split_meta_hash( meta_string ) {
+    var meta = meta_string.split( "" ),
+        parts = [ "" ],
+        in_quotes = false;
+
+    while ( meta.length ) {
+      var letter = meta.shift();
+      switch ( letter ) {
+      case " " :
+        // if we're in a quoted section, keep it
+        if ( in_quotes )
+          parts[ parts.length - 1 ] += letter;
+        // otherwise make a new part
+        else
+          parts.push( "" );
+        break;
+      case "'" :
+      case '"' :
+        // reverse the quotes and move straight on
+        in_quotes = !in_quotes;
+        break;
+      case "\\" :
+        // shift off the next letter to be used straight away.
+        // it was escaped so we'll keep it whatever it is
+        letter = meta.shift();
+        /* falls through */
+      default :
+        parts[ parts.length - 1 ] += letter;
+        break;
+      }
+    }
+
+    return parts;
+  }
+
+  Maruku.block.document_meta = function document_meta( block ) {
+    // we're only interested in the first block
+    if ( block.lineNumber > 1 )
+      return undefined;
+
+    // document_meta blocks consist of one or more lines of `Key: Value\n`
+    if ( ! block.match( /^(?:\w+:.*\n)*\w+:.*$/ ) )
+      return undefined;
+
+    // make an attribute node if it doesn't exist
+    if ( !extract_attr( this.tree ) )
+      this.tree.splice( 1, 0, {} );
+
+    var pairs = block.split( /\n/ );
+    for ( var p in pairs ) {
+      var m = pairs[ p ].match( /(\w+):\s*(.*)$/ ),
+          key = m[ 1 ].toLowerCase(),
+          value = m[ 2 ];
+
+      this.tree[ 1 ][ key ] = value;
+    }
+
+    // document_meta produces no content!
+    return [];
+  };
+
+  Maruku.block.block_meta = function block_meta( block ) {
+    // check if the last line of the block is an meta hash
+    var m = block.match( /(^|\n) {0,3}\{:\s*((?:\\\}|[^\}])*)\s*\}$/ );
+    if ( !m )
+      return undefined;
+
+    // process the meta hash
+    var attr = this.dialect.processMetaHash( m[ 2 ] ),
+        hash;
+
+    // if we matched ^ then we need to apply meta to the previous block
+    if ( m[ 1 ] === "" ) {
+      var node = this.tree[ this.tree.length - 1 ];
+      hash = extract_attr( node );
+
+      // if the node is a string (rather than JsonML), bail
+      if ( typeof node === "string" )
+        return undefined;
+
+      // create the attribute hash if it doesn't exist
+      if ( !hash ) {
+        hash = {};
+        node.splice( 1, 0, hash );
+      }
+
+      // add the attributes in
+      for ( var a in attr )
+        hash[ a ] = attr[ a ];
+
+      // return nothing so the meta hash is removed
+      return [];
+    }
+
+    // pull the meta hash off the block and process what's left
+    var b = block.replace( /\n.*$/, "" ),
+        result = this.processBlock( b, [] );
+
+    // get or make the attributes hash
+    hash = extract_attr( result[ 0 ] );
+    if ( !hash ) {
+      hash = {};
+      result[ 0 ].splice( 1, 0, hash );
+    }
+
+    // attach the attributes to the block
+    for ( var a in attr )
+      hash[ a ] = attr[ a ];
+
+    return result;
+  };
+
+  Maruku.block.definition_list = function definition_list( block, next ) {
+    // one or more terms followed by one or more definitions, in a single block
+    var tight = /^((?:[^\s:].*\n)+):\s+([\s\S]+)$/,
+        list = [ "dl" ],
+        i, m;
+
+    // see if we're dealing with a tight or loose block
+    if ( ( m = block.match( tight ) ) ) {
+      // pull subsequent tight DL blocks out of `next`
+      var blocks = [ block ];
+      while ( next.length && tight.exec( next[ 0 ] ) )
+        blocks.push( next.shift() );
+
+      for ( var b = 0; b < blocks.length; ++b ) {
+        var m = blocks[ b ].match( tight ),
+            terms = m[ 1 ].replace( /\n$/, "" ).split( /\n/ ),
+            defns = m[ 2 ].split( /\n:\s+/ );
+
+        // print( uneval( m ) );
+
+        for ( i = 0; i < terms.length; ++i )
+          list.push( [ "dt", terms[ i ] ] );
+
+        for ( i = 0; i < defns.length; ++i ) {
+          // run inline processing over the definition
+          list.push( [ "dd" ].concat( this.processInline( defns[ i ].replace( /(\n)\s+/, "$1" ) ) ) );
+        }
+      }
+    }
+    else {
+      return undefined;
+    }
+
+    return [ list ];
+  };
+
+  // splits on unescaped instances of @ch. If @ch is not a character the result
+  // can be unpredictable
+
+  Maruku.block.table = function table ( block ) {
+
+    var _split_on_unescaped = function( s, ch ) {
+      ch = ch || '\\s';
+      if ( ch.match(/^[\\|\[\]{}?*.+^$]$/) )
+        ch = '\\' + ch;
+      var res = [ ],
+          r = new RegExp('^((?:\\\\.|[^\\\\' + ch + '])*)' + ch + '(.*)'),
+          m;
+      while ( ( m = s.match( r ) ) ) {
+        res.push( m[1] );
+        s = m[2];
+      }
+      res.push(s);
+      return res;
+    };
+
+    var leading_pipe = /^ {0,3}\|(.+)\n {0,3}\|\s*([\-:]+[\-| :]*)\n((?:\s*\|.*(?:\n|$))*)(?=\n|$)/,
+        // find at least an unescaped pipe in each line
+        no_leading_pipe = /^ {0,3}(\S(?:\\.|[^\\|])*\|.*)\n {0,3}([\-:]+\s*\|[\-| :]*)\n((?:(?:\\.|[^\\|])*\|.*(?:\n|$))*)(?=\n|$)/,
+        i,
+        m;
+    if ( ( m = block.match( leading_pipe ) ) ) {
+      // remove leading pipes in contents
+      // (header and horizontal rule already have the leading pipe left out)
+      m[3] = m[3].replace(/^\s*\|/gm, '');
+    } else if ( ! ( m = block.match( no_leading_pipe ) ) ) {
+      return undefined;
+    }
+
+    var table = [ "table", [ "thead", [ "tr" ] ], [ "tbody" ] ];
+
+    // remove trailing pipes, then split on pipes
+    // (no escaped pipes are allowed in horizontal rule)
+    m[2] = m[2].replace(/\|\s*$/, '').split('|');
+
+    // process alignment
+    var html_attrs = [ ];
+    forEach (m[2], function (s) {
+      if (s.match(/^\s*-+:\s*$/))
+        html_attrs.push({align: "right"});
+      else if (s.match(/^\s*:-+\s*$/))
+        html_attrs.push({align: "left"});
+      else if (s.match(/^\s*:-+:\s*$/))
+        html_attrs.push({align: "center"});
+      else
+        html_attrs.push({});
+    });
+
+    // now for the header, avoid escaped pipes
+    m[1] = _split_on_unescaped(m[1].replace(/\|\s*$/, ''), '|');
+    for (i = 0; i < m[1].length; i++) {
+      table[1][1].push(['th', html_attrs[i] || {}].concat(
+        this.processInline(m[1][i].trim())));
+    }
+
+    // now for body contents
+    forEach (m[3].replace(/\|\s*$/mg, '').split('\n'), function (row) {
+      var html_row = ['tr'];
+      row = _split_on_unescaped(row, '|');
+      for (i = 0; i < row.length; i++)
+        html_row.push(['td', html_attrs[i] || {}].concat(this.processInline(row[i].trim())));
+      table[2].push(html_row);
+    }, this);
+
+    return [table];
+  };
+
+  Maruku.inline[ "{:" ] = function inline_meta( text, matches, out ) {
+    if ( !out.length )
+      return [ 2, "{:" ];
+
+    // get the preceeding element
+    var before = out[ out.length - 1 ];
+
+    if ( typeof before === "string" )
+      return [ 2, "{:" ];
+
+    // match a meta hash
+    var m = text.match( /^\{:\s*((?:\\\}|[^\}])*)\s*\}/ );
+
+    // no match, false alarm
+    if ( !m )
+      return [ 2, "{:" ];
+
+    // attach the attributes to the preceeding element
+    var meta = this.dialect.processMetaHash( m[ 1 ] ),
+        attr = extract_attr( before );
+
+    if ( !attr ) {
+      attr = {};
+      before.splice( 1, 0, attr );
+    }
+
+    for ( var k in meta )
+      attr[ k ] = meta[ k ];
+
+    // cut out the string and replace it with nothing
+    return [ m[ 0 ].length, "" ];
+  };
+
+
+  Markdown.dialects.Maruku = Maruku;
+  Markdown.dialects.Maruku.inline.__escape__ = /^\\[\\`\*_{}\[\]()#\+.!\-|:]/;
+  Markdown.buildBlockOrder ( Markdown.dialects.Maruku.block );
+  Markdown.buildInlinePatterns( Markdown.dialects.Maruku.inline );
+
+
+// Include all our depndencies and;
+  expose.Markdown = Markdown;
+  expose.parse = Markdown.parse;
+  expose.toHTML = Markdown.toHTML;
+  expose.toHTMLTree = Markdown.toHTMLTree;
+  expose.renderJsonML = Markdown.renderJsonML;
+
+})(function() {
+  window.markdown = {};
+  return window.markdown;
+}());
+
+angular
+    .module('routerApp', ['ui.router'])
+    .config(config)
+    .controller('mainCtrl', mainCtrl)
+    .controller('articleCtrl', articleCtrl);
+
+var routeList = [
+    {
+        name: 'home',
+        url: '/home',
+        template: 'pages/home.md'
+    },{
+        name: 'about',
+        url: '/about',
+        template: 'pages/about.md'
+    }
+];
+
+var articles = [
+     { name: "npm" },
+     { name: "bower" },
+     { name: "command-prompt" }
+];
+
+function mainCtrl($scope) {
+    'use strict';
+
+    $scope.routes = routeList;
+    $scope.articleList = articles;
+}
+
+function articleCtrl($scope, $location) {
+    $scope.title = "Hanna";
+    $scope.content = "Content";
+
+    console.log($location.$$path);
+}
+
+function getFile($file) {
+    $.get( $file, function(data) {
+        console.log(data);
+        return data;
+    });
+}
+
+function config($stateProvider, $urlRouterProvider) {
+    'use strict';
+
+    $urlRouterProvider.otherwise('/home');
+
+    // Create pages
+    for(var i = 0; i < routeList.length; i++) {
+
+        var _state = routeList[i];
+
+        $stateProvider.state( _state.name, {
+            url:  _state.url,
+            templateUrl: _state.template
+        });
+    };
+
+    // Create content list
+    for (var i=0; i < articles.length; i++) {
+        var _item = articles[i];
+
+        $stateProvider.state( _item.name, {
+            url: '/' + _item.name,
+            templateUrl: 'page.html',
+            controller: 'articleCtrl'
+        });
+    }
+
+}

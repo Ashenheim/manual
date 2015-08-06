@@ -1,21 +1,15 @@
 // Includes
 @import "helpers/normalize"
+@import "helpers/colors"
 @import "helpers/variables"
 @import "../../bower_components/bourbon/app/assets/stylesheets/bourbon"
 
-/*  ==============
- *  Global Styling
- *  ==============
+//  Foundation
+	------------------------------------
+@import 'foundation/base'
+@import 'foundation/typography'
 
-*,
-*:before,
-*:after
-    box-sizing: border-box
-
-
-html,
-body
-    font-family: arial, sans-serif
-    background: #222
-    color: #EEE
-    height: 99999px
+//  regions
+	------------------------------------
+@import 'regions/header'
+@import 'regions/content'

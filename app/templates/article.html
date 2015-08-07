@@ -1,0 +1,10 @@
+<div ng-bind-html="content"></div>
+
+<ul ng-if="chapters">
+	<section ng-repeat="chapter in chapters" id="{{chapter}}">
+			<h3>{{chapter.title}}</h3>
+			<div ng-include="chapter.file"></div>
+			<hr>
+	</section>
+
+</ul>

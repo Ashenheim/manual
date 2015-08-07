@@ -1,26 +1,34 @@
-
-.main-header
-	+padding($gutter)
-	font-weight: bold
-	border-bottom: 1px solid #ccc
-	margin-bottom: $gutter
-
-	a
-		color: currentcolor
-
+//
+	#Navigation styling
+	------------------------------------
 
 .navigation
+	margin-bottom: $gutter
+
+	.sub-navigation
+		margin-bottom: $spacing-large
+		
+		a
+			font-size: .8em
+			+padding( $spacing-small null $spacing-small ($gutter * 2) )
+
+	h3
+		margin-bottom: 0
+
 	ul
 		margin: 0
 		padding-left: 0
 
 	li
 		list-style: none
-		display: inline-block
+		margin-left: 0
 
 	a
-		display: inline-block
-		padding: $gutter
+		display: block
+		padding: $spacing-large $gutter
+		color: currentcolor
 
-		&:hover 
-			background: #FFF
+		&:hover,
+		&.active
+			color: $c-fg
+			text-decoration: underline

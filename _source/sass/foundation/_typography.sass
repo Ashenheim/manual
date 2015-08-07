@@ -1,7 +1,30 @@
+//
+	Typography styling
+	====================================
+
+
+// Headings
+@for $i from 1 through 6
+	h#{$i}
+		font-size: (2.2em - (.2em * $i))
+		+margin( 0 null $gutter )
+
+// inline
 a
 	text-decoration: none
 	font-weight: bold
 	color: $c-main
+	p &:hover
+		color: black
+		background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) repeat-x bottom
+		text-shadow: -1px -1px 0 $c-bg--light, 1px -1px 0 $c-bg--light, -1px 1px 0 $c-bg--light, 1px 1px 0 $c-bg--light !important
 
 	&:hover
 		color: $c-main--dark
+
+hr
+	border: none
+	border-top: 3px dashed #ccc
+	margin-bottom: $gutter
+	max-width: 18em
+	display: block

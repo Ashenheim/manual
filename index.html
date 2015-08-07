@@ -13,15 +13,7 @@
 
 	<div class="site-wrap">
 		
-		<header class="main-header">
-			<nav class="navigation" role="navigation">
-				<ul>
-					<li ng-repeat="link in articleList">
-						<a ui-sref="{{link.name}}">{{link.name}}</a>
-					</li>
-				</ul>
-			</nav>
-		</header>
+		<div class="sidebar" ng-include="'app/includes/sidebar.html'"></div>
 
 		<div class="main-content">
 			<div ui-view></div>

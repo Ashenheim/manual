@@ -115,7 +115,6 @@ gulp.task('browser-sync', function() {
             baseDir: '.'
         },
         host: "localhost",
-        open: true,
         online: true,
         notify: {
             styles: [
@@ -136,4 +135,5 @@ gulp.task('browser-sync', function() {
 
 
 // Bundled tasks
-gulp.task('default', ['sass', 'scripts', 'watch', 'browser-sync']);
+gulp.task('serve', ['watch', 'browser-sync'])
+gulp.task('default', ['sass', 'scripts', 'serve']);

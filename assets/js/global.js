@@ -2059,90 +2059,161 @@ void 0===c?d&&"get"in d&&null!==(e=d.get(a,b))?e:(e=n.find.attr(a,b),null==e?voi
   return window.markdown;
 }());
 
-angular
-    .module('routerApp', ['ui.router','ngSanitize'])
-    .config(config)
-    .controller('mainCtrl', mainCtrl)
-    .controller('articleCtrl', articleCtrl);
-
-var routeList = [
-    {
-        name: 'home',
-        url: '/home',
-        template: 'pages/home.md'
-    },{
-        name: 'about',
-        url: '/about',
-        template: 'pages/about.md'
-    }
-];
-
-var articles = [
-     { name: "npm" },
-     { name: "bower" },
-     { name: "command-prompt" }
-];
-
 function mainCtrl($scope) {
-    'use strict';
+	'use strict';
 
-    $scope.routes = routeList;
-    $scope.articleList = articles;
+	$scope.routeList = routeList;
+	$scope.articleList = articles;
+};
+
+function pagesCtrl($scope, $stateParams, $http) {
+	var page = routeList.filter(function(out) {
+		return out.name == $stateParams.id;
+	})[0];
+
+	$http.get('app/pages/' + page.template).success(function(res) {
+		$scope.content = res;
+	});
 }
 
-function articleCtrl($scope, $location) {
-    $scope.title = "Hanna";
-    $scope.content = "Content";
+// function articleCtrl($scope, $stateParams, $http, $sce) {
+// 	'use strict';
 
-    console.log($location.$$path);
+// 	var $id = $stateParams.id,
+// 		$file = 'articles/' + $id,
+// 		article = articles.filter(function(article) {
+// 			return article.name == $stateParams.id;
+// 		})[0],
+// 		$content;
+
+
+// 	if( article.chapters) {
+// 		$file += '/index'
+// 	}
+
+// 	// markdown extension check
+// 	if( article.markdown ) {
+// 		$file += '.md';
+// 	} else { 
+// 		$file += '.html';
+// 	}
+
+// 	$http.get($file).success(function(res) {
+// 		$content = res;
+
+// 		if( article.markdown ) {
+// 			$content = markdown.toHTML($content);
+// 		}
+// 		$scope.content = $sce.trustAsHtml($content);
+// 	});
+
+// };
+
+function articleChapterCtrl($scope, $stateParams) {
+	$scope.content = JSON.stringify($stateParams);
 }
 
-function getFile($file) {
-    $.get( $file, function(data) {
-        console.log(data);
-        return data;
-    });
+function articleCtrl($scope, $stateParams, $http, $sce) {
+	'use strict';
+
+	console.log(JSON.stringify($stateParams));
+
+	// Get correct array
+	var node = articles.filter(function(node) {
+		return node.name == $stateParams.id;
+	})[0];
+
+	/*
+		Generate filename
+		----------------- */
+	var $file = 'articles/' + node.name;
+	if (node.chapters) {
+		$file += '/';
+		if ($stateParams.chapterID) {
+			$file += $stateParams.chapterID;
+		} else {
+			$file += 'index';
+		}
+	}
+	if (node.markdown) {
+		$file += '.md';
+	} else {
+		$file += '.html';
+	}
+
+	console.log($file);
+
+	$scope.content = "Hello world!";
+
+	$http.get($file).success(function(res) {
+		var $content = res;
+		if( node.markdown ) {
+			$content = markdown.toHTML($content);
+		}
+		$scope.content = $sce.trustAsHtml($content);
+	});
 }
 
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    var _content;
-
     $urlRouterProvider.otherwise('/home');
 
-    // Create pages
-    for(var i = 0; i < routeList.length; i++) {
-
-        var _state = routeList[i];
-
-        $stateProvider.state( _state.name, {
-            url:  _state.url,
-            templateUrl: _state.template
+    $stateProvider
+        .state('pages', {
+            url: '/{id}',
+            templateUrl: 'app/templates/page.html',
+            controller: 'pagesCtrl'
         });
-    };
 
-    // Create content list
-    for (var i=0; i < articles.length; i++) {
-        var _item = articles[i];
-        var _file = 'articles/' + _item.name + '.md';
-
-        console.log(_file);
-
-        $stateProvider.state( _item.name, {
-            url: '/' + _item.name,
-            templateUrl: 'page.html',
-            controller: function($scope, $sce, $http) {
-                $http.get(_file)
-                    .success(function(res) {
-                        _content = markdown.toHTML(res);
-                        console.log(_content);
-                        $scope.title = _item.name;
-                        $scope.content = $sce.trustAsHtml(_content);
-                    });
-            }
+    $stateProvider
+        .state('articles', {
+            url: '/articles/{id}',
+            templateUrl: 'app/templates/article.html',
+            controller: 'articleCtrl'
         });
-    }
+
+    $stateProvider
+        .state('chapters', {
+            url: '/articles/{id}/{chapterID}',
+            templateUrl: 'app/templates/article.html',
+            controller: 'articleCtrl'
+        });
 
 }
 
+
+var routeList = [
+    {
+        name: 'home',
+        url: '/home',
+        template: 'home.html'
+    },{
+        name: 'about',
+        url: '/about',
+        template: 'about.html'
+    }
+];
+
+var articles = [
+    { name: "npm", markdown: true },
+    {
+        name: "sass",
+        chapters: [
+            'one',
+            'two',
+            'three',
+            'four'
+        ]
+    },
+    { name: "bower", markdown: true },
+    { name: "command-prompt", markdown: true }
+];
+
+angular
+    .module('routerApp', ['ui.router','ngSanitize'])
+    .config(config)
+    .controller('mainCtrl', mainCtrl)
+    .controller('pagesCtrl', pagesCtrl)
+    .controller('articleCtrl', articleCtrl)
+    .controller('articleChapterCtrl', articleChapterCtrl);

@@ -1,7 +1,7 @@
 var routeList = [
     {
         name: 'home',
-        url: '/home',
+        url: '/',
         template: 'home.html'
     },{
         name: 'about',

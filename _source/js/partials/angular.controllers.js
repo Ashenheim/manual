@@ -15,43 +15,6 @@ function pagesCtrl($scope, $stateParams, $http) {
 	});
 }
 
-// function articleCtrl($scope, $stateParams, $http, $sce) {
-// 	'use strict';
-
-// 	var $id = $stateParams.id,
-// 		$file = 'articles/' + $id,
-// 		article = articles.filter(function(article) {
-// 			return article.name == $stateParams.id;
-// 		})[0],
-// 		$content;
-
-
-// 	if( article.chapters) {
-// 		$file += '/index'
-// 	}
-
-// 	// markdown extension check
-// 	if( article.markdown ) {
-// 		$file += '.md';
-// 	} else { 
-// 		$file += '.html';
-// 	}
-
-// 	$http.get($file).success(function(res) {
-// 		$content = res;
-
-// 		if( article.markdown ) {
-// 			$content = markdown.toHTML($content);
-// 		}
-// 		$scope.content = $sce.trustAsHtml($content);
-// 	});
-
-// };
-
-function articleChapterCtrl($scope, $stateParams) {
-	$scope.content = JSON.stringify($stateParams);
-}
-
 function articleCtrl($scope, $stateParams, $http, $sce) {
 	'use strict';
 
@@ -87,7 +50,8 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	$http.get($file).success(function(res) {
 		var $content = res;
 		if( node.markdown ) {
-			$content = markdown.toHTML($content);
+			var showDown = new showdown.Converter();
+			$content = showDown.makeHtml($content);
 		}
 		$scope.content = $sce.trustAsHtml($content);
 	});

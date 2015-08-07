@@ -1,25 +1,25 @@
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
         .state('pages', {
-            url: '/{id}',
+            url: '/:id',
             templateUrl: 'app/templates/page.html',
             controller: 'pagesCtrl'
         });
 
     $stateProvider
         .state('articles', {
-            url: '/articles/{id}',
+            url: '/articles/:id',
             templateUrl: 'app/templates/article.html',
             controller: 'articleCtrl'
         });
 
     $stateProvider
         .state('chapters', {
-            url: '/articles/{id}/{chapterID}',
+            url: '/articles/:id/:chapterID',
             templateUrl: 'app/templates/article.html',
             controller: 'articleCtrl'
         });

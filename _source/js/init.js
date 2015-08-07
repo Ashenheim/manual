@@ -4,4 +4,3 @@ angular
     .controller('mainCtrl', mainCtrl)
     .controller('pagesCtrl', pagesCtrl)
     .controller('articleCtrl', articleCtrl)
-    .controller('articleChapterCtrl', articleChapterCtrl);

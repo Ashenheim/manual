@@ -1,18 +1,10 @@
-<!--<nav class="navigation" role="navigation">
-	<ul>
-		<li ng-repeat="route in routeList">
-			<a ui-sref-active="active" ui-sref="pages({ id: route.name })">{{route.name}}</a>
-		</li>
-	</ul>
-</nav>-->
-
 <nav class="navigation" role="navigation">
 	<ul>
 		<li ng-repeat="link in articleList">
 			<a ui-sref-active="active" ui-sref="articles({ id: link.name })">{{link.name}}</a>
 			<ul ng-if="link.chapters" class="sub-navigation">
 				<li ng-repeat="chapter in link.chapters">
-					<a ui-sref="chapters({ id: link.name, chapterID: chapter })">{{chapter}}</a>
+					<a ui-sref="chapters({ id: link.name, chapterID: chapter })" ui-sref-active="active">{{chapter}}</a>
 				</li>
 			</ul>
 		</li>

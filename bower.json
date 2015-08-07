@@ -22,7 +22,6 @@
     "jquery": "~2.1.4",
     "markdown": "~0.5.0",
     "angular-sanitize": "~1.4.3",
-    "to-markdown": "~1.2.1",
     "showdown": "~1.2.2"
   }
 }

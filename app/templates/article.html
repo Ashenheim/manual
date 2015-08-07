@@ -1,10 +1,6 @@
-<div ng-bind-html="content"></div>
-
-<ul ng-if="chapters">
-	<section ng-repeat="chapter in chapters" id="{{chapter}}">
-			<h3>{{chapter.title}}</h3>
-			<div ng-include="chapter.file"></div>
-			<hr>
-	</section>
-
-</ul>
+<article class="article">
+	<header class="article__header">
+		<h3>{{title}} <small ng-if="chapterTitle">{{chapterTitle}}</small></h3>
+	</header>
+	<div class="article__content" ng-bind-html="content"></div>
+</article>

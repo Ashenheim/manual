@@ -2,6 +2,7 @@
 	<ul>
 		<li ng-repeat="link in articleList">
 			<a ui-sref-active="active" ui-sref="articles({ id: link.name })">{{link.name}}</a>
+			
 			<ul ng-if="link.chapters" class="sub-navigation">
 				<li ng-repeat="chapter in link.chapters">
 					<a ui-sref="chapters({ id: link.name, chapterID: chapter })" ui-sref-active="active">{{chapter}}</a>

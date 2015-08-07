@@ -1,3 +1,17 @@
-.main-content
+.main
+	padding-left: $sidebar-width
+
+.site-content
+	+margin(null auto)
 	+padding($gutter)
-	background: $c-bg--light
+	width: $site-width
+	min-height: 100vh
+
+.article
+	&__header,
+	&__content
+		+padding(null $gutter)
+
+	&__content
+		background: $white
+		+padding($spacing-large null)

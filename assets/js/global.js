@@ -327,6 +327,11 @@ function mainCtrl($scope) {
 
 	$scope.routeList = routeList;
 	$scope.articleList = articles;
+
+	$scope.countOf = function(text) {
+		var s = text ? text.split(/\s+/) : 0; // it splits the text on space/tab/enter
+		return s ? s.length : '';
+	};
 };
 
 function pagesCtrl($scope, $stateParams, $http) {
@@ -367,9 +372,8 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 		$file += '.html';
 	}
 
-	console.log($file);
-
-	$scope.content = "Hello world!";
+	$scope.title = node.name;
+	$scope.chapterTitle = $stateParams.chapterID;
 
 	$http.get($file).success(function(res) {
 		var $content = res;

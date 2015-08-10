@@ -1,6 +1,11 @@
 <article class="article">
 	<header class="article__header">
-		<h3>{{title}} <small ng-if="chapterTitle">{{chapterTitle}}</small></h3>
+		<h3>
+			<a ui-sref="articles({ id: title })" ng-bind="convert(title)"></a>
+		</h3>
+		<p class="breadcrumbs">
+			<small ng-if="chapterTitle" ng-bind="convert(chapterTitle)"></small>
+		</p>
 	</header>
-	<div class="article__content" ng-bind-html="content"></div>
+	<div class="article__content" ng-bind-html="content" ng-init="init()"></div>
 </article>

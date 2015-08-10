@@ -3,15 +3,25 @@
 
 .site-content
 	+margin(null auto)
-	+padding($gutter)
-	width: $site-width
 	min-height: 100vh
+	box-shadow: 0 0 3px rgba($black, .2)
+	position: relative
+	z-index: 2
+	background: $white
 
 .article
 	&__header,
 	&__content
 		+padding(null $gutter)
 
+
+	&__header
+		+padding( $spacing-large null $spacing-small )
+		margin-bottom: $spacing-large
+		border-bottom: 1px solid $c-bg
+
+		h3
+			margin-bottom: 0
+
 	&__content
-		background: $white
 		+padding($spacing-large null)

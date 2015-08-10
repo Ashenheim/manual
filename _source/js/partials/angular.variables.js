@@ -1,7 +1,7 @@
 var routeList = [
     {
         name: 'home',
-        url: '/',
+        url: '/home',
         template: 'home.html'
     },{
         name: 'about',
@@ -10,17 +10,20 @@ var routeList = [
     }
 ];
 
-var articles = [
-    { name: "npm", markdown: true },
-    {
-        name: "sass",
-        chapters: [
-            'one',
-            'two',
-            'three',
-            'four'
-        ]
-    },
-    { name: "bower", markdown: true },
-    { name: "command-prompt", markdown: true }
-];
+// var articles = [
+//     { name: "npm", title: 'NPM', markdown: true },
+//     {
+//         name: "sass",
+//         markdown: true,
+//         chapters: [
+//             'SASS_Maps',
+//             'mixins'
+//         ]
+//     },
+//     { name: "bower", markdown: true },
+//     { name: "command-prompt", markdown: true },
+//     {
+//         name: "gulp",
+//         markdown: true
+//     }
+// ];

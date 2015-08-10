@@ -3,4 +3,8 @@ angular
     .config(config)
     .controller('mainCtrl', mainCtrl)
     .controller('pagesCtrl', pagesCtrl)
-    .controller('articleCtrl', articleCtrl)
+    .controller('articleCtrl', articleCtrl);
+
+angular.element(document).ready(function() {
+    angular.bootstrap(document, ['routerApp']);
+});

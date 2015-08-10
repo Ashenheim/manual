@@ -4,6 +4,20 @@ code
 	padding: 2px 5px
 
 pre
+	+padding($gutter)
+	margin: 0 0 $spacing-large !important
+	position: relative
+
+	&:after
+		content: attr(data-language)
+		padding:
+			right: $gutter
+			top: $spacing-small
+		+position(absolute, 0 0 null null)
+		text-shadow: 0 1px 0 rgba( $black, .4 )
+		opacity: .2
+
 	code
+		background: transparent
 		display: block
-		padding: $gutter
+		+padding(0)

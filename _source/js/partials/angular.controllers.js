@@ -1,14 +1,44 @@
-function mainCtrl($scope) {
+/* ====================================
+ * Main Controller
+==================================== */
+
+function mainCtrl($scope, $rootScope, $http) {
 	'use strict';
 
-	$scope.routeList = routeList;
-	$scope.articleList = articles;
+	var converted;
 
-	$scope.countOf = function(text) {
-		var s = text ? text.split(/\s+/) : 0; // it splits the text on space/tab/enter
-		return s ? s.length : '';
-	};
+	$scope.routeList = routeList;
+	// $scope.articleList = articles;
+
+	$http.get('settings.json').success(function(data) {
+		$scope.articleList = data.articles;
+	})
+
+    $rootScope.$on('$viewContentLoaded', function(event){
+    	// Sets timout to force Prism to apply after DOM elements are rendered
+        setTimeout(function(){
+        	Prism.highlightAll();
+        	var codeList = $('pre code');
+
+        	for(var i=0; i < codeList.length; i++) {
+        		console.log(codeList[i].className.split(" ")[0]);
+        	}
+	    }, 100);
+    });
+
+    $scope.convert = function(t) {
+    	converted = t.split('_').join(' ');
+
+    	converted = converted.charAt(0).toUpperCase() + converted.slice(1);
+
+    	return converted;
+    }
 };
+
+
+/* ====================================
+ * Page Controller
+==================================== */
 
 function pagesCtrl($scope, $stateParams, $http) {
 	var page = routeList.filter(function(out) {
@@ -20,35 +50,46 @@ function pagesCtrl($scope, $stateParams, $http) {
 	});
 }
 
+
+/* ====================================
+ * Article Controller
+==================================== */
+
 function articleCtrl($scope, $stateParams, $http, $sce) {
 	'use strict';
 
-	console.log(JSON.stringify($stateParams));
-
 	// Get correct array
-	var node = articles.filter(function(node) {
+	var node = $scope.articleList.filter(function(node) {
 		return node.name == $stateParams.id;
 	})[0];
 
 	/*
-		Generate filename
+		Generate file names
+		and scopes
 		----------------- */
-	var $file = 'articles/' + node.name;
+	var $file = 'articles/' + node.name,
+		scopeTitle = "";
+
 	if (node.chapters) {
 		$file += '/';
 		if ($stateParams.chapterID) {
 			$file += $stateParams.chapterID;
+			scopeTitle += $stateParams.chapterID;
 		} else {
 			$file += 'index';
+			scopeTitle += node.name;
 		}
+	} else {
+		scopeTitle += node.name;
 	}
+	
 	if (node.markdown) {
 		$file += '.md';
 	} else {
 		$file += '.html';
 	}
 
-	$scope.title = node.name;
+	$scope.title = scopeTitle;
 	$scope.chapterTitle = $stateParams.chapterID;
 
 	$http.get($file).success(function(res) {
@@ -58,5 +99,6 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 			$content = showDown.makeHtml($content);
 		}
 		$scope.content = $sce.trustAsHtml($content);
+		$(window).trigger('pageLoaded');
 	});
 }

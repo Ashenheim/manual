@@ -5,10 +5,28 @@
 ##### Heading five
 ###### Heading
 
+```scss
+body {
+    @include margin(0);
+    @include padding(0);
+    background: {
+        image: url("../images/background.jpg");
+        position: top center;
+        repeat: no-repeat;
+        size: cover;
+    };
+}
+```
+
 ```javascript
 ;(function ($) {
     // do Shit
 }(jQuery));
+```
+
+```markup
+<h1>Hello world</h1>
+<p>This is some normal text</p>
 ```
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum necessitatibus, odio officiis sint sit voluptatum aliquam recusandae eum at sequi. Tenetur sapiente consequuntur eius labore earum vero ipsum, modi quam.

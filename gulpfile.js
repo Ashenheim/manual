@@ -71,6 +71,7 @@ var files = {
     Invidual tasks
 ------------------------------------ */
 
+// Error handler
 var onError = function (err) {
     var errorMessage =
         '<span style="color: #f10000;">Sass error: </span>' + err.message +

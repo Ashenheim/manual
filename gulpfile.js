@@ -16,7 +16,7 @@ var browserSync     = require('browser-sync');
 
 var settings = {
     sass: {
-        style: 'compressed',
+        outputStyle: 'compressed',
         errLogToConsole: false
     },
     autoprefixer: {

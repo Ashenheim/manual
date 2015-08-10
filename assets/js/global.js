@@ -353,16 +353,11 @@ function mainCtrl($scope, $rootScope, $http) {
         setTimeout(function(){
         	Prism.highlightAll();
         	var codeList = $('pre code');
-
-        	for(var i=0; i < codeList.length; i++) {
-        		console.log(codeList[i].className.split(" ")[0]);
-        	}
 	    }, 100);
     });
 
     $scope.convert = function(t) {
     	converted = t.split('_').join(' ');
-
     	converted = converted.charAt(0).toUpperCase() + converted.slice(1);
 
     	return converted;
@@ -397,10 +392,8 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 		return node.name == $stateParams.id;
 	})[0];
 
-	/*
-		Generate file names
-		and scopes
-		----------------- */
+	/* Variables
+	------------ */
 	var $file = 'articles/' + node.name,
 		scopeTitle = "";
 
@@ -424,6 +417,7 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	}
 
 	$scope.title = scopeTitle;
+	$scope.mainTitle = node.name;
 	$scope.chapterTitle = $stateParams.chapterID;
 
 	$http.get($file).success(function(res) {
@@ -435,6 +429,20 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 		$scope.content = $sce.trustAsHtml($content);
 		$(window).trigger('pageLoaded');
 	});
+}
+function articlePageDir() {
+    return {
+        restrict: 'E',
+        scope: {
+            title: '=',
+            content: '='
+        },
+        templateUrl: 'app/templates/article.html',
+        transclude: true,
+        controller: function($scope) {
+            console.log($scope.title)
+        }
+    }
 }
 
 function config($stateProvider, $urlRouterProvider) {
@@ -494,7 +502,8 @@ angular
     .config(config)
     .controller('mainCtrl', mainCtrl)
     .controller('pagesCtrl', pagesCtrl)
-    .controller('articleCtrl', articleCtrl);
+    .controller('articleCtrl', articleCtrl)
+    .directive('articlePage', articlePageDir);
 
 angular.element(document).ready(function() {
     angular.bootstrap(document, ['routerApp']);

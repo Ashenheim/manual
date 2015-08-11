@@ -8,26 +8,24 @@ function mainCtrl($scope, $rootScope, $http) {
 	var converted;
 
 	$scope.routeList = routeList;
-	// $scope.articleList = articles;
 
-	$http.get('settings.json').success(function(data) {
-		$scope.articleList = data.articles;
+	$http.get('settings.yml').success(function(data) {
+		var YML = jsyaml.load(data);
+		$scope.articleList = YML.articles;
 	})
 
-    $rootScope.$on('$viewContentLoaded', function(event){
-    	// Sets timout to force Prism to apply after DOM elements are rendered
-        setTimeout(function(){
-        	Prism.highlightAll();
-        	var codeList = $('pre code');
-	    }, 100);
-    });
+	$scope.articleList = $articles;
 
     $scope.convert = function(t) {
     	converted = t.split('_').join(' ');
     	converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-
     	return converted;
     }
+
+    $rootScope.$on('$stateChangeStart',
+		function(event, toState, toParams, fromState, fromParams){
+			
+		});
 };
 
 
@@ -50,41 +48,54 @@ function pagesCtrl($scope, $stateParams, $http) {
  * Article Controller
 ==================================== */
 
-function articleCtrl($scope, $stateParams, $http, $sce) {
+function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 	'use strict';
 
+	var object = $stateParams;
+
 	// Get correct array
-	var node = $scope.articleList.filter(function(node) {
+	var node = $articles.filter(function(node) {
 		return node.name == $stateParams.id;
 	})[0];
 
-	/* Variables
-	------------ */
-	var $file = 'articles/' + node.name,
-		scopeTitle = "";
+	console.log(object);
 
-	if (node.chapters) {
-		$file += '/';
-		if ($stateParams.chapterID) {
-			$file += $stateParams.chapterID;
-			scopeTitle += $stateParams.chapterID;
-		} else {
-			$file += 'index';
-			scopeTitle += node.name;
-		}
-	} else {
-		scopeTitle += node.name;
-	}
+	/* ------------------------------------
+		#Create Variables
+	------------------------------------ */
 	
-	if (node.markdown) {
-		$file += '.md';
-	} else {
-		$file += '.html';
-	}
+	var $title = node.name;
 
-	$scope.title = scopeTitle;
+	if (object.chapterTitle)
+		$title = object.chapterTitle
+
+	console.log(node);
+	console.log(object);
+
+
+	// Filename
+	var $file = 'articles/' + node.name;
+	if (node.chapters)
+		$file += '/';
+		if ($stateParams.chapterTitle)
+			$file += $stateParams.chapterTitle;
+		else
+			$file += '/index';
+	
+	if (node.markdown)
+		$file += '.md';
+	else
+		$file += '.html';
+
+	/* ------------------------------------
+		#Scopes
+	------------------------------------ */
+
+	$scope.title = $title;
 	$scope.mainTitle = node.name;
-	$scope.chapterTitle = $stateParams.chapterID;
+	$scope.chapterTitle = $stateParams.chapterTitle;
+
+	// console.log($title);
 
 	$http.get($file).success(function(res) {
 		var $content = res;
@@ -93,6 +104,5 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 			$content = showDown.makeHtml($content);
 		}
 		$scope.content = $sce.trustAsHtml($content);
-		$(window).trigger('pageLoaded');
 	});
 }

@@ -1,5 +1,25 @@
+pre,
 code
-	background: $c-bg
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
+	direction: ltr
+	text-align: left
+	white-space: pre
+	word-spacing: normal
+	word-break: normal
+	line-height: 1.5
+
+	-moz-tab-size: 4
+	-o-tab-size: 4
+	tab-size: 4
+
+	-webkit-hyphens: none
+	-moz-hyphens: none
+	-ms-hyphens: none
+	hyphens: none
+	border-radius: .3em
+
+
+code
 	display: inline-block
 	padding: 2px 5px
 
@@ -11,10 +31,11 @@ pre
 	&:after
 		content: attr(data-language)
 		padding:
-			right: $gutter
+			right: $spacing-medium
 			top: $spacing-small
 		+position(absolute, 0 0 null null)
 		text-shadow: 0 1px 0 rgba( $black, .4 )
+		font-size: .8em
 		opacity: .2
 
 	code

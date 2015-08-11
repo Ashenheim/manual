@@ -1,0 +1,6 @@
+<div class="navigation-bar">
+	<ul>
+		<a ui-sref="chapters({ id: leading, chapterTitle: chapter })" ng-bind="leading"></a>
+		<li ng-repeat="chapter in chapters"><a ui-sref="chapters({ id: leading, chapterTitle: chapter })" ng-bind="chapter"></a></li>
+	</ul>
+</div>

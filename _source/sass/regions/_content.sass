@@ -4,12 +4,10 @@
 .site-content
 	+margin(null auto)
 	min-height: 100vh
-	// box-shadow: 0 0 3px rgba($black, .2)
-	border:
-		color: $c-bg--dark
-		style: solid
-		left-width: 1px
-		right-width: 1px
+	box-shadow: 0 0 5px rgba($black, .03)
+	+bp(mobile)
+		border-left:  1px solid $c-bg--dark
+		border-right: 1px solid $c-bg--dark
 
 	position: relative
 	z-index: 2
@@ -22,12 +20,15 @@
 
 
 	&__header
-		+padding( $spacing-large null $spacing-small )
+		+padding( $spacing-large null )
 		margin-bottom: $spacing-large
-		border-bottom: 1px solid $c-bg
+		border-bottom: 1px solid $c-bg--light
 
-		h3
+		a
+			color: currentcolor
+
+		h2
 			margin-bottom: 0
 
 	&__content
-		+padding($spacing-large null)
+		padding-bottom: $spacing-large 

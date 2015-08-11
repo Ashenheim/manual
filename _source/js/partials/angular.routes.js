@@ -11,12 +11,12 @@ function config($stateProvider, $urlRouterProvider) {
         })
         .state('articles', {
             url: '/articles/:id',
-            templateUrl: 'app/templates/article.html',
+            templateUrl: 'app/templates/article-page.html',
             controller: 'articleCtrl'
         })
         .state('chapters', {
-            url: '/articles/:id/:chapterID',
-            templateUrl: 'app/templates/article.html',
+            url: '/articles/:id/:chapterTitle',
+            templateUrl: 'app/templates/article-page.html',
             controller: 'articleCtrl'
         });
 }

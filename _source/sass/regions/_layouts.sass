@@ -5,15 +5,16 @@
 
 .sidebar
 	overflow: auto
-	color: $c-sec--lighter
+	color: $c-fg--light
 
 	+bp(mobile)
 		width: $sidebar-width
+		height: 100%
 		+position(fixed, 0 null null null )
-		+size(100%)
 
 	+bp(mobileonly)
-		background: $c-sec
+		background: $c-main
+		color: $c-main--light
 
 
 .main

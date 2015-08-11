@@ -1,6 +1,3 @@
-
-### Sass Maps
-
 Met Sass maps kan je gemakkelijker grote aantal variabelen opslaan. Die je als een "array" kan doorloopen en CSS van kan maken via een _for_ loopt.
 
 Bijvoorbeeld:

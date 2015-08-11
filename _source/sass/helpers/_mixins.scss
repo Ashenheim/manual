@@ -1,25 +1,28 @@
 @mixin bp($breakpoint) {
+  @if $breakpoint == "mobileonly" {
+    @media (max-width: ($bp-small - 1)) {
+      @content;
+    }
+  }
   @if $breakpoint == "mobile" {
-    @media (min-width: $mobile) {
+    @media (min-width: $bp-small) {
       @content;
     }
   }
  
   @else if $breakpoint == "tablet" {
-    @media (min-width: $tablet) {
+    @media (min-width: $bp-medium) {
       @content;
     }
   }
  
   @else if $breakpoint == "desktop" {
-    @media (min-width: $desktop) {
+    @media (min-width: $bp-large) {
       @content;
     }
   }
-}
 
-html,body {
-  @include bp(mobile) { background: yellow; }
-  @include bp(tablet) { background: orange; }
-  @include bp(desktop) { background: red; }
+  @else {
+
+  }
 }

@@ -2,15 +2,17 @@
 
 	<nav class="navigation" role="navigation">
 		<ul>
-			<li ng-repeat="link in articleList">
-				<a ui-sref="articles({ id: link.name })">
-					<span ng-if="!link.title" ng-bind="convert(link.name)"></span>
-					<span ng-if="link.title"  ng-bind="convert(link.title)"></span>
+			<li ng-repeat="node in articleList">
+
+				<a ui-sref="articles({ id: node.name })">
+					<i ng-if="node.icon" class="icon devicon-{{node.icon}}"></i>
+					<span ng-if="!node.title" ng-bind="convert(node.name)"></span>
+					<span ng-if="node.title"  ng-bind="convert(node.title)"></span>
 				</a>
 				
-				<ol ng-if="link.chapters" class="sub-navigation">
-					<li ng-repeat="chapter in link.chapters">
-						<a ui-sref="chapters({ id: link.name, chapterTitle: chapter })" ui-sref-active="active" ng-bind="convert(chapter)"></a>
+				<ol ng-if="node.chapters" class="sub-navigation">
+					<li ng-repeat="chapter in node.chapters">
+						<a ui-sref="chapters({ id: node.name, chapterTitle: chapter })" ui-sref-active="active" ng-bind="convert(chapter)"></a>
 					</li>
 				</ol>
 			</li>

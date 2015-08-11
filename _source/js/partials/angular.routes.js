@@ -1,7 +1,7 @@
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise(routeList[0].url);
+    $urlRouterProvider.otherwise('articles/' + $articles[0].name);
 
     $stateProvider
         .state('pages', {

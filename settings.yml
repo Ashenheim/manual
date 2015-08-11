@@ -1,18 +1,23 @@
 articles: 
 - name: "npm"
+  icon: nodejs-plain
   title: "Node Package Manager"
   markdown: true
 
 - name: "sass"
+  icon: sass-original
   markdown: true
   chapters: 
     - "SASS_Maps"
     - "mixins"
 
 - name: "bower"
+  icon: bower-line
   markdown: true
 
 - name: "command-prompt"
+  icon: windows8-original
 
 - name: "gulp"
+  icon: gulp-plain
   markdown: true

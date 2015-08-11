@@ -1,7 +1,7 @@
 (function() {
 
 	angular
-	    .module('routerApp', ['ui.router','ngSanitize'])
+	    .module('myApp', ['ui.router','ngSanitize'])
 	    .config(config)
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('pagesCtrl', pagesCtrl)
@@ -24,7 +24,7 @@
 
 	function bootstrapApp() {
 		angular.element(document).ready(function() {
-		    angular.bootstrap(document, ['routerApp']);
+		    angular.bootstrap(document, ['myApp']);
 		});
 	}
 

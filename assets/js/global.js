@@ -4339,8 +4339,6 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 		return node.name == $stateParams.id;
 	})[0];
 
-	console.log(object);
-
 	/* ------------------------------------
 		#Create Variables
 	------------------------------------ */
@@ -4349,9 +4347,6 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 
 	if (object.chapterTitle)
 		$title = object.chapterTitle
-
-	console.log(node);
-	console.log(object);
 
 
 	// Filename
@@ -4375,6 +4370,11 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 	$scope.title = $title;
 	$scope.mainTitle = node.name;
 	$scope.chapterTitle = $stateParams.chapterTitle;
+
+	if(node.icon) {
+		console.log(node.icon);
+		$scope.icon = node.icon;
+	}
 
 	// console.log($title);
 
@@ -4432,7 +4432,7 @@ function navigationBarDir() {
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise(routeList[0].url);
+    $urlRouterProvider.otherwise('articles/' + $articles[0].name);
 
     $stateProvider
         .state('pages', {
@@ -4466,7 +4466,7 @@ var routeList = [
 (function() {
 
 	angular
-	    .module('routerApp', ['ui.router','ngSanitize'])
+	    .module('myApp', ['ui.router','ngSanitize'])
 	    .config(config)
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('pagesCtrl', pagesCtrl)
@@ -4489,7 +4489,7 @@ var routeList = [
 
 	function bootstrapApp() {
 		angular.element(document).ready(function() {
-		    angular.bootstrap(document, ['routerApp']);
+		    angular.bootstrap(document, ['myApp']);
 		});
 	}
 

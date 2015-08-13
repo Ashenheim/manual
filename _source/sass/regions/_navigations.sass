@@ -3,6 +3,15 @@
 	------------------------------------
 
 .navigation
+	+padding($spacing-large null)
+
+	li:before
+		content: ''
+		+position( absolute, 0 null null -1px )
+		+size(0 100%)
+		background: $c-main
+		transition: all $easing
+
 	& + &
 		margin-top: $spacing-large
 
@@ -17,37 +26,93 @@
 		list-style: none
 		margin-left: 0
 		margin-top: 0
+		position: relative
+		// +padding($spacing-medium null)
+		transition: all $easing
+		+bp(mobile)
+			border:
+				top:    1px solid rgba($black,.1)
+				bottom: 1px solid rgba($black,.1)
+				left:   1px solid rgba($black,.1)
 
-	.icon
-		color: $white
-		color: $c-fg--light
-		font-size: .8em
-		border-radius: 50%
-		margin-top: 5px
-		float: right
+	li + li
+		border-top: none
+
 
 	a
 		display: block
-		padding: $spacing-small
+		padding-left: 2em
+		+padding($spacing-medium null)
 		color: currentcolor
-		border: 1px solid transparent
-		border-right: none
 
-		&:hover span
-			text-decoration: underline
-			
-		&.active
-			border-color: $c-bg--dark
+		&:hover
+			color: $c-link--hover
+			+bp(mobileonly)
+				color: $c-main--lighter
+
+	.icon
+		color: currentcolor
+		font-size: 1.4em
+		+position( absolute, ($spacing-medium) null null .4em )
+		line-height: 1
+
+	// States			
+	.active
+		+bp(mobileonly)
+			background: rgba($black, .2)
+			color: $white
+		+bp(mobile)
 			background: $white
-			
-
+			position: relative
+			z-index: 1
+			&:after
+				content: ''
+				+position( absolute, 0 -1px null null )
+				+size(1px 100%)
+				z-index: 2
+				background: $white
+			&:before
+				width: 3px
+		
 /* 
 	sub navigation
 	------------------------------ */
 
 .sub-navigation
 	margin-bottom: $spacing-large
+	+bp(mobile)
+		display: none
+
+	.active &
+		display: block
+
+	li
+		padding: 0
+		border: 0
 	
 	a
 		font-size: .8em
-		padding-left: ($spacing-medium + $spacing-small)
+		+padding($spacing-small null)
+		&:before
+			content: '-'
+			margin-right: .4em
+			display: inline-block
+
+
+// Hamburger
+
+$hamburger-line: 8px
+
+.hamburger
+	width: 60px
+	padding: 5px
+	span
+		display: block
+		+size( 100% $hamburger-line )
+		background: currentcolor
+		margin-bottom: $hamburger-line
+		&:nth-child(2)
+			width: (100% / 3) * 2
+		&:nth-child(3)
+			width: (100% / 3) * 1
+				

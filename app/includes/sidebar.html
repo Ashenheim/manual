@@ -1,22 +1,27 @@
 <aside class="sidebar">
 
-	<nav class="navigation" role="navigation">
-		<ul>
-			<li ng-repeat="node in articleList">
+	<div class="inner">
+		<nav class="navigation articles" role="navigation">
+			<ul>
+				<li ng-repeat="node in articles" ui-sref-active="active" class="btn-effect">
+					
+					<span ng-if="node.icon" class="icon">
+						<i class="devicons devicons-{{node.icon}}"></i>
+					</span>
 
-				<a ui-sref="articles({ id: node.name })">
-					<i ng-if="node.icon" class="icon devicon-{{node.icon}}"></i>
-					<span ng-if="!node.title" ng-bind="convert(node.name)"></span>
-					<span ng-if="node.title"  ng-bind="convert(node.title)"></span>
-				</a>
-				
-				<ol ng-if="node.chapters" class="sub-navigation">
-					<li ng-repeat="chapter in node.chapters">
-						<a ui-sref="chapters({ id: node.name, chapterTitle: chapter })" ui-sref-active="active" ng-bind="convert(chapter)"></a>
-					</li>
-				</ol>
-			</li>
-		</ul>
-	</nav>
+					<a ui-sref="articles({ id: node.name })">
+						<span ng-if="!node.title" ng-bind="convert(node.name)"></span>
+						<span ng-if="node.title"  ng-bind="convert(node.title)"></span>
+					</a>
+					
+					<ul ng-if="node.chapters" class="sub-navigation">
+						<li ng-repeat="nodeChild in node.chapters">
+							<a ui-sref="chapters({ id: node.name, chapterTitle: nodeChild })" ng-bind="convert(nodeChild)"></a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
 
 </aside>

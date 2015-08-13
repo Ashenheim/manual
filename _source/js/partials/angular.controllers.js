@@ -2,30 +2,32 @@
  * Main Controller
 ==================================== */
 
-function mainCtrl($scope, $rootScope, $http) {
+function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	'use strict';
 
 	var converted;
 
 	$scope.routeList = routeList;
+	$scope.articles  = $articles;
 
-	$http.get('settings.yml').success(function(data) {
-		var YML = jsyaml.load(data);
-		$scope.articleList = YML.articles;
-	})
+	$scope.convert = function(t) {
+		converted = t.split('_').join(' ');
+		converted = converted.charAt(0).toUpperCase() + converted.slice(1);
+		return converted;
+	}
 
-	$scope.articleList = $articles;
+	$rootScope.$on('$viewContentLoaded', function(event){
+		$timeout(function() {
 
-    $scope.convert = function(t) {
-    	converted = t.split('_').join(' ');
-    	converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-    	return converted;
-    }
+			var buttons = "",
+					buttons = $('.btn-effect, .btn, button');
 
-    $rootScope.$on('$stateChangeStart',
-		function(event, toState, toParams, fromState, fromParams){
-			
-		});
+			console.log(buttons.length);
+			materialButton(buttons);
+			Prism.highlightAll()
+
+		},500);
+	});
 };
 
 
@@ -48,7 +50,7 @@ function pagesCtrl($scope, $stateParams, $http) {
  * Article Controller
 ==================================== */
 
-function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
+function articleCtrl($scope, $stateParams, $http, $sce) {
 	'use strict';
 
 	var object = $stateParams;
@@ -63,6 +65,8 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 	------------------------------------ */
 	
 	var $title = node.name;
+	if (node.title)
+		$title = node.title
 
 	if (object.chapterTitle)
 		$title = object.chapterTitle
@@ -91,11 +95,8 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 	$scope.chapterTitle = $stateParams.chapterTitle;
 
 	if(node.icon) {
-		console.log(node.icon);
 		$scope.icon = node.icon;
 	}
-
-	// console.log($title);
 
 	$http.get($file).success(function(res) {
 		var $content = res;

@@ -4283,30 +4283,32 @@ module.exports = yaml;
  * Main Controller
 ==================================== */
 
-function mainCtrl($scope, $rootScope, $http) {
+function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	'use strict';
 
 	var converted;
 
 	$scope.routeList = routeList;
+	$scope.articles  = $articles;
 
-	$http.get('settings.yml').success(function(data) {
-		var YML = jsyaml.load(data);
-		$scope.articleList = YML.articles;
-	})
+	$scope.convert = function(t) {
+		converted = t.split('_').join(' ');
+		converted = converted.charAt(0).toUpperCase() + converted.slice(1);
+		return converted;
+	}
 
-	$scope.articleList = $articles;
+	$rootScope.$on('$viewContentLoaded', function(event){
+		$timeout(function() {
 
-    $scope.convert = function(t) {
-    	converted = t.split('_').join(' ');
-    	converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-    	return converted;
-    }
+			var buttons = "",
+					buttons = $('.btn-effect, .btn, button');
 
-    $rootScope.$on('$stateChangeStart',
-		function(event, toState, toParams, fromState, fromParams){
-			
-		});
+			console.log(buttons.length);
+			materialButton(buttons);
+			Prism.highlightAll()
+
+		},500);
+	});
 };
 
 
@@ -4329,7 +4331,7 @@ function pagesCtrl($scope, $stateParams, $http) {
  * Article Controller
 ==================================== */
 
-function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
+function articleCtrl($scope, $stateParams, $http, $sce) {
 	'use strict';
 
 	var object = $stateParams;
@@ -4344,6 +4346,8 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 	------------------------------------ */
 	
 	var $title = node.name;
+	if (node.title)
+		$title = node.title
 
 	if (object.chapterTitle)
 		$title = object.chapterTitle
@@ -4372,11 +4376,8 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 	$scope.chapterTitle = $stateParams.chapterTitle;
 
 	if(node.icon) {
-		console.log(node.icon);
 		$scope.icon = node.icon;
 	}
-
-	// console.log($title);
 
 	$http.get($file).success(function(res) {
 		var $content = res;
@@ -4389,15 +4390,7 @@ function articleCtrl($scope, $stateParams, $http, $sce, $timeout) {
 }
 function prismDir() {
     return {
-        restrict: 'A',
-        link: function(scope, element, attr) {
-            element.ready(function() {
-
-            	setTimeout(function() {
-					Prism.highlightAll()
-            	}, 200);
-            });
-        }
+        restrict: 'A'
     }
 }
 
@@ -4406,6 +4399,14 @@ function sidebarDir() {
         restrict: 'E',
         replace: true,
         templateUrl: 'app/includes/sidebar.html'
+    }
+}
+
+function headerDir() {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/includes/header.html'
     }
 }
 
@@ -4463,18 +4464,68 @@ var routeList = [
         template: 'about.html'
     }
 ];
+;(function($) {
+  materialButton = function(element) {
+    'use strict';
+
+    var buttons = $(element);
+
+    if (buttons[0]) {
+
+      // reset event listeners
+      buttons.off('mousedown mouseup mouseout');
+
+      buttons.on('mousedown', function(event) {
+
+        var button = $(this),
+            offset = button.offset(),
+            offsetY = (event.pageY - offset.top),
+            offsetX = (event.pageX - offset.left),
+            clickTimeout;
+
+
+        button
+          .addClass('clicked')
+          .append(
+            $('<span class="btn-circle"></span>').css({
+              'top' : offsetY,
+              'left': offsetX
+            })
+          );
+
+        console.log('trigger');
+
+      }).on('mouseup mouseout', function(event) {
+
+        var button = $(this);
+
+        button
+            .removeClass('clicked')
+            .find('.btn-circle').fadeOut(function() {
+              $(this).remove();
+            });
+      });
+
+    } // End of IF
+
+  } // End of function
+}(jQuery));
 (function() {
 
 	angular
 	    .module('myApp', ['ui.router','ngSanitize'])
+
 	    .config(config)
+
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('pagesCtrl', pagesCtrl)
 	    .controller('articleCtrl', articleCtrl)
-	    .directive('ngPrism', prismDir)
-	    .directive('incSidebar', sidebarDir)
-	    .directive('navigationBar', navigationBarDir);
 
+	    .directive('ngPrism', prismDir)
+	    .directive('incHeader', headerDir)
+	    .directive('incSidebar', sidebarDir);
+
+	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);
 
 	function fetchData() {
@@ -4488,7 +4539,7 @@ var routeList = [
 	}
 
 	function bootstrapApp() {
-		angular.element(document).ready(function() {
+		return angular.element(document).ready(function() {
 		    angular.bootstrap(document, ['myApp']);
 		});
 	}

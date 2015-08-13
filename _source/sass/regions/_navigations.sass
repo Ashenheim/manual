@@ -101,11 +101,18 @@
 
 // Hamburger
 
-$hamburger-line: 8px
+$hamburger-line: 5px
 
 .hamburger
-	width: 60px
-	padding: 5px
+	width: 40px + ($gutter * 2)
+	padding: $gutter
+	cursor: pointer
+	+bp(mobile)
+		display: none
+	+bp(mobileonly)
+		+position( absolute, 0 null null 0 )
+		z-index: 10
+
 	span
 		display: block
 		+size( 100% $hamburger-line )
@@ -115,4 +122,6 @@ $hamburger-line: 8px
 			width: (100% / 3) * 2
 		&:nth-child(3)
 			width: (100% / 3) * 1
-				
+
+		.navigation-is-active &
+			background: $white

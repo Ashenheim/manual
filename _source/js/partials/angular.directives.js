@@ -1,14 +1,6 @@
 function prismDir() {
     return {
-        restrict: 'A',
-        link: function(scope, element, attr) {
-            element.ready(function() {
-
-            	setTimeout(function() {
-					Prism.highlightAll()
-            	}, 200);
-            });
-        }
+        restrict: 'A'
     }
 }
 
@@ -17,6 +9,14 @@ function sidebarDir() {
         restrict: 'E',
         replace: true,
         templateUrl: 'app/includes/sidebar.html'
+    }
+}
+
+function headerDir() {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/includes/header.html'
     }
 }
 

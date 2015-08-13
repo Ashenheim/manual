@@ -36,7 +36,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum necessitatibus
 3. item one
 3. item three
 
-Lorem *ipsum* [google][google] sit amet, consectetur adipisicing elit. 
+Lorem *ipsum* [Google][google] sit amet, consectetur adipisicing elit. 
 `npm install` aliquid praesentium, corrupti dignissimos totam inventore cupiditate nesciunt, nostrum quos harum, atque. Laboriosam est, nesciunt perferendis labore pariatur, ex fugit doloribus.
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet nisi nemo culpa quidem quaerat minus, esse vitae in aliquam similique ipsum quis expedita veniam temporibus molestias, quae delectus alias assumenda.

@@ -1,23 +1,36 @@
 .site-wrap
 	max-width: $site-width;
 	margin: 0 auto
+	position: relative
+	z-index: 1
 
 
 .sidebar
-	overflow: auto
 	color: $c-fg--light
+	position: relative
+	z-index: 3	
+	overflow: auto
+	background: $c-bg
 
 	+bp(mobile)
 		width: $sidebar-width
 		height: 100%
-		+position(fixed, 0 null null null )
+		+position(absolute, 0 null null null )
 
 	+bp(mobileonly)
 		background: $c-main
-		color: $c-main--light
+		color: $c-main--lighter
+		// +size( 100% )
+		// +position( fixed, 0 null null 0 )
+		// transform: translateX(-100%)
+
+	.inner
+		+bp(mobile)
+			min-height: 100vh
+			border-right:  1px solid $c-bg--dark
 
 
-.main
-	padding-left: 0
+.site-content
 	+bp(mobile)
 		padding-left: $sidebar-width
+		border-right: 1px solid $c-bg--dark

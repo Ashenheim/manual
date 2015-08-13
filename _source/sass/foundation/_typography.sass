@@ -7,7 +7,8 @@
 @for $i from 1 through 6
 	h#{$i}
 		font-size: (2.2em - (.2em * $i))
-		+margin( 0 null $spacing-medium )
+		+margin( 0 null $spacing-large )
+		line-height: 1
 
 p
 	line-height: 1.8
@@ -16,11 +17,9 @@ p
 a
 	text-decoration: none
 	font-weight: bold
-	color: $c-main
+	color: $c-link
 	p &:hover
-		color: black
-		background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) repeat-x bottom
-		text-shadow: -1px -1px 0 $c-bg--light, 1px -1px 0 $c-bg--light, -1px 1px 0 $c-bg--light, 1px 1px 0 $c-bg--light !important
+		color: $c-link--hover
 
 	&:hover
 		color: $c-main--dark

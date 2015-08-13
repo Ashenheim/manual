@@ -1,5 +1,6 @@
 // Includes
 @import "../../bower_components/bourbon/app/assets/stylesheets/bourbon"
+@import "helpers/devicons"
 @import "helpers/normalize"
 @import "helpers/colors"
 @import "helpers/variables"
@@ -15,6 +16,7 @@
 @import 'elements/prism'
 @import 'elements/code-blocks'
 @import 'elements/lists'
+@import 'elements/buttons'
 
 //  regions
 	------------------------------------
@@ -22,3 +24,10 @@
 @import 'regions/navigations'
 @import 'regions/content'
 @import 'regions/layouts'
+
+.c-main
+	background: $c-main
+	&--dark
+		background: $c-main--dark
+	&--light
+		background: $c-main--light

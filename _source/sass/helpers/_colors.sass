@@ -1,18 +1,26 @@
 // Colors
-$c-main        	: #19283F
-$c-main--light 	: #6279A2
-$c-main--dark  	: #091220
+$c-main        		: #EC1443
+$c-main--light 		: lighten($c-main,10%)
+$c-main--lighter	: lighten($c-main--light,30%)
+$c-main--dark  		: saturate(darken($c-main,10%),20%)
 
-$c-sec			: #11C3DD
-$c-sec--light	: #94E2EE
+$c-sec				: #11C3DD
+$c-sec--light		: #94E2EE
 
-$c-bg          	: #F9F9F9
-$c-bg--light   	: #FFFFFF
-$c-bg--dark    	: #EEEEEE
+$c-bg          		: #F9F9F9
+$c-bg--light   		: #FFFFFF
+$c-bg--dark    		: #EEEEEE
 
-$c-fg          	: #151515
-$c-fg--light   	: #555555
-$c-fg--dark    	: #000000
+$c-fg          		: #151515
+$c-fg--light   		: #555555
+$c-fg--dark    		: #000000
 
-$white: #FFF
-$black: #000
+$white				: #FFF
+$black				: #000
+
+
+
+
+
+$c-link				: $c-main
+$c-link--hover		: $c-main--dark

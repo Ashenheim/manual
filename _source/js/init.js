@@ -2,14 +2,18 @@
 
 	angular
 	    .module('myApp', ['ui.router','ngSanitize'])
+
 	    .config(config)
+
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('pagesCtrl', pagesCtrl)
 	    .controller('articleCtrl', articleCtrl)
-	    .directive('ngPrism', prismDir)
-	    .directive('incSidebar', sidebarDir)
-	    .directive('navigationBar', navigationBarDir);
 
+	    .directive('ngPrism', prismDir)
+	    .directive('incHeader', headerDir)
+	    .directive('incSidebar', sidebarDir);
+
+	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);
 
 	function fetchData() {
@@ -23,7 +27,7 @@
 	}
 
 	function bootstrapApp() {
-		angular.element(document).ready(function() {
+		return angular.element(document).ready(function() {
 		    angular.bootstrap(document, ['myApp']);
 		});
 	}

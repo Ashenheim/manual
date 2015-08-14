@@ -4299,9 +4299,10 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 			$('html').removeClass('navigation-is-active');
 		});
 
-	$('.hamburger').on('click', function(event) {
-		$(window).trigger('toggleNav');
-	})
+	$('.hamburger')
+		.on('click', function(event) {
+			$(window).trigger('toggleNav');
+		})
 
 	$scope.convert = function(t) {
 		if (t) {
@@ -4311,15 +4312,11 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 		}
 	}
 
-	$rootScope.$on('$viewContentLoaded', function(event){
-		$timeout(function() {
-
-			materialButton('.btn-effect, .btn, button');
-			Prism.highlightAll();
-			_navigation('.navigation');
-
-		},500);
-	});
+	$scope.load = function() {
+		materialButton();
+		_navigation('.navigation');
+		Prism.highlightAll();
+	}
 };
 
 
@@ -4332,7 +4329,7 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 
 	var object = $stateParams;
 
-	console.log(object);
+	// console.log(object);
 
 	// Get correct array
 	var node = $articles.filter(function(node) {
@@ -4423,22 +4420,30 @@ function chaptersDir() {
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise('articles/' + $articles[0].name);
+    // $urlRouterProvider.otherwise('articles/' + $articles[0].name);
+    $urlRouterProvider.otherwise('/');
+
+    var articleView = {
+        '@': {
+            templateUrl: 'app/templates/article.tpl.html',
+            controller: 'articleCtrl'
+        }
+    };
+
+    $stateProvider
+        .state('/', {
+            url: '/',
+            template: '<h1>Hello world!</h1>'
+        })
 
     $stateProvider
         .state('articles', {
             url: '/articles/:id',
-            templateUrl: 'app/templates/article.tpl.html',
-            controller: 'articleCtrl'
+            views: articleView
         })
         .state('articles.chapters', {
             url: '/:chapterTitle',
-            views: {
-                '@': {
-                    templateUrl: 'app/templates/article.tpl.html',
-                    controller: 'articleCtrl'
-                }
-            }
+            views: articleView
         });
 }
 
@@ -4509,7 +4514,6 @@ var routeList = [
 			$elementTop = $element.offset().top,
 			$elementBottom = $element.offset().top + $element.height();
 
-		console.log($elementBottom);
 
 		$('.site-content .inner').css({
 			'min-height': $elementBottom
@@ -4539,7 +4543,23 @@ var routeList = [
 	    // directives
 	    .directive('incHeader', headerDir)
 	    .directive('incSidebar', sidebarDir)
-	    .directive('chapters', chaptersDir);
+	    .directive('chapters', chaptersDir)
+	    .directive( 'elemReady', function( $parse ) {
+			return {
+				restrict: 'A',
+				link: function( $scope, elem, attrs ) {    
+					elem.ready(function(){
+						$scope.$apply(function(){
+							var func = function() {
+							    var _Count = $('code').length;
+							    console.log(_Count);
+							}
+							func();
+						})
+					})
+				}
+			}
+		});
 
 	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);

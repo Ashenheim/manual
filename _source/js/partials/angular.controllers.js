@@ -18,9 +18,10 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 			$('html').removeClass('navigation-is-active');
 		});
 
-	$('.hamburger').on('click', function(event) {
-		$(window).trigger('toggleNav');
-	})
+	$('.hamburger')
+		.on('click', function(event) {
+			$(window).trigger('toggleNav');
+		})
 
 	$scope.convert = function(t) {
 		if (t) {
@@ -30,15 +31,11 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 		}
 	}
 
-	$rootScope.$on('$viewContentLoaded', function(event){
-		$timeout(function() {
-
-			materialButton('.btn-effect, .btn, button');
-			Prism.highlightAll();
-			_navigation('.navigation');
-
-		},500);
-	});
+	$scope.load = function() {
+		materialButton();
+		_navigation('.navigation');
+		Prism.highlightAll();
+	}
 };
 
 
@@ -51,7 +48,7 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 
 	var object = $stateParams;
 
-	console.log(object);
+	// console.log(object);
 
 	// Get correct array
 	var node = $articles.filter(function(node) {

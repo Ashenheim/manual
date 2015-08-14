@@ -9,7 +9,6 @@
 			$elementTop = $element.offset().top,
 			$elementBottom = $element.offset().top + $element.height();
 
-		console.log($elementBottom);
 
 		$('.site-content .inner').css({
 			'min-height': $elementBottom

@@ -1,7 +1,8 @@
-<article class="article" ng-prism check-last>
+<article class="article">
 	<header class="article__header">
 		<h2 class="article__title" ng-bind="convert(title)"></h2>
 	</header>
 	<div class="article__content" ng-bind-html="content"></div>
 	<footer class="article__footer"></footer>
+	{{load()}}
 </article>

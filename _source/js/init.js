@@ -10,7 +10,23 @@
 	    // directives
 	    .directive('incHeader', headerDir)
 	    .directive('incSidebar', sidebarDir)
-	    .directive('chapters', chaptersDir);
+	    .directive('chapters', chaptersDir)
+	    .directive( 'elemReady', function( $parse ) {
+			return {
+				restrict: 'A',
+				link: function( $scope, elem, attrs ) {    
+					elem.ready(function(){
+						$scope.$apply(function(){
+							var func = function() {
+							    var _Count = $('code').length;
+							    console.log(_Count);
+							}
+							func();
+						})
+					})
+				}
+			}
+		});
 
 	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);

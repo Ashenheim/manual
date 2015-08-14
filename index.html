@@ -23,7 +23,11 @@
 		
 		<main class="main">
 			<inc-sidebar></inc-sidebar>
-			<div id="primary" class="site-content" ui-view></div>
+			<div id="primary" class="site-content">
+				<div class="inner" autoscroll="true">
+					<ui-view />
+				</div>
+			</div>
 		</main>
 		
 	</div>

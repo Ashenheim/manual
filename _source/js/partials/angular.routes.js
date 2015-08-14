@@ -4,19 +4,14 @@ function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('articles/' + $articles[0].name);
 
     $stateProvider
-        .state('pages', {
-            url: '/:id',
-            templateUrl: 'app/templates/page.html',
-            controller: 'pagesCtrl'
-        })
         .state('articles', {
             url: '/articles/:id',
-            templateUrl: 'app/templates/article-page.html',
+            templateUrl: 'app/templates/article.tpl.html',
             controller: 'articleCtrl'
         })
         .state('chapters', {
-            url: '/articles/:id/:chapterTitle',
-            templateUrl: 'app/templates/article-page.html',
+            url: '/:chapterTitle',
+            templateUrl: 'app/templates/article.tpl.html',
             controller: 'articleCtrl'
         });
 }

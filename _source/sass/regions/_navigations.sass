@@ -3,14 +3,14 @@
 	------------------------------------
 
 .navigation
-	+padding($spacing-large null)
 
 	li:before
 		content: ''
 		+position( absolute, 0 null null -1px )
-		+size(0 100%)
+		+size(5px 100%)
 		background: $c-main
 		transition: all $easing
+		transform: scale(0,1)
 
 	& + &
 		margin-top: $spacing-large
@@ -27,13 +27,9 @@
 		margin-left: 0
 		margin-top: 0
 		position: relative
-		// +padding($spacing-medium null)
-		transition: all $easing
+		transition: background $easing
 		+bp(mobile)
-			border:
-				top:    1px solid rgba($black,.1)
-				bottom: 1px solid rgba($black,.1)
-				left:   1px solid rgba($black,.1)
+			border: 1px solid $c-bg--dark
 
 	li + li
 		border-top: none
@@ -56,7 +52,17 @@
 		+position( absolute, 13px null null .4em )
 		line-height: 1
 
-	// States			
+	.more
+		font-size: 12px
+		color: $c-main
+		+bp(mobileonly)
+			display: none
+
+	// States
+	&.is-fixed
+		+bp(mobile)
+			+position(fixed, 0 null null null)
+			width: $sidebar-width
 	.active
 		+bp(mobileonly)
 			background: rgba($black, .2)
@@ -65,14 +71,10 @@
 			background: $white
 			position: relative
 			z-index: 1
-			&:after
-				content: ''
-				+position( absolute, 0 -1px null null )
-				+size(1px 100%)
-				z-index: 2
-				background: $white
+			border-left: none
+			border-right: none
 			&:before
-				width: 3px
+				transform: none
 		
 /* 
 	sub navigation
@@ -89,6 +91,9 @@
 	li
 		padding: 0
 		border: 0
+
+		&:last-child a
+			padding-bottom: $spacing-medium
 	
 	a
 		font-size: .8em
@@ -96,6 +101,7 @@
 		&:before
 			content: '-'
 			margin-right: .4em
+			margin-left: $spacing-medium
 			display: inline-block
 
 
@@ -118,6 +124,8 @@ $hamburger-line: 5px
 		+size( 100% $hamburger-line )
 		background: currentcolor
 		margin-bottom: $hamburger-line
+		transition: all $easing
+		transform-origin: 50% 50%
 		&:nth-child(2)
 			width: (100% / 3) * 2
 		&:nth-child(3)
@@ -125,3 +133,11 @@ $hamburger-line: 5px
 
 		.navigation-is-active &
 			background: $white
+			width: 100%
+
+			&:nth-child(1)
+				transform: translateY( $hamburger-line * 2 ) rotate(45deg)
+			&:nth-child(2)
+				opacity: 0
+			&:nth-child(3)
+				transform: translateY( -#{$hamburger-line * 2} ) rotate(-45deg)

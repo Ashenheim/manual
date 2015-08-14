@@ -4,46 +4,60 @@
  * @author Rose Pritchard
  */
 
-code,
-pre {
-	color: #ccc;
-	background: #2d2d2d;
+$adjust-color: 10%;
+
+@function adjust-color($color) {
+	@return saturate(darken($color, 10%), 10%)
 }
+
+code,
+pre { color: $c-fg; }
+
+code {
+	color: $c-fg--light;
+	background: $c-bg;
+}
+
+pre {
+	border-top:    1px dashed $c-accent;
+	border-bottom: 1px dashed $c-accent;
+}
+
 
 .token.comment,
 .token.block-comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: #999;
+	color: adjust-color(#999);
 }
 
 .token.punctuation {
-	color: #ccc;
+	color: adjust-color(#ccc);
 }
 
 .token.tag,
 .token.attr-name,
 .token.namespace,
 .token.deleted {
-	color: #e2777a;
+	color: adjust-color(#e2777a);
 }
 
 .token.function-name {
-	color: #6196cc;
+	color: adjust-color(#6196cc);
 }
 
 .token.boolean,
 .token.number,
 .token.function {
-	color: #f08d49;
+	color: adjust-color(#f08d49);
 }
 
 .token.property,
 .token.class-name,
 .token.constant,
 .token.symbol {
-	color: #f8c555;
+	color: adjust-color(#f8c555);
 }
 
 .token.selector,
@@ -51,7 +65,7 @@ pre {
 .token.atrule,
 .token.keyword,
 .token.builtin {
-	color: #cc99cd;
+	color: adjust-color(#cc99cd);
 }
 
 .token.string,
@@ -59,13 +73,13 @@ pre {
 .token.attr-value,
 .token.regex,
 .token.variable {
-	color: #7ec699;
+	color: adjust-color(#7ec699);
 }
 
 .token.operator,
 .token.entity,
 .token.url {
-	color: #67cdcc;
+	color: adjust-color(#67cdcc);
 }
 
 .token.important,

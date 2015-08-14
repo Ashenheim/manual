@@ -1,0 +1,25 @@
+.site-content {
+	@include margin(auto);
+	min-height: 100vh;
+	position: relative;
+	z-index: 2;
+}
+
+.article {
+	&__header,
+	&__content,
+	&__footer { @include padding(null $gutter); }
+
+	&__header {
+		padding: $spacing-large;
+		margin-bottom: $spacing-large;
+		border-bottom: 1px solid $c-bg;
+
+		a  { color: currentcolor; }
+		h2 { margin-bottom: 0; }
+	}
+
+	&__content {
+		padding-bottom: $spacing-large;
+	}
+}

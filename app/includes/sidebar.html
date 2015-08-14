@@ -12,6 +12,7 @@
 					<a ui-sref="articles({ id: node.name })">
 						<span ng-if="!node.title" ng-bind="convert(node.name)"></span>
 						<span ng-if="node.title"  ng-bind="convert(node.title)"></span>
+						<span ng-if="node.chapters" class="more">+</span>
 					</a>
 					
 					<ul ng-if="node.chapters" class="sub-navigation">

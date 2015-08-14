@@ -4291,9 +4291,16 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	$scope.routeList = routeList;
 	$scope.articles  = $articles;
 
+	$(window)
+		.on('toggleNav', function() {
+			$('html').toggleClass('navigation-is-active');
+		})
+		.on('hideNav', function() {
+			$('html').removeClass('navigation-is-active');
+		});
+
 	$('.hamburger').on('click', function(event) {
-		event.preventDefault();
-		$('html').toggleClass('navigation-is-active');
+		$(window).trigger('toggleNav');
 	})
 
 	$scope.convert = function(t) {
@@ -4305,31 +4312,13 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	$rootScope.$on('$viewContentLoaded', function(event){
 		$timeout(function() {
 
-			var buttons = "",
-					buttons = $('.btn-effect, .btn, button');
-
-			console.log(buttons.length);
-			materialButton(buttons);
-			Prism.highlightAll()
+			materialButton('.btn-effect, .btn, button');
+			Prism.highlightAll();
+			navigationScroll('.navigation');
 
 		},500);
 	});
 };
-
-
-/* ====================================
- * Page Controller
-==================================== */
-
-function pagesCtrl($scope, $stateParams, $http) {
-	var page = routeList.filter(function(out) {
-		return out.name == $stateParams.id;
-	})[0];
-
-	$http.get('app/pages/' + page.template).success(function(res) {
-		$scope.content = res;
-	});
-}
 
 
 /* ====================================
@@ -4393,11 +4382,6 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 		$scope.content = $sce.trustAsHtml($content);
 	});
 }
-function prismDir() {
-    return {
-        restrict: 'A'
-    }
-}
 
 function sidebarDir() {
     return {
@@ -4415,14 +4399,14 @@ function headerDir() {
     }
 }
 
-function navigationBarDir() {
+function chaptersDir() {
     return {
         restrict: 'E',
         scope: {
             id: "=output"
         },
         replace: true,
-        templateUrl: 'app/templates/navigation-bar.html',
+        templateUrl: 'app/templates/chapters.tpl.html',
         controller: function($scope, $stateParams) {
 
             var node =  $articles.filter(function(node) {
@@ -4441,19 +4425,14 @@ function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('articles/' + $articles[0].name);
 
     $stateProvider
-        .state('pages', {
-            url: '/:id',
-            templateUrl: 'app/templates/page.html',
-            controller: 'pagesCtrl'
-        })
         .state('articles', {
             url: '/articles/:id',
-            templateUrl: 'app/templates/article-page.html',
+            templateUrl: 'app/templates/article.tpl.html',
             controller: 'articleCtrl'
         })
         .state('chapters', {
-            url: '/articles/:id/:chapterTitle',
-            templateUrl: 'app/templates/article-page.html',
+            url: '/:chapterTitle',
+            templateUrl: 'app/templates/article.tpl.html',
             controller: 'articleCtrl'
         });
 }
@@ -4477,58 +4456,78 @@ var routeList = [
 
     if (buttons[0]) {
 
-      // reset event listeners
-      buttons.off('mousedown mouseup mouseout');
+        buttons
+            .off('mousedown mouseup mouseout')
+            .on('mousedown', function(event) {
 
-      buttons.on('mousedown', function(event) {
-
-        var button = $(this),
-            offset = button.offset(),
-            offsetY = (event.pageY - offset.top),
-            offsetX = (event.pageX - offset.left),
-            clickTimeout;
+                var button = $(this),
+                    offset = button.offset(),
+                    offsetY = (event.pageY - offset.top),
+                    offsetX = (event.pageX - offset.left),
+                    clickTimeout;
 
 
-        button
-          .addClass('clicked')
-          .append(
-            $('<span class="btn-circle"></span>').css({
-              'top' : offsetY,
-              'left': offsetX
-            })
-          );
+                button
+                    .addClass('clicked')
+                    .append(
+                        $('<span class="btn-circle"></span>').css({
+                            'top' : offsetY,
+                            'left': offsetX
+                        })
+                    );
 
-        console.log('trigger');
+                $(window).trigger('hideNav');
 
-      }).on('mouseup mouseout', function(event) {
+            }).on('mouseup mouseout', function(event) {
 
-        var button = $(this);
+                var button = $(this);
 
-        button
-            .removeClass('clicked')
-            .find('.btn-circle').fadeOut(function() {
-              $(this).remove();
-            });
-      });
+                button
+                    .removeClass('clicked')
+                    .find('.btn-circle').fadeOut(function() {
+                        $(this).remove();
+                    });
+                });
 
-    } // End of IF
+        } // End of IF
 
-  } // End of function
+    } // End of function
+}(jQuery));
+;(function ($) {
+
+	navigationScroll = function (element) {
+		'use strict';
+
+		var $window = $(window),
+			$element = $(element),
+			$scrollTop = $window.scrollTop(),
+			$elementTop = $element.offset().top;
+
+		$window.on('scroll', function() {
+			$scrollTop = $window.scrollTop();
+
+			if($scrollTop >= $elementTop) {
+				$element.addClass('is-fixed');
+			} else {
+				$element.removeClass('is-fixed');
+			}
+		});
+	}
+
 }(jQuery));
 (function() {
 
 	angular
 	    .module('myApp', ['ui.router','ngSanitize'])
-
+	    // config
 	    .config(config)
-
+	    // controllers
 	    .controller('mainCtrl', mainCtrl)
-	    .controller('pagesCtrl', pagesCtrl)
 	    .controller('articleCtrl', articleCtrl)
-
-	    .directive('ngPrism', prismDir)
+	    // directives
 	    .directive('incHeader', headerDir)
-	    .directive('incSidebar', sidebarDir);
+	    .directive('incSidebar', sidebarDir)
+	    .directive('chapters', chaptersDir);
 
 	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);

@@ -2,16 +2,15 @@
 
 	angular
 	    .module('myApp', ['ui.router','ngSanitize'])
-
+	    // config
 	    .config(config)
-
+	    // controllers
 	    .controller('mainCtrl', mainCtrl)
-	    .controller('pagesCtrl', pagesCtrl)
 	    .controller('articleCtrl', articleCtrl)
-
-	    .directive('ngPrism', prismDir)
+	    // directives
 	    .directive('incHeader', headerDir)
-	    .directive('incSidebar', sidebarDir);
+	    .directive('incSidebar', sidebarDir)
+	    .directive('chapters', chaptersDir);
 
 	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);

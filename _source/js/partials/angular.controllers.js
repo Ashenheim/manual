@@ -10,9 +10,16 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	$scope.routeList = routeList;
 	$scope.articles  = $articles;
 
+	$(window)
+		.on('toggleNav', function() {
+			$('html').toggleClass('navigation-is-active');
+		})
+		.on('hideNav', function() {
+			$('html').removeClass('navigation-is-active');
+		});
+
 	$('.hamburger').on('click', function(event) {
-		event.preventDefault();
-		$('html').toggleClass('navigation-is-active');
+		$(window).trigger('toggleNav');
 	})
 
 	$scope.convert = function(t) {
@@ -24,31 +31,13 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	$rootScope.$on('$viewContentLoaded', function(event){
 		$timeout(function() {
 
-			var buttons = "",
-					buttons = $('.btn-effect, .btn, button');
-
-			console.log(buttons.length);
-			materialButton(buttons);
-			Prism.highlightAll()
+			materialButton('.btn-effect, .btn, button');
+			Prism.highlightAll();
+			navigationScroll('.navigation');
 
 		},500);
 	});
 };
-
-
-/* ====================================
- * Page Controller
-==================================== */
-
-function pagesCtrl($scope, $stateParams, $http) {
-	var page = routeList.filter(function(out) {
-		return out.name == $stateParams.id;
-	})[0];
-
-	$http.get('app/pages/' + page.template).success(function(res) {
-		$scope.content = res;
-	});
-}
 
 
 /* ====================================

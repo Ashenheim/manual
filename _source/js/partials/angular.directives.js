@@ -1,8 +1,3 @@
-function prismDir() {
-    return {
-        restrict: 'A'
-    }
-}
 
 function sidebarDir() {
     return {
@@ -20,14 +15,14 @@ function headerDir() {
     }
 }
 
-function navigationBarDir() {
+function chaptersDir() {
     return {
         restrict: 'E',
         scope: {
             id: "=output"
         },
         replace: true,
-        templateUrl: 'app/templates/navigation-bar.html',
+        templateUrl: 'app/templates/chapters.tpl.html',
         controller: function($scope, $stateParams) {
 
             var node =  $articles.filter(function(node) {

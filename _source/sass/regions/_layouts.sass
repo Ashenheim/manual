@@ -3,6 +3,8 @@
 	margin: 0 auto
 	position: relative
 	z-index: 1
+	+bp(mobileonly)
+		padding-top: 100px
 
 
 .sidebar
@@ -20,9 +22,14 @@
 	+bp(mobileonly)
 		background: $c-main
 		color: $c-main--lighter
-		// +size( 100% )
-		// +position( fixed, 0 null null 0 )
-		// transform: translateX(-100%)
+		+size( 100% )
+		+position( fixed, 0 null null 0 )
+		transform: translateX(-100%)
+		transition: all $easing
+		padding-top: 100px
+		.navigation-is-active &
+			transform: translateX(0)
+
 
 	.inner
 		+bp(mobile)

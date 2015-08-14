@@ -4291,6 +4291,11 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	$scope.routeList = routeList;
 	$scope.articles  = $articles;
 
+	$('.hamburger').on('click', function(event) {
+		event.preventDefault();
+		$('html').toggleClass('navigation-is-active');
+	})
+
 	$scope.convert = function(t) {
 		converted = t.split('_').join(' ');
 		converted = converted.charAt(0).toUpperCase() + converted.slice(1);

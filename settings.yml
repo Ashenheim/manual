@@ -1,7 +1,7 @@
 articles: 
 - name: npm
   icon: npm
-  title: Node Package Manager
+  title: NPM
   markdown: true
 
 - name: sass

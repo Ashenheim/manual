@@ -4285,7 +4285,7 @@ module.exports = yaml;
 
 function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	'use strict';
-
+	
 	var converted;
 
 	$scope.routeList = routeList;
@@ -4310,12 +4310,6 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 			converted = converted.charAt(0).toUpperCase() + converted.slice(1);
 			return converted;
 		}
-	}
-
-	$scope.load = function() {
-		materialButton();
-		_navigation('.navigation');
-		Prism.highlightAll();
 	}
 };
 
@@ -4417,11 +4411,54 @@ function chaptersDir() {
     }
 }
 
+
+function buttonDir() {
+    return {
+        restrict: 'C',
+        template: '<ng-transclude></ng-transclude>',
+        replace: true,
+        transclude: true,
+        link: function(scope, element, attrs) {
+            element.addClass('btn');
+            materialButton(element);
+            console.log('added button');
+        }
+    }
+}
+
+function articleDir($timeout, $document) {
+
+    function link(scope, element, attrs) {
+        var watcher = scope.$watch('content', function(newValue) {
+            if(newValue) {
+                element.html(newValue);
+                $timeout(function() {
+                    Prism.highlightAll();
+                    $('p a').addClass('btn-small');
+                    materialButton('.btn-effect, .btn, button, a');
+                    _navigation('.navigation');
+                });
+            }  
+        });
+
+        scope.$on('$destroy', watcher);
+    }
+
+    return {
+        restrict: 'A',
+        replace: true,
+        scope: {
+            content: '='
+        },
+        link: link
+    }
+}
+
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    // $urlRouterProvider.otherwise('articles/' + $articles[0].name);
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise($articles[0].name);
+    // $urlRouterProvider.otherwise('/');
 
     var articleView = {
         '@': {
@@ -4431,14 +4468,8 @@ function config($stateProvider, $urlRouterProvider) {
     };
 
     $stateProvider
-        .state('/', {
-            url: '/',
-            template: '<h1>Hello world!</h1>'
-        })
-
-    $stateProvider
         .state('articles', {
-            url: '/articles/:id',
+            url: '/:id',
             views: articleView
         })
         .state('articles.chapters', {
@@ -4535,31 +4566,14 @@ var routeList = [
 
 	angular
 	    .module('myApp', ['ui.router','ngSanitize'])
-	    // config
 	    .config(config)
-	    // controllers
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('articleCtrl', articleCtrl)
-	    // directives
 	    .directive('incHeader', headerDir)
 	    .directive('incSidebar', sidebarDir)
 	    .directive('chapters', chaptersDir)
-	    .directive( 'elemReady', function( $parse ) {
-			return {
-				restrict: 'A',
-				link: function( $scope, elem, attrs ) {    
-					elem.ready(function(){
-						$scope.$apply(function(){
-							var func = function() {
-							    var _Count = $('code').length;
-							    console.log(_Count);
-							}
-							func();
-						})
-					})
-				}
-			}
-		});
+	    .directive('btn', buttonDir)
+	    .directive('ngConvert', articleDir);
 
 	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);

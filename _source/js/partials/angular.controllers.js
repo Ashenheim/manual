@@ -4,7 +4,7 @@
 
 function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	'use strict';
-
+	
 	var converted;
 
 	$scope.routeList = routeList;
@@ -29,12 +29,6 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 			converted = converted.charAt(0).toUpperCase() + converted.slice(1);
 			return converted;
 		}
-	}
-
-	$scope.load = function() {
-		materialButton();
-		_navigation('.navigation');
-		Prism.highlightAll();
 	}
 };
 

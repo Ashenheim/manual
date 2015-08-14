@@ -1,8 +1,8 @@
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    // $urlRouterProvider.otherwise('articles/' + $articles[0].name);
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise($articles[0].name);
+    // $urlRouterProvider.otherwise('/');
 
     var articleView = {
         '@': {
@@ -12,14 +12,8 @@ function config($stateProvider, $urlRouterProvider) {
     };
 
     $stateProvider
-        .state('/', {
-            url: '/',
-            template: '<h1>Hello world!</h1>'
-        })
-
-    $stateProvider
         .state('articles', {
-            url: '/articles/:id',
+            url: '/:id',
             views: articleView
         })
         .state('articles.chapters', {

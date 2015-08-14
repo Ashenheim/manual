@@ -34,3 +34,46 @@ function chaptersDir() {
         }
     }
 }
+
+
+function buttonDir() {
+    return {
+        restrict: 'C',
+        template: '<ng-transclude></ng-transclude>',
+        replace: true,
+        transclude: true,
+        link: function(scope, element, attrs) {
+            element.addClass('btn');
+            materialButton(element);
+            console.log('added button');
+        }
+    }
+}
+
+function articleDir($timeout, $document) {
+
+    function link(scope, element, attrs) {
+        var watcher = scope.$watch('content', function(newValue) {
+            if(newValue) {
+                element.html(newValue);
+                $timeout(function() {
+                    Prism.highlightAll();
+                    $('p a').addClass('btn-small');
+                    materialButton('.btn-effect, .btn, button, a');
+                    _navigation('.navigation');
+                });
+            }  
+        });
+
+        scope.$on('$destroy', watcher);
+    }
+
+    return {
+        restrict: 'A',
+        replace: true,
+        scope: {
+            content: '='
+        },
+        link: link
+    }
+}

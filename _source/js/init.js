@@ -2,31 +2,14 @@
 
 	angular
 	    .module('myApp', ['ui.router','ngSanitize'])
-	    // config
 	    .config(config)
-	    // controllers
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('articleCtrl', articleCtrl)
-	    // directives
 	    .directive('incHeader', headerDir)
 	    .directive('incSidebar', sidebarDir)
 	    .directive('chapters', chaptersDir)
-	    .directive( 'elemReady', function( $parse ) {
-			return {
-				restrict: 'A',
-				link: function( $scope, elem, attrs ) {    
-					elem.ready(function(){
-						$scope.$apply(function(){
-							var func = function() {
-							    var _Count = $('code').length;
-							    console.log(_Count);
-							}
-							func();
-						})
-					})
-				}
-			}
-		});
+	    .directive('btn', buttonDir)
+	    .directive('ngConvert', articleDir);
 
 	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);

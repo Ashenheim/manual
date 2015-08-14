@@ -4304,9 +4304,11 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	})
 
 	$scope.convert = function(t) {
-		converted = t.split('_').join(' ');
-		converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-		return converted;
+		if (t) {
+			converted = t.split('_').join(' ');
+			converted = converted.charAt(0).toUpperCase() + converted.slice(1);
+			return converted;
+		}
 	}
 
 	$rootScope.$on('$viewContentLoaded', function(event){
@@ -4314,7 +4316,7 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 
 			materialButton('.btn-effect, .btn, button');
 			Prism.highlightAll();
-			navigationScroll('.navigation');
+			_navigation('.navigation');
 
 		},500);
 	});
@@ -4329,6 +4331,8 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	'use strict';
 
 	var object = $stateParams;
+
+	console.log(object);
 
 	// Get correct array
 	var node = $articles.filter(function(node) {
@@ -4368,10 +4372,7 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	$scope.title = $title;
 	$scope.mainTitle = node.name;
 	$scope.chapterTitle = $stateParams.chapterTitle;
-
-	if(node.icon) {
-		$scope.icon = node.icon;
-	}
+	if(node.icon) $scope.icon = node.icon;
 
 	$http.get($file).success(function(res) {
 		var $content = res;
@@ -4430,10 +4431,14 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/templates/article.tpl.html',
             controller: 'articleCtrl'
         })
-        .state('chapters', {
+        .state('articles.chapters', {
             url: '/:chapterTitle',
-            templateUrl: 'app/templates/article.tpl.html',
-            controller: 'articleCtrl'
+            views: {
+                '@': {
+                    templateUrl: 'app/templates/article.tpl.html',
+                    controller: 'articleCtrl'
+                }
+            }
         });
 }
 
@@ -4495,13 +4500,20 @@ var routeList = [
 }(jQuery));
 ;(function ($) {
 
-	navigationScroll = function (element) {
+	_navigation = function (element) {
 		'use strict';
 
 		var $window = $(window),
 			$element = $(element),
 			$scrollTop = $window.scrollTop(),
-			$elementTop = $element.offset().top;
+			$elementTop = $element.offset().top,
+			$elementBottom = $element.offset().top + $element.height();
+
+		console.log($elementBottom);
+
+		$('.site-content .inner').css({
+			'min-height': $elementBottom
+		})
 
 		$window.on('scroll', function() {
 			$scrollTop = $window.scrollTop();

@@ -9,9 +9,13 @@ function config($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/templates/article.tpl.html',
             controller: 'articleCtrl'
         })
-        .state('chapters', {
+        .state('articles.chapters', {
             url: '/:chapterTitle',
-            templateUrl: 'app/templates/article.tpl.html',
-            controller: 'articleCtrl'
+            views: {
+                '@': {
+                    templateUrl: 'app/templates/article.tpl.html',
+                    controller: 'articleCtrl'
+                }
+            }
         });
 }

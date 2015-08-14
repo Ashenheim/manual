@@ -23,9 +23,11 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	})
 
 	$scope.convert = function(t) {
-		converted = t.split('_').join(' ');
-		converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-		return converted;
+		if (t) {
+			converted = t.split('_').join(' ');
+			converted = converted.charAt(0).toUpperCase() + converted.slice(1);
+			return converted;
+		}
 	}
 
 	$rootScope.$on('$viewContentLoaded', function(event){
@@ -33,7 +35,7 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 
 			materialButton('.btn-effect, .btn, button');
 			Prism.highlightAll();
-			navigationScroll('.navigation');
+			_navigation('.navigation');
 
 		},500);
 	});
@@ -48,6 +50,8 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	'use strict';
 
 	var object = $stateParams;
+
+	console.log(object);
 
 	// Get correct array
 	var node = $articles.filter(function(node) {
@@ -87,10 +91,7 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	$scope.title = $title;
 	$scope.mainTitle = node.name;
 	$scope.chapterTitle = $stateParams.chapterTitle;
-
-	if(node.icon) {
-		$scope.icon = node.icon;
-	}
+	if(node.icon) $scope.icon = node.icon;
 
 	$http.get($file).success(function(res) {
 		var $content = res;

@@ -1,14 +1,5 @@
-.site-wrap
-	max-width: $site-width;
-	margin: 0 auto
-	position: relative
-	z-index: 1
-	+bp(mobileonly)
-		padding-top: 100px
-
-
 .sidebar
-	padding-top: 100px
+	padding-top: 99px
 	color: $c-fg--light
 	position: relative
 	z-index: 3	
@@ -32,16 +23,18 @@
 
 
 .site-content
+	padding-bottom: $spacing-large
 	+bp(mobile)
 		padding-left: $sidebar-width
+
 
 	.inner
 		background: $white;
 		position: relative
 		padding-bottom: $spacing-large
-		margin-bottom: $spacing-large
 		border-bottom: 1px solid $c-bg--dark
 		border-radius: 0 0 2px 2px
+		box-shadow: 0 0 5px rgba($black, .05)
 
 		+bp(mobile)
 			border-right: 1px solid $c-bg--dark

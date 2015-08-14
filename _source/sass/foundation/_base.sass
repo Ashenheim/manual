@@ -1,6 +1,6 @@
 /*  ==============
  *  Global Styling
- *  ==============
+ *  ============== */
 
 *,
 *:before,
@@ -21,8 +21,15 @@ html
 		x: auto
 		y: scroll
 
+
 .site-wrap
+	max-width: $site-width;
+	margin: 0 auto
+	+padding(null $spacing-small)
 	position: relative
+	z-index: 1
+	+bp(mobileonly)
+		padding-top: 85px
 
 .main
 	position: relative

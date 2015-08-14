@@ -17,7 +17,7 @@
 					
 					<ul ng-if="node.chapters" class="sub-navigation">
 						<li ng-repeat="nodeChild in node.chapters">
-							<a ui-sref="chapters({ id: node.name, chapterTitle: nodeChild })" ng-bind="convert(nodeChild)"></a>
+							<a ui-sref="articles.chapters({ id: node.name, chapterTitle: nodeChild })" ng-bind="convert(nodeChild)"></a>
 						</li>
 					</ul>
 				</li>

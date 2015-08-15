@@ -53,27 +53,21 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 		#Create Variables
 	------------------------------------ */
 	
-	var $title = node.name;
-	if (node.title)
-		$title = node.title
+	// Title
+	var $title = 						node.name;
+	if (node.title)						$title = node.title
 
-	if (object.chapterTitle)
-		$title = object.chapterTitle
+	if (object.chapterTitle)			$title = object.chapterTitle
 
 
 	// Filename
-	var $file = 'articles/' + node.name;
-	if (node.chapters)
-		$file += '/';
-		if ($stateParams.chapterTitle)
-			$file += $stateParams.chapterTitle;
-		else
-			$file += '/index';
+	var $file = 						'articles/' + node.name;
+	if (node.chapters) 					$file += '/';
+	if ($stateParams.chapterTitle) 		$file += $stateParams.chapterTitle;
+	else 								$file += '/index';
 	
-	if (node.markdown)
-		$file += '.md';
-	else
-		$file += '.html';
+	if (node.markdown)					$file += '.md';
+	else								$file += '.html';
 
 	/* ------------------------------------
 		#Scopes

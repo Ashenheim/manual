@@ -4334,27 +4334,21 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 		#Create Variables
 	------------------------------------ */
 	
-	var $title = node.name;
-	if (node.title)
-		$title = node.title
+	// Title
+	var $title = 						node.name;
+	if (node.title)						$title = node.title
 
-	if (object.chapterTitle)
-		$title = object.chapterTitle
+	if (object.chapterTitle)			$title = object.chapterTitle
 
 
 	// Filename
-	var $file = 'articles/' + node.name;
-	if (node.chapters)
-		$file += '/';
-		if ($stateParams.chapterTitle)
-			$file += $stateParams.chapterTitle;
-		else
-			$file += '/index';
+	var $file = 						'articles/' + node.name;
+	if (node.chapters) 					$file += '/';
+	if ($stateParams.chapterTitle) 		$file += $stateParams.chapterTitle;
+	else 								$file += '/index';
 	
-	if (node.markdown)
-		$file += '.md';
-	else
-		$file += '.html';
+	if (node.markdown)					$file += '.md';
+	else								$file += '.html';
 
 	/* ------------------------------------
 		#Scopes
@@ -4434,11 +4428,11 @@ function articleDir($timeout, $document) {
                 element.html(newValue);
                 $timeout(function() {
                     Prism.highlightAll();
-                    $('p a').addClass('btn-small');
-                    materialButton('.btn-effect, .btn, button, a');
+                    // materialButton('.navigation .nav-item, .btn, button, .hamburger');
+                    materialButton();
                     _navigation('.navigation');
                 });
-            }  
+            }
         });
 
         scope.$on('$destroy', watcher);
@@ -4453,6 +4447,7 @@ function articleDir($timeout, $document) {
         link: link
     }
 }
+
 
 function config($stateProvider, $urlRouterProvider) {
     'use strict';
@@ -4489,51 +4484,45 @@ var routeList = [
         template: 'about.html'
     }
 ];
-;(function($) {
-  materialButton = function(element) {
-    'use strict';
+(function() {
+    materialButton = function() {
+        'use strict';
 
-    var buttons = $(element);
+        // Store Dom elements
+        var $buttons     = $('.btn, .nav-item, button');
+        var circleClass  = 'btn-circle';
+        var clickedClass = 'clicked';
+        var fadeOutTime  = 250;
 
-    if (buttons[0]) {
-
-        buttons
-            .off('mousedown mouseup mouseout')
-            .on('mousedown', function(event) {
-
-                var button = $(this),
-                    offset = button.offset(),
-                    offsetY = (event.pageY - offset.top),
-                    offsetX = (event.pageX - offset.left),
-                    clickTimeout;
+        // Event listeners
+        $buttons.off('mousedown mouseup mouseleave');
+        $buttons.on('mousedown', addCircle);
+        $buttons.on('mouseup mouseleave', removeCircle);
 
 
-                button
-                    .addClass('clicked')
-                    .append(
-                        $('<span class="btn-circle"></span>').css({
-                            'top' : offsetY,
-                            'left': offsetX
-                        })
-                    );
+        $buttons.addClass('btn-js');
 
-                $(window).trigger('hideNav');
+        function addCircle(event) {
+            var $this = $(this);
+            var offset = $this.offset();
+            var offsetY = (event.pageY - offset.top);
+            var offsetX = (event.pageX - offset.left);
+            var circle = $('<span class="' + circleClass + '"></span>').css({ 'top' : offsetY, 'left': offsetX });
 
-            }).on('mouseup mouseout', function(event) {
+            $this.addClass(clickedClass);
+            $this.append(circle);
+        }
 
-                var button = $(this);
-
-                button
-                    .removeClass('clicked')
-                    .find('.btn-circle').fadeOut(function() {
-                        $(this).remove();
-                    });
-                });
-
-        } // End of IF
-
-    } // End of function
-}(jQuery));
+        function removeCircle(event) {
+            var $this = $(this);
+            $this.removeClass(clickedClass)
+            $this.find('.btn-circle').fadeOut( fadeOutTime, function() {
+                $(this).remove();
+            });
+            $(window).trigger('hideNav');
+        }
+    }
+})();
 ;(function ($) {
 
 	_navigation = function (element) {

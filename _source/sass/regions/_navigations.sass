@@ -51,6 +51,8 @@
 		font-size: 2em
 		+position( absolute, 13px null null .4em )
 		line-height: 1
+		z-index: -1
+		// pointer-events: none
 
 	.more
 		font-size: 12px
@@ -113,8 +115,9 @@
 $hamburger-line: 5px
 
 .hamburger
-	width: 40px + ($gutter * 2)
-	padding: $gutter
+	width: 50px
+	margin: $gutter
+	padding: 5px
 	cursor: pointer
 	+bp(mobile)
 		display: none
@@ -122,7 +125,7 @@ $hamburger-line: 5px
 		+position( absolute, 0 null null 0 )
 		z-index: 10
 
-	span
+	.line
 		display: block
 		+size( 100% $hamburger-line )
 		background: currentcolor

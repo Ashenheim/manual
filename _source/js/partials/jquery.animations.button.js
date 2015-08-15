@@ -1,45 +1,39 @@
-;(function($) {
-  materialButton = function(element) {
-    'use strict';
+(function() {
+    materialButton = function() {
+        'use strict';
 
-    var buttons = $(element);
+        // Store Dom elements
+        var $buttons     = $('.btn, .nav-item, button');
+        var circleClass  = 'btn-circle';
+        var clickedClass = 'clicked';
+        var fadeOutTime  = 250;
 
-    if (buttons[0]) {
-
-        buttons
-            .off('mousedown mouseup mouseout')
-            .on('mousedown', function(event) {
-
-                var button = $(this),
-                    offset = button.offset(),
-                    offsetY = (event.pageY - offset.top),
-                    offsetX = (event.pageX - offset.left),
-                    clickTimeout;
+        // Event listeners
+        $buttons.off('mousedown mouseup mouseleave');
+        $buttons.on('mousedown', addCircle);
+        $buttons.on('mouseup mouseleave', removeCircle);
 
 
-                button
-                    .addClass('clicked')
-                    .append(
-                        $('<span class="btn-circle"></span>').css({
-                            'top' : offsetY,
-                            'left': offsetX
-                        })
-                    );
+        $buttons.addClass('btn-js');
 
-                $(window).trigger('hideNav');
+        function addCircle(event) {
+            var $this = $(this);
+            var offset = $this.offset();
+            var offsetY = (event.pageY - offset.top);
+            var offsetX = (event.pageX - offset.left);
+            var circle = $('<span class="' + circleClass + '"></span>').css({ 'top' : offsetY, 'left': offsetX });
 
-            }).on('mouseup mouseout', function(event) {
+            $this.addClass(clickedClass);
+            $this.append(circle);
+        }
 
-                var button = $(this);
-
-                button
-                    .removeClass('clicked')
-                    .find('.btn-circle').fadeOut(function() {
-                        $(this).remove();
-                    });
-                });
-
-        } // End of IF
-
-    } // End of function
-}(jQuery));
+        function removeCircle(event) {
+            var $this = $(this);
+            $this.removeClass(clickedClass)
+            $this.find('.btn-circle').fadeOut( fadeOutTime, function() {
+                $(this).remove();
+            });
+            $(window).trigger('hideNav');
+        }
+    }
+})();

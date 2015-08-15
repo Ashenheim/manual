@@ -58,11 +58,11 @@ function articleDir($timeout, $document) {
                 element.html(newValue);
                 $timeout(function() {
                     Prism.highlightAll();
-                    $('p a').addClass('btn-small');
-                    materialButton('.btn-effect, .btn, button, a');
+                    // materialButton('.navigation .nav-item, .btn, button, .hamburger');
+                    materialButton();
                     _navigation('.navigation');
                 });
-            }  
+            }
         });
 
         scope.$on('$destroy', watcher);

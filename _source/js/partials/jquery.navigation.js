@@ -1,28 +1,52 @@
-;(function ($) {
+;(function() {
 
-	_navigation = function (element) {
+	navigation = function () {
 		'use strict';
 
 		var $window = $(window),
-			$element = $(element),
-			$scrollTop = $window.scrollTop(),
-			$elementTop = $element.offset().top,
-			$elementBottom = $element.offset().top + $element.height();
+			$navigation = $('.navigation'),
+			$hamburger = $('.hamburger'),
+			$content = $('.site-content .inner'),
+			navLink = $navigation.find('a'),
+			scrollTop = $window.scrollTop(),
+			navigationTop = $navigation.offset().top,
+			navigationBottom = $navigation.offset().top + $navigation.height();
+
+		/*  Initialize
+			------------------------------------ */
+		function init() {
+			events();
+		}
 
 
-		$('.site-content .inner').css({
-			'min-height': $elementBottom
-		})
+		/*  Event listeners
+			------------------------------------ */
 
-		$window.on('scroll', function() {
-			$scrollTop = $window.scrollTop();
+		function events() {
+			$hamburger.off('click').on('click', toggleMenu);
+			navLink.off('click').on('click', toggleMenu);
+			$window.off('scroll').on('scroll', stickyMenu);
+		}
 
-			if($scrollTop >= $elementTop) {
-				$element.addClass('is-fixed');
+
+		/*  Functions
+			------------------------------------ */
+
+		function toggleMenu(event) {
+			$('html').toggleClass('navigation-is-active');
+		}
+
+		function stickyMenu(event) {
+			scrollTop = $window.scrollTop();
+			if (scrollTop >= navigationTop) {
+				$navigation.addClass('is-fixed');
 			} else {
-				$element.removeClass('is-fixed');
+				$navigation.removeClass('is-fixed');
 			}
-		});
+		}
+
+		return init();
+
 	}
 
-}(jQuery));
+})();

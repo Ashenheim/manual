@@ -73,25 +73,20 @@
 			background: $white
 			position: relative
 			z-index: 1
-			border-left: none
-			border-right: none
+			border-left-color: transparent
+			border-right-color: transparent
 			&:before
 				transform: none
 
 	li.clicked
 		background-image: linear-gradient(to right, rgba($black,0) 98%, rgba($black,.03))
-		
-/* 
+
+/*
 	sub navigation
 	------------------------------ */
 
 .sub-navigation
 	margin-bottom: $spacing-large
-	+bp(mobile)
-		display: none
-
-	.active &
-		display: block
 
 	li
 		padding: 0
@@ -99,7 +94,7 @@
 
 		&:last-child a
 			padding-bottom: $spacing-medium
-	
+
 	a
 		font-size: .8em
 		+padding($spacing-small null)

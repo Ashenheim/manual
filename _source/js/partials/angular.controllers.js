@@ -4,24 +4,19 @@
 
 function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 	'use strict';
-	
+
 	var converted;
 
 	$scope.routeList = routeList;
 	$scope.articles  = $articles;
 
-	$(window)
-		.on('toggleNav', function() {
-			$('html').toggleClass('navigation-is-active');
-		})
-		.on('hideNav', function() {
-			$('html').removeClass('navigation-is-active');
-		});
 
-	$('.hamburger')
-		.on('click', function(event) {
-			$(window).trigger('toggleNav');
-		})
+
+	$scope.markdown = function(data) {
+		var showDown = new showdown.Converter();
+		showDown.setOption('tables', true)
+		return showDown.makeHtml(data);
+	}
 
 	$scope.convert = function(t) {
 		if (t) {
@@ -42,8 +37,6 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 
 	var object = $stateParams;
 
-	// console.log(object);
-
 	// Get correct array
 	var node = $articles.filter(function(node) {
 		return node.name == $stateParams.id;
@@ -52,20 +45,17 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	/* ------------------------------------
 		#Create Variables
 	------------------------------------ */
-	
+
 	// Title
 	var $title = 						node.name;
-	if (node.title)						$title = node.title
-
-	if (object.chapterTitle)			$title = object.chapterTitle
-
+	if (node.title)						$title = node.title;
+	if (object.chapterTitle)			$title = object.chapterTitle;
 
 	// Filename
-	var $file = 						'articles/' + node.name;
-	if (node.chapters) 					$file += '/';
-	if ($stateParams.chapterTitle) 		$file += $stateParams.chapterTitle;
+	var $file = 						'articles/' + node.name + '/';
+	if (object.chapterTitle) 			$file += object.chapterTitle;
 	else 								$file += '/index';
-	
+
 	if (node.markdown)					$file += '.md';
 	else								$file += '.html';
 
@@ -75,14 +65,15 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 
 	$scope.title = $title;
 	$scope.mainTitle = node.name;
-	$scope.chapterTitle = $stateParams.chapterTitle;
+	$scope.chapterTitle = object.chapterTitle;
+	$scope.chapters = node.chapters;
+
 	if(node.icon) $scope.icon = node.icon;
 
 	$http.get($file).success(function(res) {
 		var $content = res;
 		if( node.markdown ) {
-			var showDown = new showdown.Converter();
-			$content = showDown.makeHtml($content);
+			$content = $scope.markdown($content);
 		}
 		$scope.content = $sce.trustAsHtml($content);
 	});

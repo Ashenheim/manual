@@ -58,9 +58,8 @@ function articleDir($timeout, $document) {
                 element.html(newValue);
                 $timeout(function() {
                     Prism.highlightAll();
-                    // materialButton('.navigation .nav-item, .btn, button, .hamburger');
                     materialButton();
-                    _navigation('.navigation');
+                    navigation();
                 });
             }
         });
@@ -75,5 +74,23 @@ function articleDir($timeout, $document) {
             content: '='
         },
         link: link
+    }
+}
+
+function articleNavDir() {
+    return {
+        restrict: 'E',
+        template: '<h3>{{chapter}}</h3>',
+        replace: true,
+        controller: function($scope, $stateParams) {
+
+            var current = $stateParams.chapterTitle;
+            var chapters = $scope.chapters;
+            if(current && chapters) {
+                var indexOf = chapters.indexOf(current);
+                var indexOf = chapters[0];
+                console.log(indexOf);
+            }
+        }
     }
 }

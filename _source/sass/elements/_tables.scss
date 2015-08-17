@@ -1,0 +1,19 @@
+/* ====================================
+    Table styling
+==================================== */
+
+table {
+    width: 100%;
+    margin-bottom: $spacing-medium;
+    border: 1px solid $c-accent;
+    thead {
+        background: $c-accent;
+        color: $white;
+
+        th, td { border-color: $c-accent; }
+    }
+    th, td {
+        padding: $spacing-small $spacing-medium;
+        border: 1px solid $c-accent;
+    }
+}

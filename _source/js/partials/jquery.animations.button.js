@@ -8,13 +8,17 @@
         var clickedClass = 'clicked';
         var fadeOutTime  = 250;
 
+        function init() {
+            $buttons.addClass('btn-js');
+            events();
+        }
+
         // Event listeners
-        $buttons.off('mousedown mouseup mouseleave');
-        $buttons.on('mousedown', addCircle);
-        $buttons.on('mouseup mouseleave', removeCircle);
-
-
-        $buttons.addClass('btn-js');
+        function events() {
+            $buttons.off('mousedown mouseup mouseleave');
+            $buttons.on('mousedown', addCircle);
+            $buttons.on('mouseup mouseleave', removeCircle);
+        }
 
         function addCircle(event) {
             var $this = $(this);
@@ -35,5 +39,7 @@
             });
             $(window).trigger('hideNav');
         }
+
+        return init();
     }
 })();

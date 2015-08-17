@@ -3,6 +3,8 @@ articles:
   icon: npm
   title: NPM
   markdown: true
+  chapters:
+  - commands
 
 - name: sass
   icon: sass

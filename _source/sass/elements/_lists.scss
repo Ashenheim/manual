@@ -1,5 +1,5 @@
 ul,ol {
-  @include margin(0 $spacing-large);
+  @include margin(0 $spacing-large $spacing-medium);
   @include padding(0);
   li {
     margin-left: 1.45em;

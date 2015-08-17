@@ -7,6 +7,8 @@ Bij het bouwen van een project wordt bijna altijd Node gebruikt voor de bouwproc
 - Compileren van Sass
 - Javascript combineren, verkleinen en/of checken (concat, uglify, jslint)
 
+NPM kan ook per project onthouden welke pakketen zijn gebruikt door het bestand _package.json_.
+
 ### Installatie
 
 1. Vind en download de .exe bestand van [Node.js]. En installeer deze.

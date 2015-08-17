@@ -47,8 +47,7 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	------------------------------------ */
 
 	// Title
-	var $title = 						node.name;
-	if (node.title)						$title = node.title;
+	var $title = 						node.title || node.name;
 	if (object.chapterTitle)			$title = object.chapterTitle;
 
 	// Filename
@@ -64,17 +63,21 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	------------------------------------ */
 
 	$scope.title = $title;
-	$scope.mainTitle = node.name;
+	$scope.mainTitle = node.title || node.name;
 	$scope.chapterTitle = object.chapterTitle;
 	$scope.chapters = node.chapters;
 
 	if(node.icon) $scope.icon = node.icon;
 
-	$http.get($file).success(function(res) {
-		var $content = res;
-		if( node.markdown ) {
-			$content = $scope.markdown($content);
-		}
-		$scope.content = $sce.trustAsHtml($content);
-	});
+	$http.get($file)
+		.success(function(res) {
+			var $content = res;
+			if( node.markdown ) {
+				$content = $scope.markdown($content);
+			}
+			$scope.content = $sce.trustAsHtml($content);
+		})
+		.error(function(err) {
+			$scope.content = '<div class="error"><h3>404 - Not Found</h3><code>' + $file + '</code></div>';
+		});
 }

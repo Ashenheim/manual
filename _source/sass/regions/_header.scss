@@ -1,0 +1,9 @@
+.main-header {
+  background: $c-main;
+  @include padding($spacing-medium);
+  color: $white;
+}
+
+.site-title {
+  margin-bottom: 0;
+}

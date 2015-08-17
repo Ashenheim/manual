@@ -20,7 +20,7 @@ var settings = {
         errLogToConsole: false
     },
     autoprefixer: {
-        browsers: ['last 2 versions'],
+        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', "ie 9"],
         cascade: false
     }
 };

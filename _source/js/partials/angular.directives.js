@@ -1,4 +1,3 @@
-
 function sidebarDir() {
     return {
         restrict: 'E',
@@ -12,41 +11,6 @@ function headerDir() {
         restrict: 'E',
         replace: true,
         templateUrl: 'app/includes/header.html'
-    }
-}
-
-function chaptersDir() {
-    return {
-        restrict: 'E',
-        scope: {
-            id: "=output"
-        },
-        replace: true,
-        templateUrl: 'app/templates/chapters.tpl.html',
-        controller: function($scope, $stateParams) {
-
-            var node =  $articles.filter(function(node) {
-                return node.name == $stateParams.id;
-            })[0];
-
-            $scope.leading = node.name;
-            $scope.chapters = node.chapters;
-        }
-    }
-}
-
-
-function buttonDir() {
-    return {
-        restrict: 'C',
-        template: '<ng-transclude></ng-transclude>',
-        replace: true,
-        transclude: true,
-        link: function(scope, element, attrs) {
-            element.addClass('btn');
-            materialButton(element);
-            console.log('added button');
-        }
     }
 }
 
@@ -79,18 +43,48 @@ function articleDir($timeout, $document) {
 
 function articleNavDir() {
     return {
-        restrict: 'E',
-        template: '<h3>{{chapter}}</h3>',
-        replace: true,
+        restrict: 'A',
         controller: function($scope, $stateParams) {
 
-            var current = $stateParams.chapterTitle;
-            var chapters = $scope.chapters;
-            if(current && chapters) {
-                var indexOf = chapters.indexOf(current);
-                var indexOf = chapters[0];
-                console.log(indexOf);
+            var current = $stateParams.chapterTitle,
+                chapters = $scope.chapters,
+                prev,
+                next,
+                $i;
+
+            if(chapters) {
+                $i = chapters.indexOf(current);
+                prev = chapters[($i - 1)];
+                next = chapters[($i + 1)];
+            }
+
+            $scope.nav = {
+                prev: prev,
+                next: next
             }
         }
     }
+}
+
+function stateLoadDir($rootScope) {
+  return {
+    restrict: 'E',
+    template: "<div ng-show='isStateLoading' class='loading-indicator'>" +
+    "<div class='loading-indicator-body'>" +
+    "<h3 class='loading-title'>Loading...</h3>" +
+    "<div class='spinner'><chasing-dots-spinner></chasing-dots-spinner></div>" +
+    "</div>" +
+    "</div>",
+    replace: true,
+    link: function(scope, elem, attrs) {
+      scope.isStateLoading = false;
+
+      $rootScope.$on('$stateChangeStart', function() {
+        scope.isStateLoading = true;
+      });
+      $rootScope.$on('$stateChangeSuccess', function() {
+        scope.isStateLoading = false;
+      });
+    }
+  };
 }

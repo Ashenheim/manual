@@ -1,8 +1,9 @@
 .site-content {
-	@include margin(auto);
-	min-height: 100vh;
+	@include margin(null auto);
 	position: relative;
 	z-index: 2;
+
+	.inner { min-height: 100vh; }
 }
 
 .article {
@@ -16,10 +17,25 @@
 		border-bottom: 1px solid $c-bg;
 
 		a  { color: currentcolor; }
-		h2 { margin-bottom: 0; }
 	}
 
 	&__content {
 		padding-bottom: $spacing-large;
+	}
+
+	&__footer {
+		@include clearfix;
+		.prev { float: left; }
+		.next { float: right; }
+	}
+
+	&__title {
+		margin-bottom: 0;
+		.small {
+			font-size: .8em;
+			font-style: italic;
+			color: $c-fg--light;
+			&:after { content: '-'; }
+		}
 	}
 }

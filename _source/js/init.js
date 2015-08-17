@@ -7,10 +7,9 @@
 	    .controller('articleCtrl', articleCtrl)
 	    .directive('incHeader', headerDir)
 	    .directive('incSidebar', sidebarDir)
-	    .directive('chapters', chaptersDir)
-	    .directive('btn', buttonDir)
 	    .directive('ngConvert', articleDir)
-		.directive('articleNav', articleNavDir);
+		.directive('articleNav', articleNavDir)
+		.directive('stateLoad', stateLoadDir);
 
 	// Load Angular after retrieving data
 	fetchData().then(bootstrapApp);

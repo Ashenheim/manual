@@ -22,3 +22,8 @@ articles:
 - name: markdown
   icon: markdown
   markdown: true
+  chapters:
+  - headings
+  - paragraphs
+  - links
+  - tables

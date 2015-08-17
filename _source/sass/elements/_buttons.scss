@@ -1,0 +1,99 @@
+.btn,
+button {
+    background: $c-link;
+    padding: $spacing-small $spacing-medium;
+    border: 0;
+    color: $white;
+    font-weight: bold;
+    box-shadow: 0 1px 2px rgba($black, 0.2);
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+    transition: all $easing;
+    &:hover {
+        background: $white;
+        color: $c-link--hover;
+        background: $c-link--hover;
+        color: $white;
+    }
+    &:focus {
+        outline: none;
+    }
+
+    // states/variations
+    &.btn-light {
+        @extend .btn;
+        background: $white;
+        color: $c-link;
+    }
+
+    &.btn-disabled {
+        @extend .btn;
+        background: $c-accent;
+        color: $white;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+}
+
+.btn-small {
+    @extend .btn;
+    padding: 0 5px;
+    vertical-align: middle;
+}
+
+.btn-circle {
+    display: block;
+    position: absolute;
+    background: rgba($c-accent, 0.3);
+    border-radius: 50%;
+    width: 100%;
+    animation: btn-animation 300ms ease-in forwards;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    min-height: 10px;
+    pointer-events: none;
+    &:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+    }
+}
+
+.btn-js {
+    overflow: hidden;
+    position: relative;
+}
+
+.loader {
+    @include size(30px);
+    @include position(absolute, 30% null null 50%);
+    margin: 0 auto;
+    display: block;
+    border-radius: 50%;
+    border: 3px solid $c-accent--dark;
+    border-top-color: transparent;
+    transition-origin: 50% 50%;
+    animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes btn-animation {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.25);
+    }
+}

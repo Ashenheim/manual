@@ -4401,6 +4401,8 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	if (node.markdown)					$file += '.md';
 	else								$file += '.html';
 
+	$file = $file.replace(/ /g, '_').toLowerCase();
+
 	/* ------------------------------------
 		#Scopes
 	------------------------------------ */
@@ -4409,6 +4411,7 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	$scope.mainTitle = node.title || node.name;
 	$scope.chapterTitle = object.chapterTitle;
 	$scope.chapters = node.chapters;
+	$scope.file = $file;
 
 	if(node.icon) $scope.icon = node.icon;
 

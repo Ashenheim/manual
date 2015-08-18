@@ -10,7 +10,7 @@ articles:
   icon: sass
   markdown: true
   chapters:
-    - SASS_Maps
+    - SASS Maps
     - mixins
 
 - name: bower
@@ -25,6 +25,6 @@ articles:
   icon: markdown
   markdown: true
   chapters:
-  - headings_and_paragraphs
+  - headings and paragraphs
   - links
   - tables

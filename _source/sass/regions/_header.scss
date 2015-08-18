@@ -1,9 +1,13 @@
 .main-header {
   background: $c-main;
   @include padding($spacing-medium);
+  margin-bottom: $spacing-small;
   color: $white;
 }
 
 .site-title {
   margin-bottom: 0;
+  text-align: center;
+  font-weight: bold;
+  display: block;
 }

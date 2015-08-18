@@ -2,6 +2,11 @@
  * ------------------------------------ */
 .navigation {
 
+    &-title {
+        margin: 0;
+        padding: $spacing-medium 0;
+    }
+
     ul,
     ol {
         margin: 0;
@@ -76,7 +81,7 @@
     }
     a {
         font-size: 0.8em;
-        @include padding($spacing-small);
+        @include padding($spacing-small null);
         &:before {
             content: "-";
             margin-right: 0.4em;

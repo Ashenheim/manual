@@ -24,7 +24,7 @@ code {
 }
 pre {
     @include padding($gutter);
-    margin: 0 -#{$gutter} $spacing-large;
+    margin: 0 -#{$gutter} $spacing-medium;
     position: relative !important;
     &:after {
         @include position(absolute, 0 0 null null);

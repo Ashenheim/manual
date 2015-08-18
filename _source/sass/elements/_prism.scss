@@ -7,7 +7,7 @@
 $adjust-color: 10%;
 
 @function adjust-color($color) {
-	@return saturate(darken($color, 10%), 10%)
+	@return saturate(darken($color, 0%), 0%)
 }
 
 code,

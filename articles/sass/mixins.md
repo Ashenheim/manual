@@ -3,16 +3,14 @@ Mixins zijn functies die het makelijker maakt om herhadelijke patronen op te sla
 Je begint een mixin met `@mixin` en gebruikt een mixin met `@include`.
 
 ```scss
-@mixin [name] {
+@mixin mixinName() {
     // ...
 }
 
-@function [name];
+@function mixinName(); // De () is optioneel
 ```
 
 Bijvoorbeeld kan je een mixin schrijven dat prefixes toevoegt:
-
----
 
 ```scss
 @mixin transform($val) {

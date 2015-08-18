@@ -1,0 +1,27 @@
+/* ====================================
+    Animations
+==================================== */
+
+.site-content {
+    overflow: hidden;
+    position: relative;
+    min-height: 100vh;
+    perspective: 2000;
+}
+
+[ui-view] {
+    backface-visibility: hidden;
+    // transform: rotateY(180deg);
+    &.ng-enter,
+    &.ng-leave {
+        transition: all $easing--slow;
+        position: absolute !important;
+        left: 0;
+        right: 0;
+    }
+
+    &.ng-enter         { opacity:0; transform: rotateY(180deg); }
+    &.ng-enter-active  { opacity:1; transform: rotateY(0deg); }
+    &.ng-leave         { opacity:1; transform: rotateY(0deg); }
+    &.ng-leave-active  { opacity:0; transform: rotateY(-180deg); }
+}

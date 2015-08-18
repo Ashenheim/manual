@@ -25,7 +25,6 @@ articles:
   icon: markdown
   markdown: true
   chapters:
-  - headings
-  - paragraphs
+  - headings_and_paragraphs
   - links
   - tables

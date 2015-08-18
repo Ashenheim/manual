@@ -6,6 +6,8 @@ var sass            = require('gulp-sass');
 var sourcemaps      = require('gulp-sourcemaps');
 var autoprefixer    = require('gulp-autoprefixer');
 var concat          = require('gulp-concat');
+var uglify          = require('gulp-uglify');
+var ngAnnotate      = require('gulp-ng-annotate');
 var plumber         = require('gulp-plumber');
 var browserSync     = require('browser-sync');
 
@@ -55,6 +57,7 @@ var files = {
         src: [
             paths.bower + 'angular/angular.min.js',
             paths.bower + 'angular-sanitize/angular-sanitize.min.js',
+            paths.bower + 'angular-animate/angular-animate.min.js',
             paths.bower + 'angular-ui-router/release/angular-ui-router.min.js',
             paths.bower + 'jquery/dist/jquery.min.js',
             paths.bower + 'showdown/dist/showdown.min.js',
@@ -102,8 +105,18 @@ gulp.task('scripts', function() {
   gulp.src(files.js.src)
     .pipe(concat('global.js'))
     .pipe(gulp.dest(files.js.dest))
-    .pipe(browserSync.reload({stream:true}));
+    .pipe(browserSync.reload({stream:true}))
 });
+
+gulp.task('minify', function() {
+    gulp.src(files.js.src)
+        .pipe(concat('global.min.js'))
+        .pipe(ngAnnotate())
+        .pipe(uglify())
+        .pipe(gulp.dest(files.js.dest));
+})
+
+
 
 gulp.task('watch', function() {
     gulp.watch( files.sass.src, ['sass']);
@@ -138,4 +151,4 @@ gulp.task('browser-sync', function() {
 
 // Bundled tasks
 gulp.task('serve', ['watch', 'browser-sync'])
-gulp.task('default', ['sass', 'scripts', 'serve']);
+gulp.task('default', ['sass', 'scripts', 'watch', 'browser-sync']);

@@ -11,7 +11,10 @@ $adjust-color: 10%;
 }
 
 code,
-pre { color: $c-fg; }
+pre { 
+	color: $c-bg--dark;
+	background: $c-fg;
+}
 
 code {
 	color: $c-fg--light;
@@ -19,8 +22,11 @@ code {
 }
 
 pre {
-	border-top:    1px dashed $c-accent;
-	border-bottom: 1px dashed $c-accent;
+	// border-top:    1px dashed $c-accent;
+	// border-bottom: 1px dashed $c-accent;
+	code {
+		color: currentcolor;
+	}
 }
 
 

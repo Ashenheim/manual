@@ -1,7 +1,7 @@
 (function() {
 
 	angular
-	    .module('myApp', ['ui.router','ngSanitize'])
+	    .module('myApp', ['ui.router','ngSanitize','ngAnimate'])
 	    .config(config)
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('articleCtrl', articleCtrl)

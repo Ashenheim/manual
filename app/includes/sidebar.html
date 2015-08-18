@@ -9,6 +9,8 @@
 						<i class="devicons devicons-{{node.icon}}"></i>
 					</span>
 
+					<div class="active-bar"></div>
+
 					<a ui-sref="articles({ id: node.name })">
 						<span ng-if="!node.title" ng-bind="convert(node.name)"></span>
 						<span ng-if="node.title"  ng-bind="convert(node.title)"></span>

@@ -2,14 +2,6 @@
  * ------------------------------------ */
 .navigation {
 
-    .nav-item:before {
-        content: "";
-        @include position(absolute, 0 null 0 0);
-        @include size(1px 100%);
-        background: $c-bg--dark;
-        transition: all $easing;
-    }
-
     ul,
     ol {
         margin: 0;
@@ -76,10 +68,6 @@
             background: $white;
             position: relative;
             z-index: 1;
-            &:before  {
-                background: $c-main;
-                width: 4px;
-            }
         }
     }
     li.clicked {
@@ -150,5 +138,19 @@ $hamburger-line: 5px;
                 transform: translateY(-#{$hamburger-line * 2}) rotate(-45deg);
             }
         }
+    }
+}
+
+
+
+.active-bar {
+    @include position(absolute, 0 null 0 0);
+    @include size(1px 100%);
+    background: $c-bg--dark;
+    transition: all $easing;
+
+    .active & {
+        background: $c-main;
+        width: 4px;
     }
 }

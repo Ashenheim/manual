@@ -7,7 +7,7 @@
     @include bp(mobile) {
         width: $sidebar-width;
         height: 100%;
-        @include position(absolute, 0);
+        @include position(fixed, 0 null null null);
     }
     @include bp(mobileonly) {
         background: $c-main;
@@ -23,25 +23,26 @@
     }
 }
 .site-content {
+    background: $white;
 
     @include bp(mobile) {
-        padding-left: $sidebar-width;
+        border-right: 1px solid $c-bg--dark;
+        margin-left: $sidebar-width;
+
+        &:before {
+            content: "";
+            @include position(absolute, 0 0 -1px);
+            @include size(1px 100%);
+            background: $c-bg--dark;
+        }
     }
+
     .inner {
-        background: $white;
         position: relative;
         padding-bottom: $spacing-large;
         border-bottom: 1px solid $c-bg--dark;
         border-radius: 0 0 2px 2px;
         box-shadow: 0 0 5px rgba($black, 0.05);
-        @include bp(mobile) {
-            border-right: 1px solid $c-bg--dark;
-            &:before {
-                content: "";
-                @include position(absolute, 0 0 -1px);
-                @include size(1px 100%);
-                background: $c-bg--dark;
-            }
-        }
     }
+
 }

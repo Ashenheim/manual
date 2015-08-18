@@ -1,4 +1,6 @@
-Markdown is een eenvoudige taal om HTML content makelijker te schrijven. Het formatteerd simpel te onthouden syntax naar HTML componenten. Bijvoorbeeld
+Markdown is een eenvoudige taal om HTML content makelijker te schrijven. Het formatteerd simpel te onthouden syntax naar HTML componenten.
+
+---
 
 ```markdown
 ### The uprise of Markdown

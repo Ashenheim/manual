@@ -24,8 +24,8 @@
 
 		function events() {
 			$hamburger.off('click').on('click', toggleMenu);
-			navLink.off('click').on('click', toggleMenu);
-			$window.off('scroll').on('scroll', stickyMenu);
+			navLink.off('click').on('click', removeMenu);
+			// $window.off('scroll').on('scroll', stickyMenu);
 		}
 
 
@@ -34,6 +34,10 @@
 
 		function toggleMenu(event) {
 			$('html').toggleClass('navigation-is-active');
+		}
+
+		function removeMenu(event) {
+			$('html').removeClass('navigation-is-active');
 		}
 
 		function stickyMenu(event) {

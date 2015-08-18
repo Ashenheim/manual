@@ -78,6 +78,6 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 			$scope.content = $sce.trustAsHtml($content);
 		})
 		.error(function(err) {
-			$scope.content = '<div class="error"><h3>404 - Not Found</h3><code>' + $file + '</code></div>';
+			$scope.content = '<div class="error"><h3>404 - File Not Found</h3><code>' + $file + '</code></div>';
 		});
 }

@@ -1,14 +1,15 @@
 .sidebar {
-    padding-top: 99px;
     color: $c-fg--light;
     position: relative;
     z-index: 3;
     overflow: auto;
+
     @include bp(mobile) {
         width: $sidebar-width;
         height: 100%;
         @include position(fixed, 0 null null null);
     }
+
     @include bp(mobileonly) {
         background: $c-main;
         color: $c-main--lighter;
@@ -17,10 +18,12 @@
         transform: translateX(-100%);
         transition: all $easing;
         padding-top: 100px;
+        
         .navigation-is-active & {
             transform: translateX(0);
         }
     }
+
 }
 .site-content {
     background: $white;

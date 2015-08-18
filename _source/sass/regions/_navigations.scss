@@ -14,13 +14,8 @@
         position: relative;
         transition: background $easing;
         @include bp(mobile) {
-            border: 1px solid $c-bg--dark;
-            border-right: none;
-            border-left: none;
+            border-bottom: 1px solid $c-bg--dark;
         }
-    }
-    li + li {
-        border-top: none;
     }
 
     a {
@@ -52,13 +47,6 @@
         }
     }
 
-    // States
-    &.is-fixed {
-        @include bp(mobile) {
-            @include position(fixed, 0 null null null);
-            width: $sidebar-width;
-        }
-    }
     .active {
         @include bp(mobileonly) {
             background: rgba($black, 0.2);
@@ -98,20 +86,25 @@
     }
 }
 
+
 // Hamburger
-$hamburger-line: 5px;
+$hamburger-line: 4px;
+
 .hamburger {
-    width: 50px;
+    width: 40px;
     margin: $gutter;
     padding: 5px;
     cursor: pointer;
+
     @include bp(mobile) {
         display: none;
     }
+
     @include bp(mobileonly) {
-        @include position(absolute, 0 0);
+        @include position(fixed, 0 0 null null);
         z-index: 10;
     }
+
     .line {
         display: block;
         @include size(100% $hamburger-line);
@@ -119,12 +112,10 @@ $hamburger-line: 5px;
         margin-bottom: $hamburger-line;
         transition: all $easing;
         transform-origin: 50% 50%;
-        &:nth-child(2) {
-            width: 100% / 3 * 2;
-        }
-        &:nth-child(3) {
-            width: 100% / 3 * 1;
-        }
+
+        &:nth-child(2) { width: 100% / 3 * 2; }
+        &:nth-child(3) { width: 100% / 3 * 1; }
+        
         .navigation-is-active & {
             background: $white;
             width: 100%;
@@ -144,13 +135,15 @@ $hamburger-line: 5px;
 
 
 .active-bar {
-    @include position(absolute, 0 null 0 0);
-    @include size(1px 100%);
-    background: $c-bg--dark;
-    transition: all $easing;
+    @include bp(mobile) {
+        @include position(absolute, 0 null 0 0);
+        @include size(1px 100%);
+        background: $c-bg--dark;
+        transition: all $easing;
 
-    .active & {
-        background: $c-main;
-        width: 4px;
+        .active & {
+            background: $c-main;
+            width: 4px;
+        }
     }
 }

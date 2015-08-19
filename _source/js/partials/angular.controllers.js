@@ -32,14 +32,14 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
  * Article Controller
 ==================================== */
 
-function articleCtrl($scope, $stateParams, $http, $sce) {
+function articleCtrl($scope, $stateParams, $http) {
 	'use strict';
 
-	var object = $stateParams;
+	var $object = $stateParams;
 
 	// Get correct array
-	var node = $articles.filter(function(node) {
-		return node.name == $stateParams.id;
+	var $node = $articles.filter(function($node) {
+		return $node.name == $stateParams.id;
 	})[0];
 
 	/* ------------------------------------
@@ -47,15 +47,15 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	------------------------------------ */
 
 	// Title
-	var $title = 						node.title || node.name;
-	if (object.chapterTitle)			$title = object.chapterTitle;
+	var $title = 						$node.title || $node.name;
+	if ($object.chapterTitle)			$title = $object.chapterTitle;
 
 	// Filename
-	var $file = 						'articles/' + node.name + '/';
-	if (object.chapterTitle) 			$file += object.chapterTitle;
+	var $file = 						'articles/' + $node.name + '/';
+	if ($object.chapterTitle) 			$file += $object.chapterTitle;
 	else 								$file += '/index';
 
-	if (node.markdown)					$file += '.md';
+	if ($node.markdown)					$file += '.md';
 	else								$file += '.html';
 
 	$file = $file.replace(/ /g, '_').toLowerCase();
@@ -65,20 +65,20 @@ function articleCtrl($scope, $stateParams, $http, $sce) {
 	------------------------------------ */
 
 	$scope.title = $title;
-	$scope.mainTitle = node.title || node.name;
-	$scope.chapterTitle = object.chapterTitle;
-	$scope.chapters = node.chapters;
+	$scope.mainTitle = $node.title || $node.name;
+	$scope.chapterTitle = $object.chapterTitle;
+	$scope.chapters = $node.chapters;
 	$scope.file = $file;
 
-	if(node.icon) $scope.icon = node.icon;
+	if($node.icon) $scope.icon = $node.icon;
 
 	$http.get($file)
 		.success(function(res) {
 			var $content = res;
-			if( node.markdown ) {
+			if( $node.markdown ) {
 				$content = $scope.markdown($content);
 			}
-			$scope.content = $sce.trustAsHtml($content);
+			$scope.content = $content;
 		})
 		.error(function(err) {
 			$scope.content = '<div class="error"><h3>404 - File Not Found</h3><code>' + $file + '</code></div>';

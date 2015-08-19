@@ -2,29 +2,19 @@
  * ------------------------------------ */
 .navigation {
 
-    &-title {
-        margin: 0;
-        padding: $spacing-medium 0;
-    }
-
     ul,
-    ol {
-        margin: 0;
-        padding-left: 0;
-    }
+    ol { margin: 0; padding-left: 0; }
+    
     li {
         list-style: none;
         margin-left: 0;
         margin-top: 0;
         position: relative;
         transition: background $easing;
-        @include bp(mobile) {
-            border-bottom: 1px solid $c-bg--dark;
-        }
     }
 
     a {
-        @include padding($spacing-medium);
+        @include padding( $spacing-medium $gutter );
         padding-left: 4em;
         display: block;
         color: currentcolor;
@@ -36,33 +26,43 @@
         }
     }
 
-    .icon {
-        color: currentcolor;
-        font-size: 2em;
-        @include position(absolute, 13px 0.4em);
-        line-height: 1;
-        z-index: -1;
-        pointer-events: none
-    }
-    .more {
-        font-size: 12px;
-        color: $c-main;
-        @include bp(mobileonly) {
-            display: none;
+    .nav-item {
+        @include bp(mobile) {
+            border-bottom: 1px solid $c-bg--dark;
+        }
+
+        .icon {
+            color: currentcolor;
+            font-size: 2em;
+            @include position(absolute, ($spacing-medium - 5) null null 0.4em);
+            line-height: 1;
+            z-index: -1;
+            pointer-events: none
+        }
+
+        .more {
+            font-size: 12px;
+            color: $c-main;
+            @include bp(mobileonly) {
+                display: none;
+            }
+        }
+
+        &.active {
+            @include bp(mobileonly) {
+                background: rgba($black, 0.2);
+                color: $white;
+            }
+            @include bp(mobile) {
+                background: $white;
+                position: relative;
+                z-index: 1;
+            }
         }
     }
 
-    .active {
-        @include bp(mobileonly) {
-            background: rgba($black, 0.2);
-            color: $white;
-        }
-        @include bp(mobile) {
-            background: $white;
-            position: relative;
-            z-index: 1;
-        }
-    }
+    
+
     li.clicked {
         background-image: linear-gradient(to right, rgba($black, 0) 98%, rgba($black, 0.03));
     }

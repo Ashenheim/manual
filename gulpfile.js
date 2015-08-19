@@ -93,8 +93,8 @@ gulp.task('sass', function() {
     gulp.src(files.sass.src)
         .pipe(plumber({ errorHandler: onError }))
         .pipe(sourcemaps.init())
-        .pipe(sass( settings.sass ))
-        .pipe(sourcemaps.write({includeContent: false, sourceRoot: '/sass'}))
+            .pipe(sass( settings.sass ))
+        .pipe(sourcemaps.write('./maps'))
         .pipe(autoprefixer(settings.autoprefixer))
         .pipe(gulp.dest(files.sass.dest))
         .pipe(browserSync.stream());

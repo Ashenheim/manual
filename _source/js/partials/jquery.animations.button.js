@@ -11,7 +11,6 @@
         function init() {
             $buttons.addClass('btn-js');
             events();
-            console.log('Hello there');
         }
 
         // Event listeners

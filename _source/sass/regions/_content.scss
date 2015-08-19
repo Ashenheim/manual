@@ -1,12 +1,15 @@
-.site-content {
-	@include margin(null auto);
-	position: relative;
-	z-index: 2;
 
-	.inner { min-height: 100vh; }
-}
+
+/* ==============================
+	Article styling
+============================== */
 
 .article {
+	max-width: $site-width;
+
+	/* ------------------------------
+		Sections
+	------------------------------ */
 	&__header,
 	&__content,
 	&__footer { @include padding(null $gutter); }
@@ -28,6 +31,10 @@
 		.prev { float: left; }
 		.next { float: right; }
 	}
+
+	/* ------------------------------
+		Components
+	------------------------------ */
 
 	&__title {
 		margin-bottom: 0;

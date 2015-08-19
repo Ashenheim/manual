@@ -12,10 +12,15 @@
 	------------------------------ */
 	&__header,
 	&__content,
-	&__footer { @include padding(null $gutter); }
+	&__footer {
+		@include padding(null $gutter);
+		@include bp(mobileonly) {
+			@include padding(null $spacing-small);
+		}
+	}
 
 	&__header {
-		padding: $spacing-large;
+		@include padding($spacing-large null);
 		margin-bottom: $spacing-large;
 		border-bottom: 1px solid $c-bg;
 

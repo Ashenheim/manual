@@ -17,7 +17,6 @@
         @include position(fixed, 0 0);
         transform: translateX(-100%);
         transition: all $easing;
-        padding-top: 100px;
         
         .navigation-is-active & {
             transform: translateX(0);

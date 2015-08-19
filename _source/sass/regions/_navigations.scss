@@ -113,7 +113,6 @@ $hamburger-line: 4px;
 .hamburger {
     @include size($hamburger-size);
     background: $c-main;
-    margin: $gutter;
     padding: 0 15px;
     cursor: pointer;
     display: none;
@@ -122,7 +121,7 @@ $hamburger-line: 4px;
     user-select: none;
 
     @include bp(tabletonly) {
-        @include position(fixed, null 0px 0px null);
+        @include position(fixed, null 18px 18px null);
         z-index: 10;
         display: block
     }

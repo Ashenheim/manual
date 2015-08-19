@@ -3,7 +3,7 @@
         'use strict';
 
         // Store Dom elements
-        var $buttons     = $('.btn, .nav-item, button');
+        var $buttons     = $('.btn, .nav-item, button, .hamburger');
         var circleClass  = 'btn-circle';
         var clickedClass = 'clicked';
         var fadeOutTime  = 250;

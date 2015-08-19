@@ -293,7 +293,7 @@ maxFrac:2,minFrac:2,minInt:1,negPre:"-\u00a4",negSuf:"",posPre:"\u00a4",posSuf:"
 //# sourceMappingURL=angular.min.js.map
 
 /*
- AngularJS v1.4.3
+ AngularJS v1.4.4
  (c) 2010-2015 Google, Inc. http://angularjs.org
  License: MIT
 */
@@ -4560,7 +4560,7 @@ var routeList = [
         'use strict';
 
         // Store Dom elements
-        var $buttons     = $('.btn, .nav-item, button');
+        var $buttons     = $('.btn, .nav-item, button, .hamburger');
         var circleClass  = 'btn-circle';
         var clickedClass = 'clicked';
         var fadeOutTime  = 250;

@@ -94,8 +94,13 @@ gulp.task('sass', function() {
         .pipe(plumber({ errorHandler: onError }))
         .pipe(sourcemaps.init())
             .pipe(sass( settings.sass ))
-        .pipe(sourcemaps.write('./maps'))
-        .pipe(autoprefixer(settings.autoprefixer))
+            .pipe(autoprefixer(settings.autoprefixer))
+        .pipe(sourcemaps.write(
+            {
+                includeContent: false,
+                sourceRoot: '../../_source/sass'
+            }
+        ))
         .pipe(gulp.dest(files.sass.dest))
         .pipe(browserSync.stream());
 });
@@ -131,6 +136,7 @@ gulp.task('browser-sync', function() {
         },
         host: "localhost",
         online: true,
+        open: false,
         notify: {
             styles: [
                 'color: rgb(255, 255, 255)',

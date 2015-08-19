@@ -26,6 +26,12 @@ pre {
     @include padding($gutter);
     margin: 0 -#{$gutter} $spacing-medium;
     position: relative !important;
+
+    @include bp(mobileonly) {
+        margin-left:  -#{$spacing-small};
+        margin-right: -#{$spacing-small};
+    }
+
     &:after {
         @include position(absolute, 0 0 null null);
         content: attr(data-language);

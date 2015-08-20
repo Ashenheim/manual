@@ -12,7 +12,8 @@ function articleCtrl($scope, $stateParams, $http) {
 		return $node.name == $object.article;
 	})[0];
 
-	console.log(JSON.stringify($object));
+
+	console.log($node);
 
 	/* ------------------------------------
 		#Create Variables

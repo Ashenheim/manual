@@ -44,6 +44,7 @@ button {
 }
 
 .btn-circle {
+    max-width: 300px;
     display: block;
     position: absolute;
     background: rgba($c-accent, 0.3);

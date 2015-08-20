@@ -3,6 +3,7 @@
 	<div class="inner">
 		<nav class="navigation articles" role="navigation">
 			<ul>
+				<!-- ITEM -->
 				<li ng-repeat="node in articles" ui-sref-active="active" class="nav-item">
 
 					<span ng-if="node.icon" class="icon">
@@ -22,7 +23,9 @@
 							<a ui-sref="articles.chapters({ article: node.name, chapter: nodeChild })" ng-bind="convert(nodeChild)"></a>
 						</li>
 					</ul>
+
 				</li>
+				<!-- END -->
 			</ul>
 		</nav>
 	</div>

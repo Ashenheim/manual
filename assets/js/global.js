@@ -4355,7 +4355,8 @@ function articleCtrl($scope, $stateParams, $http) {
 		return $node.name == $object.article;
 	})[0];
 
-	console.log(JSON.stringify($object));
+
+	console.log($node);
 
 	/* ------------------------------------
 		#Create Variables
@@ -4586,7 +4587,7 @@ var routeList = [
         'use strict';
 
         // Store Dom elements
-        var $buttons     = $('.btn, .nav-item, button, .hamburger');
+        var $buttons     = $('.btn, .nav-item, button, .hamburger, .article__header');
         var circleClass  = 'btn-circle';
         var clickedClass = 'clicked';
         var fadeOutTime  = 250;

@@ -1,3 +1,7 @@
-<h1>Home</h1>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi tempora sapiente temporibus esse corrupti incidunt dicta id distinctio eum molestias ratione et harum eligendi impedit veniam tenetur, a obcaecati accusantium!</p>
+<div class="home-page">
+    <ul>
+        <li ng-repeat="article in articles">
+            <a ui-sref="articles({ article: convertURL(article.name) })" ng-bind="article.name"></a>
+        </li>
+    </ul>
+</div>

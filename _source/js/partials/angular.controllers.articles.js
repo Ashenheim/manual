@@ -5,43 +5,65 @@
 function articleCtrl($scope, $stateParams, $http) {
 	'use strict';
 
+
+	/* ------------------------------------
+		#Find arrays
+	------------------------------------ */
+
 	var $object = $stateParams;
 
 	// Get correct array
-	var $node = $articles.filter(function($node) {
-		return $node.name == $object.article;
+	var $node = $articles.filter(function(node) {
+		return $scope.convertURL(node.name) == $object.article;
 	})[0];
 
+	function urlMatch(array,url) {
 
-	console.log($node);
+		var url = $object.chapter;
+
+		if (array) {
+			for (var i=0; i < array.length; i++) {
+				if($scope.convertURL(array[i]) === url) {
+					return array[i];
+				}
+			}
+		}
+	};
+
+	console.log($node.name);
+
 
 	/* ------------------------------------
 		#Create Variables
 	------------------------------------ */
 
-	// Title
-	var $title = 						$node.title || $node.name;
-	if ($object.chapter)				$title = $object.chapter;
+	var titles = {
+		article: $node.name,
+		chapter: urlMatch($node.chapters,$object.chapter)
+	}
 
 	// Filename
-	var $file = 						'articles/' + $node.name + '/';
+	var $file = 						'articles/' + $object.article + '/';
 	if ($object.chapter) 				$file += $object.chapter;
-	else 								$file += '/index';
+	else 								$file += 'index';
 
 	if ($node.markdown)					$file += '.md';
 	else								$file += '.html';
 
-	$file = $file.replace(/ /g, '-').toLowerCase();
+	// $file = $file.replace(/ /g, '-').toLowerCase();
 
 	/* ------------------------------------
 		#Scopes
 	------------------------------------ */
 
-	$scope.title = $title;
-	$scope.mainTitle = $node.title || $node.name;
-	$scope.chapterTitle = $object.chapter;
+	$scope.title = {
+		article: titles.article,
+		chapter: titles.chapter
+	};
 	$scope.chapters = $node.chapters;
 	$scope.file = $file;
+	$scope.icon = $node.icon;
+	$scope.array = $node;
 
 	if($node.icon) $scope.icon = $node.icon;
 

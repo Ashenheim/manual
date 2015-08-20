@@ -1,17 +1,20 @@
 (function() {
 
+	/* ------------------------------------
+	    Angular
+	------------------------------------ */
 	angular
 	    .module('myApp', ['ui.router','ngSanitize','ngAnimate'])
 	    .config(config)
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('articleCtrl', articleCtrl)
-	    .directive('incHeader', headerDir)
 	    .directive('incSidebar', sidebarDir)
-	    .directive('ngConvert', articleDir)
-		.directive('articleNav', articleNavDir)
-		.directive('stateLoad', stateLoadDir);
+	    .directive('ngConvert', articleDir);
 
-	// Load Angular after retrieving data
+
+	/* ------------------------------------
+	    Initialization
+	------------------------------------ */
 	fetchData().then(bootstrapApp);
 
 	function fetchData() {

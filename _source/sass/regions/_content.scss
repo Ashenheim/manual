@@ -8,6 +8,21 @@
 	max-width: $site-width;
 
 	/* ------------------------------
+		Elements
+	------------------------------ */
+	pre {
+	    margin: 0 -#{$gutter} $spacing-medium;
+
+	    @include bp(mobileonly) {
+			padding-left:    $spacing-medium;
+			padding-right:   $spacing-medium;
+	        margin-left:  -#{$spacing-medium};
+	        margin-right: -#{$spacing-medium};
+	    }
+	}
+
+
+	/* ------------------------------
 		Sections
 	------------------------------ */
 	&__header,
@@ -15,7 +30,7 @@
 	&__footer {
 		@include padding(null $gutter);
 		@include bp(mobileonly) {
-			@include padding(null $spacing-small);
+			@include padding(null $spacing-medium);
 		}
 	}
 
@@ -42,14 +57,34 @@
 	/* ------------------------------
 		Components
 	------------------------------ */
-
 	&__title {
 		margin-bottom: 0;
-		.small {
-			font-size: .8em;
-			font-style: italic;
-			color: $c-fg--light;
-			&:after { content: '-'; }
+
+		&--side { margin-bottom: 0; font-style: italic;}
+	}
+
+
+
+	.icon {
+		@include size(55px);
+		@include position( absolute, 50% $gutter null null );
+		transform: translateY(-50%);
+		z-index: 2;
+		text-align: center;
+		font-size: 2.5em;
+		background: $white;
+		color: $c-main;
+		line-height: 1;
+		padding: 0;
+		display: block;
+		border-radius: 50%;
+		box-shadow: 0 1px 3px rgba($black, .25);
+
+		i {
+			width: 100%;
+			display: block;
+			@include position(absolute, 50% null null null);
+			transform: translateY(-50%);
 		}
 	}
 }

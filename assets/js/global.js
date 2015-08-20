@@ -4348,43 +4348,65 @@ module.exports = yaml;
 function articleCtrl($scope, $stateParams, $http) {
 	'use strict';
 
+
+	/* ------------------------------------
+		#Find arrays
+	------------------------------------ */
+
 	var $object = $stateParams;
 
 	// Get correct array
-	var $node = $articles.filter(function($node) {
-		return $node.name == $object.article;
+	var $node = $articles.filter(function(node) {
+		return $scope.convertURL(node.name) == $object.article;
 	})[0];
 
+	function urlMatch(array,url) {
 
-	console.log($node);
+		var url = $object.chapter;
+
+		if (array) {
+			for (var i=0; i < array.length; i++) {
+				if($scope.convertURL(array[i]) === url) {
+					return array[i];
+				}
+			}
+		}
+	};
+
+	console.log($node.name);
+
 
 	/* ------------------------------------
 		#Create Variables
 	------------------------------------ */
 
-	// Title
-	var $title = 						$node.title || $node.name;
-	if ($object.chapter)				$title = $object.chapter;
+	var titles = {
+		article: $node.name,
+		chapter: urlMatch($node.chapters,$object.chapter)
+	}
 
 	// Filename
-	var $file = 						'articles/' + $node.name + '/';
+	var $file = 						'articles/' + $object.article + '/';
 	if ($object.chapter) 				$file += $object.chapter;
-	else 								$file += '/index';
+	else 								$file += 'index';
 
 	if ($node.markdown)					$file += '.md';
 	else								$file += '.html';
 
-	$file = $file.replace(/ /g, '-').toLowerCase();
+	// $file = $file.replace(/ /g, '-').toLowerCase();
 
 	/* ------------------------------------
 		#Scopes
 	------------------------------------ */
 
-	$scope.title = $title;
-	$scope.mainTitle = $node.title || $node.name;
-	$scope.chapterTitle = $object.chapter;
+	$scope.title = {
+		article: titles.article,
+		chapter: titles.chapter
+	};
 	$scope.chapters = $node.chapters;
 	$scope.file = $file;
+	$scope.icon = $node.icon;
+	$scope.array = $node;
 
 	if($node.icon) $scope.icon = $node.icon;
 
@@ -4410,7 +4432,6 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 
     var converted;
 
-    $scope.routeList = routeList;
     $scope.articles  = $articles;
 
     $scope.markdown = function(data) {
@@ -4419,38 +4440,20 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
         return showDown.makeHtml(data);
     }
 
-    $scope.convert = function(t) {
-        if (t) {
-            converted = t.split('_').join(' ');
-            converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-            return converted;
-        }
-    }
-
     $scope.convertURL = function(t) {
         if (t) {
-            var text = t.replace(/ /g, '_').toLowerCase();
-
+            var text = t.replace(/[^\w\s]/gi, '').replace(/ /g, '-').toLowerCase();
             return text;
+        } else {
+            console.log('%c $scope.convertURL: Error', 'background: #222; color: red;');
+            return null;
         }
     }
 };
-function sidebarDir() {
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/includes/sidebar.html'
-    }
-}
 
-function headerDir() {
-    return {
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'app/includes/header.html'
-    }
-}
-
+/* ====================================
+    Article Directive
+==================================== */
 function articleDir($timeout, $document) {
 
     function link(scope, element, attrs) {
@@ -4464,7 +4467,7 @@ function articleDir($timeout, $document) {
                 });
             }
         });
-
+        // Remove the watcher
         scope.$on('$destroy', watcher);
     }
 
@@ -4478,70 +4481,27 @@ function articleDir($timeout, $document) {
     }
 }
 
-function articleNavDir() {
+/* ====================================
+    Sidebar Directive
+==================================== */
+function sidebarDir() {
     return {
-        restrict: 'A',
-        controller: function($scope, $stateParams) {
-
-            var current = $stateParams.chapterTitle,
-                chapters = $scope.chapters,
-                prev,
-                next,
-                $i;
-
-            if(chapters) {
-                $i = chapters.indexOf(current);
-                prev = chapters[($i - 1)];
-                next = chapters[($i + 1)];
-            }
-
-            $scope.nav = {
-                prev: prev,
-                next: next
-            }
-        }
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'app/includes/sidebar.html'
     }
 }
 
-function stateLoadDir($rootScope) {
-  return {
-    restrict: 'E',
-    template: "<div ng-show='isStateLoading' class='loading-indicator'>" +
-    "<div class='loading-indicator-body'>" +
-    "<h3 class='loading-title'>Loading...</h3>" +
-    "<div class='spinner'><chasing-dots-spinner></chasing-dots-spinner></div>" +
-    "</div>" +
-    "</div>",
-    replace: true,
-    link: function(scope, elem, attrs) {
-      scope.isStateLoading = false;
+/* ====================================
+    Angular Routes
+==================================== */
 
-      $rootScope.$on('$stateChangeStart', function() {
-        scope.isStateLoading = true;
-      });
-      $rootScope.$on('$stateChangeSuccess', function() {
-        scope.isStateLoading = false;
-      });
-    }
-  };
-}
-
-
-
-
-function config($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
+function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
     /* ------------------------------------
-        Variable Functions
+        Functions & Variables
     ------------------------------------ */
-
-    var prettyURL = {
-        encode: function(string) { return string && string.replace(/ /g, "-").toLowerCase(); },
-        decode: function(string) { return string && string.replace(/-/g, " ").toLowerCase(); },
-        is: angular.isString,
-        pattern: /[^/]+/
-    };
 
     var articleView = {
         '@': {
@@ -4556,8 +4516,13 @@ function config($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) 
     ------------------------------------ */
 
     $urlRouterProvider.otherwise($articles[0].name);
+    $urlRouterProvider.otherwise('/');
 
-    $urlMatcherFactoryProvider.type('pretty', prettyURL);
+    $stateProvider
+        .state('home', {
+            url: '/',
+            templateUrl: 'app/pages/home.html'
+        });
 
     $stateProvider
         .state('articles', {
@@ -4570,18 +4535,6 @@ function config($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) 
         });
 }
 
-
-var routeList = [
-    {
-        name: 'home',
-        url: '/home',
-        template: 'home.html'
-    },{
-        name: 'about',
-        url: '/about',
-        template: 'about.html'
-    }
-];
 (function() {
     materialButton = function() {
         'use strict';
@@ -4687,18 +4640,21 @@ var routeList = [
 
 (function() {
 
+	/* ------------------------------------
+	    Angular
+	------------------------------------ */
 	angular
 	    .module('myApp', ['ui.router','ngSanitize','ngAnimate'])
 	    .config(config)
 	    .controller('mainCtrl', mainCtrl)
 	    .controller('articleCtrl', articleCtrl)
-	    .directive('incHeader', headerDir)
 	    .directive('incSidebar', sidebarDir)
-	    .directive('ngConvert', articleDir)
-		.directive('articleNav', articleNavDir)
-		.directive('stateLoad', stateLoadDir);
+	    .directive('ngConvert', articleDir);
 
-	// Load Angular after retrieving data
+
+	/* ------------------------------------
+	    Initialization
+	------------------------------------ */
 	fetchData().then(bootstrapApp);
 
 	function fetchData() {

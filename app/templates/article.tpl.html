@@ -1,8 +1,16 @@
 <article class="article" article-nav>
+
 	<header class="article__header">
+		<span ng-if="icon" class="icon">
+			<i class="devicons devicons-{{icon}}"></i>
+		</span>
 		<h2 class="article__title">
-			{{mainTitle}}<span ng-if="chapterTitle">: {{convert(title)}}</span>
+			{{title.article}}
 		</h2>
+		<h6 class="article__title--side" ng-if="title.chapter">
+			{{title.chapter}}
+		</h6>
 	</header>
 	<div class="article__content" ng-convert content="content"></div>
+
 </article>

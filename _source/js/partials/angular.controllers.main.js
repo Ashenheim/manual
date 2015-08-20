@@ -7,7 +7,6 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 
     var converted;
 
-    $scope.routeList = routeList;
     $scope.articles  = $articles;
 
     $scope.markdown = function(data) {
@@ -16,19 +15,13 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
         return showDown.makeHtml(data);
     }
 
-    $scope.convert = function(t) {
-        if (t) {
-            converted = t.split('_').join(' ');
-            converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-            return converted;
-        }
-    }
-
     $scope.convertURL = function(t) {
         if (t) {
-            var text = t.replace(/ /g, '_').toLowerCase();
-
+            var text = t.replace(/[^\w\s]/gi, '').replace(/ /g, '-').toLowerCase();
             return text;
+        } else {
+            console.log('%c $scope.convertURL: Error', 'background: #222; color: red;');
+            return null;
         }
     }
 };

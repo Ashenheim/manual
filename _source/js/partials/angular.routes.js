@@ -1,18 +1,13 @@
+/* ====================================
+    Angular Routes
+==================================== */
 
-
-function config($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
+function config($stateProvider, $urlRouterProvider) {
     'use strict';
 
     /* ------------------------------------
-        Variable Functions
+        Functions & Variables
     ------------------------------------ */
-
-    var prettyURL = {
-        encode: function(string) { return string && string.replace(/ /g, "-").toLowerCase(); },
-        decode: function(string) { return string && string.replace(/-/g, " ").toLowerCase(); },
-        is: angular.isString,
-        pattern: /[^/]+/
-    };
 
     var articleView = {
         '@': {
@@ -27,8 +22,13 @@ function config($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) 
     ------------------------------------ */
 
     $urlRouterProvider.otherwise($articles[0].name);
+    $urlRouterProvider.otherwise('/');
 
-    $urlMatcherFactoryProvider.type('pretty', prettyURL);
+    $stateProvider
+        .state('home', {
+            url: '/',
+            templateUrl: 'app/pages/home.html'
+        });
 
     $stateProvider
         .state('articles', {

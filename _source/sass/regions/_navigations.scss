@@ -25,7 +25,7 @@
         &:hover {
             color: $c-link--hover;
             @include bp(tabletonly) {
-                color: $c-main--lighter;
+                color: $white;
             }
         }
     }
@@ -120,10 +120,7 @@ $hamburger-line: 4px;
     box-shadow: 0 1px 5px rgba($black, .25);
     user-select: none;
 
-    .navigation-is-active & {
-        background: $white;
-        color: $c-main;
-    }
+    .navigation-is-active & { background: $white; }
 
     @include bp(tabletonly) {
         @include position(fixed, null 18px 18px null);
@@ -145,6 +142,7 @@ $hamburger-line: 4px;
 
         .navigation-is-active & {
              width: 100%;
+             background: $c-main;
 
             &:nth-child(1) { transform: translateY($hamburger-line * 2) rotate(45deg); }
             &:nth-child(2) { opacity: 0; }

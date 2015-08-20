@@ -3,14 +3,14 @@ articles:
   icon: npm
   markdown: true
   chapters:
-  - commands
+  - Commands
 
 - name: Sass
   icon: sass
   markdown: true
   chapters:
     - SASS Maps
-    - mixins
+    - Mixins
 
 - name: Bower
   icon: bower
@@ -25,5 +25,5 @@ articles:
   markdown: true
   chapters:
   - Headings and Paragraphs
-  - links
-  - tables
+  - Links
+  - Tables

@@ -1,0 +1,39 @@
+/* ====================================
+    Base styling
+==================================== */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+    font-family: $font-family;
+    font-size: $font-size;
+    background: $c-bg;
+    color: $c-fg;
+}
+
+html {
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+.site-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+::selection {
+    background: $c-main;
+    color: $white;
+}
+
+// ::-webkit-scrollbar {
+//     @media screen {
+//         width: 14px; height: 0px;
+//
+//         &-track { background: $c-bg--dark; }
+//         &-thumb { background: darken($c-bg--dark, 20%); }
+//     }
+// }

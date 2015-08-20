@@ -12,12 +12,12 @@
 
     @include bp(tabletonly) {
         background: $c-main;
-        color: $c-main--lighter;
+        color: $white;
         @include size(100%);
         @include position(fixed, 0 0);
         transform: translateX(-100%);
         transition: all $easing;
-        
+
         .navigation-is-active & {
             transform: translateX(0);
         }

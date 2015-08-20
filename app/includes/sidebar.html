@@ -12,15 +12,15 @@
 
 					<div class="active-bar"></div>
 
-					<a ui-sref="articles({ article: node.name })">
-						<span ng-if="!node.title" ng-bind="convert(node.name)"></span>
-						<span ng-if="node.title"  ng-bind="convert(node.title)"></span>
+					<a ui-sref="articles({ article: convertURL(node.name) })">
+						<span ng-if="!node.title" ng-bind="node.name"></span>
+						<span ng-if="node.title"  ng-bind="node.title"></span>
 						<span ng-if="node.chapters" class="more">+</span>
 					</a>
 
 					<ul ng-if="node.chapters" class="sub-navigation">
 						<li ng-repeat="nodeChild in node.chapters">
-							<a ui-sref="articles.chapters({ article: node.name, chapter: nodeChild })" ng-bind="convert(nodeChild)"></a>
+							<a ui-sref="articles.chapters({ article: convertURL(node.name), chapter: convertURL(nodeChild) })" ng-bind="nodeChild"></a>
 						</li>
 					</ul>
 

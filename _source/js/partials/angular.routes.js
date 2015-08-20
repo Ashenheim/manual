@@ -1,8 +1,18 @@
-function config($stateProvider, $urlRouterProvider) {
+
+
+function config($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise($articles[0].name);
-    // $urlRouterProvider.otherwise('/');
+    /* ------------------------------------
+        Variable Functions
+    ------------------------------------ */
+
+    var prettyURL = {
+        encode: function(string) { return string && string.replace(/ /g, "-").toLowerCase(); },
+        decode: function(string) { return string && string.replace(/-/g, " ").toLowerCase(); },
+        is: angular.isString,
+        pattern: /[^/]+/
+    };
 
     var articleView = {
         '@': {
@@ -11,13 +21,22 @@ function config($stateProvider, $urlRouterProvider) {
         }
     };
 
+
+    /* ------------------------------------
+        UI.Router
+    ------------------------------------ */
+
+    $urlRouterProvider.otherwise($articles[0].name);
+
+    $urlMatcherFactoryProvider.type('pretty', prettyURL);
+
     $stateProvider
         .state('articles', {
-            url: '/:id',
+            url: '/{article}',
             views: articleView
         })
         .state('articles.chapters', {
-            url: '/:chapterTitle',
+            url: '/{chapter}',
             views: articleView
         });
 }

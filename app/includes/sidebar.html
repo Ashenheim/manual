@@ -4,22 +4,22 @@
 		<nav class="navigation articles" role="navigation">
 			<ul>
 				<li ng-repeat="node in articles" ui-sref-active="active" class="nav-item">
-					
+
 					<span ng-if="node.icon" class="icon">
 						<i class="devicons devicons-{{node.icon}}"></i>
 					</span>
 
 					<div class="active-bar"></div>
 
-					<a ui-sref="articles({ id: node.name })">
+					<a ui-sref="articles({ article: node.name })">
 						<span ng-if="!node.title" ng-bind="convert(node.name)"></span>
 						<span ng-if="node.title"  ng-bind="convert(node.title)"></span>
 						<span ng-if="node.chapters" class="more">+</span>
 					</a>
-					
+
 					<ul ng-if="node.chapters" class="sub-navigation">
 						<li ng-repeat="nodeChild in node.chapters">
-							<a ui-sref="articles.chapters({ id: node.name, chapterTitle: nodeChild })" ng-bind="convert(nodeChild)"></a>
+							<a ui-sref="articles.chapters({ article: node.name, chapter: nodeChild })" ng-bind="convert(nodeChild)"></a>
 						</li>
 					</ul>
 				</li>

@@ -23,6 +23,8 @@
 		@include padding($spacing-large null);
 		margin-bottom: $spacing-large;
 		border-bottom: 1px solid $c-bg;
+		background: $c-main;
+		color: $white;
 
 		a  { color: currentcolor; }
 	}

@@ -8,7 +8,7 @@
 
     ul,
     ol { margin: 0; padding-left: 0; }
-    
+
     li {
         list-style: none;
         margin-left: 0;
@@ -62,7 +62,7 @@
     /* ------------------------------------
         States
     ------------------------------------ */
-    
+
     li.clicked {
         background-image: linear-gradient(to right, rgba($black, 0) 98%, rgba($black, 0.03));
     }
@@ -89,7 +89,7 @@
 
     li { padding: 0; border: 0; }
     li:last-child a { padding-bottom: $spacing-medium; }
-    
+
     a {
         @include padding($spacing-small null);
         font-size: 0.8em;
@@ -127,29 +127,23 @@ $hamburger-line: 4px;
     }
 
     .line {
-        display: block;
         @include size(100% $hamburger-line);
+        display: block;
         background: $white;
         margin-bottom: $hamburger-line;
         transition: all $easing;
         transform-origin: 50% 50%;
-        
+
         &:nth-child(1) { margin-top: ($hamburger-size - ($hamburger-line * 5)) / 2; } //10px
         &:nth-child(2) { width: 100% / 3 * 2; }
         &:nth-child(3) { width: 100% / 3 * 1; }
-        
+
         .navigation-is-active & {
-            background: $white;
-            width: 100%;
-            &:nth-child(1) {
-                transform: translateY($hamburger-line * 2) rotate(45deg);
-            }
-            &:nth-child(2) {
-                opacity: 0;
-            }
-            &:nth-child(3) {
-                transform: translateY(-#{$hamburger-line * 2}) rotate(-45deg);
-            }
+            background: $white; width: 100%;
+            
+            &:nth-child(1) { transform: translateY($hamburger-line * 2) rotate(45deg); }
+            &:nth-child(2) { opacity: 0; }
+            &:nth-child(3) { transform: translateY(-#{$hamburger-line * 2}) rotate(-45deg); }
         }
     }
 }

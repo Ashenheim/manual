@@ -1,8 +1,7 @@
 <article class="article" article-nav>
-
 	<header class="article__header">
 		<h2 class="article__title">
-			{{convert(mainTitle)}}<span ng-if="chapterTitle">: {{convert(title)}}</span>
+			{{mainTitle}}<span ng-if="chapterTitle">: {{convert(title)}}</span>
 		</h2>
 	</header>
 	<div class="article__content" ng-convert content="content"></div>

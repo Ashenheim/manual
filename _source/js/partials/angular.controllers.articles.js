@@ -1,34 +1,4 @@
 /* ====================================
- * Main Controller
-==================================== */
-
-function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
-	'use strict';
-
-	var converted;
-
-	$scope.routeList = routeList;
-	$scope.articles  = $articles;
-
-
-
-	$scope.markdown = function(data) {
-		var showDown = new showdown.Converter();
-		showDown.setOption('tables', true)
-		return showDown.makeHtml(data);
-	}
-
-	$scope.convert = function(t) {
-		if (t) {
-			converted = t.split('_').join(' ');
-			converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-			return converted;
-		}
-	}
-};
-
-
-/* ====================================
  * Article Controller
 ==================================== */
 
@@ -39,8 +9,10 @@ function articleCtrl($scope, $stateParams, $http) {
 
 	// Get correct array
 	var $node = $articles.filter(function($node) {
-		return $node.name == $stateParams.id;
+		return $node.name == $object.article;
 	})[0];
+
+	console.log(JSON.stringify($object));
 
 	/* ------------------------------------
 		#Create Variables
@@ -48,17 +20,17 @@ function articleCtrl($scope, $stateParams, $http) {
 
 	// Title
 	var $title = 						$node.title || $node.name;
-	if ($object.chapterTitle)			$title = $object.chapterTitle;
+	if ($object.chapter)				$title = $object.chapter;
 
 	// Filename
 	var $file = 						'articles/' + $node.name + '/';
-	if ($object.chapterTitle) 			$file += $object.chapterTitle;
+	if ($object.chapter) 				$file += $object.chapter;
 	else 								$file += '/index';
 
 	if ($node.markdown)					$file += '.md';
 	else								$file += '.html';
 
-	$file = $file.replace(/ /g, '_').toLowerCase();
+	$file = $file.replace(/ /g, '-').toLowerCase();
 
 	/* ------------------------------------
 		#Scopes
@@ -66,7 +38,7 @@ function articleCtrl($scope, $stateParams, $http) {
 
 	$scope.title = $title;
 	$scope.mainTitle = $node.title || $node.name;
-	$scope.chapterTitle = $object.chapterTitle;
+	$scope.chapterTitle = $object.chapter;
 	$scope.chapters = $node.chapters;
 	$scope.file = $file;
 

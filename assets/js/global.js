@@ -293,7 +293,7 @@ maxFrac:2,minFrac:2,minInt:1,negPre:"-\u00a4",negSuf:"",posPre:"\u00a4",posSuf:"
 //# sourceMappingURL=angular.min.js.map
 
 /*
- AngularJS v1.4.4
+ AngularJS v1.4.3
  (c) 2010-2015 Google, Inc. http://angularjs.org
  License: MIT
 */
@@ -4342,36 +4342,6 @@ module.exports = yaml;
 },{"./lib/js-yaml.js":2}]},{},[])("/")
 });
 /* ====================================
- * Main Controller
-==================================== */
-
-function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
-	'use strict';
-
-	var converted;
-
-	$scope.routeList = routeList;
-	$scope.articles  = $articles;
-
-
-
-	$scope.markdown = function(data) {
-		var showDown = new showdown.Converter();
-		showDown.setOption('tables', true)
-		return showDown.makeHtml(data);
-	}
-
-	$scope.convert = function(t) {
-		if (t) {
-			converted = t.split('_').join(' ');
-			converted = converted.charAt(0).toUpperCase() + converted.slice(1);
-			return converted;
-		}
-	}
-};
-
-
-/* ====================================
  * Article Controller
 ==================================== */
 
@@ -4382,8 +4352,10 @@ function articleCtrl($scope, $stateParams, $http) {
 
 	// Get correct array
 	var $node = $articles.filter(function($node) {
-		return $node.name == $stateParams.id;
+		return $node.name == $object.article;
 	})[0];
+
+	console.log(JSON.stringify($object));
 
 	/* ------------------------------------
 		#Create Variables
@@ -4391,17 +4363,17 @@ function articleCtrl($scope, $stateParams, $http) {
 
 	// Title
 	var $title = 						$node.title || $node.name;
-	if ($object.chapterTitle)			$title = $object.chapterTitle;
+	if ($object.chapter)				$title = $object.chapter;
 
 	// Filename
 	var $file = 						'articles/' + $node.name + '/';
-	if ($object.chapterTitle) 			$file += $object.chapterTitle;
+	if ($object.chapter) 				$file += $object.chapter;
 	else 								$file += '/index';
 
 	if ($node.markdown)					$file += '.md';
 	else								$file += '.html';
 
-	$file = $file.replace(/ /g, '_').toLowerCase();
+	$file = $file.replace(/ /g, '-').toLowerCase();
 
 	/* ------------------------------------
 		#Scopes
@@ -4409,7 +4381,7 @@ function articleCtrl($scope, $stateParams, $http) {
 
 	$scope.title = $title;
 	$scope.mainTitle = $node.title || $node.name;
-	$scope.chapterTitle = $object.chapterTitle;
+	$scope.chapterTitle = $object.chapter;
 	$scope.chapters = $node.chapters;
 	$scope.file = $file;
 
@@ -4428,6 +4400,40 @@ function articleCtrl($scope, $stateParams, $http) {
 		});
 }
 
+/* ====================================
+ * Main Controller
+==================================== */
+
+function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
+    'use strict';
+
+    var converted;
+
+    $scope.routeList = routeList;
+    $scope.articles  = $articles;
+
+    $scope.markdown = function(data) {
+        var showDown = new showdown.Converter();
+        showDown.setOption('tables', true)
+        return showDown.makeHtml(data);
+    }
+
+    $scope.convert = function(t) {
+        if (t) {
+            converted = t.split('_').join(' ');
+            converted = converted.charAt(0).toUpperCase() + converted.slice(1);
+            return converted;
+        }
+    }
+
+    $scope.convertURL = function(t) {
+        if (t) {
+            var text = t.replace(/ /g, '_').toLowerCase();
+
+            return text;
+        }
+    }
+};
 function sidebarDir() {
     return {
         restrict: 'E',
@@ -4520,11 +4526,21 @@ function stateLoadDir($rootScope) {
 }
 
 
-function config($stateProvider, $urlRouterProvider) {
+
+
+function config($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise($articles[0].name);
-    // $urlRouterProvider.otherwise('/');
+    /* ------------------------------------
+        Variable Functions
+    ------------------------------------ */
+
+    var prettyURL = {
+        encode: function(string) { return string && string.replace(/ /g, "-").toLowerCase(); },
+        decode: function(string) { return string && string.replace(/-/g, " ").toLowerCase(); },
+        is: angular.isString,
+        pattern: /[^/]+/
+    };
 
     var articleView = {
         '@': {
@@ -4533,16 +4549,26 @@ function config($stateProvider, $urlRouterProvider) {
         }
     };
 
+
+    /* ------------------------------------
+        UI.Router
+    ------------------------------------ */
+
+    $urlRouterProvider.otherwise($articles[0].name);
+
+    $urlMatcherFactoryProvider.type('pretty', prettyURL);
+
     $stateProvider
         .state('articles', {
-            url: '/:id',
+            url: '/{article}',
             views: articleView
         })
         .state('articles.chapters', {
-            url: '/:chapterTitle',
+            url: '/{chapter}',
             views: articleView
         });
 }
+
 
 var routeList = [
     {

@@ -293,7 +293,7 @@ maxFrac:2,minFrac:2,minInt:1,negPre:"-\u00a4",negSuf:"",posPre:"\u00a4",posSuf:"
 //# sourceMappingURL=angular.min.js.map
 
 /*
- AngularJS v1.4.3
+ AngularJS v1.4.4
  (c) 2010-2015 Google, Inc. http://angularjs.org
  License: MIT
 */
@@ -364,7 +364,6 @@ n,K));f=E(a,b,e,n,g)}if(y||f)return{start:function(){function b(c){l=!0;z();da(a
 c){function d(c){return a(c.element,c.event,c.classes,c.options)}return function(a){if(a.from&&a.to){var b=d(a.from),s=d(a.to);if(b||s)return{start:function(){function a(){return function(){l(d,function(a){a.end()})}}var d=[];b&&d.push(b.start());s&&d.push(s.start());c.all(d,function(a){e.complete(a)});var e=new c({end:a(),cancel:a()});return e}}}else return d(a)}}]}])})(window,window.angular);
 //# sourceMappingURL=angular-animate.min.js.map
 
-angular.module("embedCodepen.config",[]).value("embedCodepen.config",{debug:!0}),angular.module("embedCodepen.directives",[]),angular.module("embedCodepen",["embedCodepen.config","embedCodepen.directives"]),function(){function e(){return{restrict:"A",scope:{themeId:"@",slugHash:"@",user:"@",defaultTab:"@",height:"@",showTabBar:"@",animations:"@",border:"@",borderColor:"@",tabBarColor:"@",tabLinkColor:"@",activeTabColor:"@",activeLinkColor:"@",linkLogoColor:"@","class":"@",customCssUrl:"@"},template:["<iframe ",'scrolling="no" ','frameborder="0" ','class="cp_embed_iframe" ','allowtransparency="true" ','allowfullscreen="true" ','style="width: 100%; overflow: hidden;"',">","</iframe>"].join(""),link:function(e,o){if(e.slugHash&&e.user){var r=document.location.protocol+"//codepen.io/"+e.user+"/embed/"+e.slugHash+"?user="+e.user,a=["themeId","defaultTab","height","showTabBar","animations","border","borderColor","tabBarColor","tabLinkColor","activeTabColor","activeLinkColor","linkLogoColor","class","customCssUrl"];angular.forEach(a,function(o){e[o]&&(r+="&"+o+"="+e[o])}),o.find("iframe").attr("src",r).attr("height",e.height).attr("id","cp_embed_"+e.slugHash)}}}}e.$inject=[],angular.module("embedCodepen.directives").directive("slugHash",e)}();
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4647,7 +4646,7 @@ navigation = (function () {
         Angular
     ------------------------------------ */
     angular
-        .module('myApp', ['ui.router','ngSanitize','ngAnimate','embedCodepen'])
+        .module('myApp', ['ui.router','ngSanitize','ngAnimate'])
         .config(config)
         .controller('mainCtrl', mainCtrl)
         .controller('articleCtrl', articleCtrl)

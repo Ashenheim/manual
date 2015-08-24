@@ -4,7 +4,7 @@
         Angular
     ------------------------------------ */
     angular
-        .module('myApp', ['ui.router','ngSanitize','ngAnimate','embedCodepen'])
+        .module('myApp', ['ui.router','ngSanitize','ngAnimate'])
         .config(config)
         .controller('mainCtrl', mainCtrl)
         .controller('articleCtrl', articleCtrl)

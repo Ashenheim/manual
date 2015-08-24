@@ -16,18 +16,11 @@ $map: (
       background: url(#{$name}.jpg);
     }
 }
-```
 
-Output als:
-
-```css
-.alpha { background: url(alpha.jpg); }
-
-.bravo { background: url(bravo.jpg); }
-
+// Output:
+.alpha   { background: url(alpha.jpg); }
+.bravo   { background: url(bravo.jpg); }
 .charlie { background: url(charlie.jpg); }
-
-.delta { background: url(delta.jpg); }
-
-.echo { background: url(echo.jpg); }
+.delta   { background: url(delta.jpg); }
+.echo    { background: url(echo.jpg); }
 ```

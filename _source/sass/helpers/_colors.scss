@@ -7,8 +7,10 @@ $c-main--light 		: lighten($c-main,10%);
 $c-main--lighter	: lighten(saturate($c-main,100%),30%);
 $c-main--dark  		: saturate(darken($c-main,10%),20%);
 
-$c-sec				: #11C3DD;
-$c-sec--light		: #94E2EE;
+$c-sec				: #ec4814;
+$c-sec--light 		: lighten($c-sec,10%);
+$c-sec--lighter		: lighten(saturate($c-sec,100%),30%);
+$c-sec--dark  		: saturate(darken($c-sec,10%),20%);
 
 $c-accent			: #CFD8DC;
 $c-accent--light	: #ECEFF1;

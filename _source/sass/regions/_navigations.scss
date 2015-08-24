@@ -115,17 +115,17 @@ $hamburger-line: 4px;
     background: $c-main;
     padding: 0 15px;
     cursor: pointer;
-    display: none;
     border-radius: 50%;
     box-shadow: 0 1px 5px rgba($black, .25);
     user-select: none;
 
     .navigation-is-active & { background: $white; }
 
+    @include bp(tablet) { display: none; }
+
     @include bp(tabletonly) {
         @include position(fixed, null 18px 18px null);
         z-index: 10;
-        display: block
     }
 
     .line {

@@ -364,6 +364,7 @@ n,K));f=E(a,b,e,n,g)}if(y||f)return{start:function(){function b(c){l=!0;z();da(a
 c){function d(c){return a(c.element,c.event,c.classes,c.options)}return function(a){if(a.from&&a.to){var b=d(a.from),s=d(a.to);if(b||s)return{start:function(){function a(){return function(){l(d,function(a){a.end()})}}var d=[];b&&d.push(b.start());s&&d.push(s.start());c.all(d,function(a){e.complete(a)});var e=new c({end:a(),cancel:a()});return e}}}else return d(a)}}]}])})(window,window.angular);
 //# sourceMappingURL=angular-animate.min.js.map
 
+angular.module("embedCodepen.config",[]).value("embedCodepen.config",{debug:!0}),angular.module("embedCodepen.directives",[]),angular.module("embedCodepen",["embedCodepen.config","embedCodepen.directives"]),function(){function e(){return{restrict:"A",scope:{themeId:"@",slugHash:"@",user:"@",defaultTab:"@",height:"@",showTabBar:"@",animations:"@",border:"@",borderColor:"@",tabBarColor:"@",tabLinkColor:"@",activeTabColor:"@",activeLinkColor:"@",linkLogoColor:"@","class":"@",customCssUrl:"@"},template:["<iframe ",'scrolling="no" ','frameborder="0" ','class="cp_embed_iframe" ','allowtransparency="true" ','allowfullscreen="true" ','style="width: 100%; overflow: hidden;"',">","</iframe>"].join(""),link:function(e,o){if(e.slugHash&&e.user){var r=document.location.protocol+"//codepen.io/"+e.user+"/embed/"+e.slugHash+"?user="+e.user,a=["themeId","defaultTab","height","showTabBar","animations","border","borderColor","tabBarColor","tabLinkColor","activeTabColor","activeLinkColor","linkLogoColor","class","customCssUrl"];angular.forEach(a,function(o){e[o]&&(r+="&"+o+"="+e[o])}),o.find("iframe").attr("src",r).attr("height",e.height).attr("id","cp_embed_"+e.slugHash)}}}}e.$inject=[],angular.module("embedCodepen.directives").directive("slugHash",e)}();
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -393,6 +394,36 @@ Prism.languages.markdown=Prism.languages.extend("markup",{}),Prism.languages.ins
 !function(e){e.languages.sass=e.languages.extend("css",{comment:/^([ \t]*)\/[\/*].*(?:(?:\r?\n|\r)\1[ \t]+.+)*/m}),e.languages.insertBefore("sass","atrule",{"atrule-line":{pattern:/^(?:[ \t]*)[@+=].+/m,inside:{atrule:/^(?:[ \t]*)(?:@[\w-]+|[+=])/m}}}),delete e.languages.sass.atrule;var a=/((\$[-_\w]+)|(#\{\$[-_\w]+\}))/i,s=/[-+]{1,2}|==?|!=|\|?\||\?|\*|\/|%/;e.languages.insertBefore("sass","property",{"variable-line":{pattern:/(^|(?:\r?\n|\r))[ \t]*\$.+/,lookbehind:!0,inside:{punctuation:/:/,variable:a,operator:s}},"property-line":{pattern:/(^|(?:\r?\n|\r))[ \t]*(?:[^:\s]+[ ]*:.*|:[^:\s]+.*)/i,lookbehind:!0,inside:{property:[/[^:\s]+(?=\s*:)/,{pattern:/(:)[^:\s]+/,lookbehind:!0}],punctuation:/:/,variable:a,operator:s,important:e.languages.sass.important}}}),delete e.languages.sass.property,delete e.languages.sass.important,delete e.languages.sass.selector,e.languages.insertBefore("sass","punctuation",{selector:{pattern:/([ \t]*).+(?:,(?:\r?\n|\r)\1[ \t]+.+)*/,lookbehind:!0}})}(Prism);;
 Prism.languages.scss=Prism.languages.extend("css",{comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|\/\/.*?(\r?\n|$))/,lookbehind:!0},atrule:{pattern:/@[\w-]+(?:\([^()]+\)|[^(])*?(?=\s+(\{|;))/i,inside:{rule:/@[\w-]+/}},url:/([-a-z]+-)*url(?=\()/i,selector:{pattern:/([^@;\{\}\(\)]?([^@;\{\}\(\)]|&|#\{\$[-_\w]+\})+)(?=\s*\{(\}|\s|[^\}]+(:|\{)[^\}]+))/m,inside:{placeholder:/%[-_\w]+/i}}}),Prism.languages.insertBefore("scss","atrule",{keyword:/@(if|else if|else|for|each|while|import|extend|debug|warn|mixin|include|function|return|content)|(?=@for\s+\$[-_\w]+\s)+from/i}),Prism.languages.insertBefore("scss","property",{variable:/((\$[-_\w]+)|(#\{\$[-_\w]+\}))/i}),Prism.languages.insertBefore("scss","function",{placeholder:{pattern:/%[-_\w]+/i,alias:"selector"},statement:/\B!(default|optional)\b/i,"boolean":/\b(true|false)\b/,"null":/\b(null)\b/,operator:/\s+([-+]{1,2}|={1,2}|!=|\|?\||\?|\*|\/|%)\s+/}),Prism.languages.scss.atrule.inside.rest=Prism.util.clone(Prism.languages.scss);;
 !function(){if(self.Prism){var e={csharp:"C#",cpp:"C++"};Prism.hooks.add("before-highlight",function(a){var t=a.element.parentNode;if(t&&/pre/i.test(t.nodeName)){var i=e[a.language]||a.language;t.setAttribute("data-language",i)}})}}();;
+
+// Event handler for modules
+
+var events = {
+    events: {},
+    // Adds event to the list
+    on: function (eventName, fn) {
+        this.events[eventName] = this.events[eventName] || [];
+        this.events[eventName].push(fn);
+    },
+    // Removes event from the list
+    off: function(eventName, fn) {
+        if (this.events[eventName]) {
+            for (var i = 0; i < this.events[eventName].length; i++) {
+                if (this.events[eventName][i] === fn) {
+                    this.events[eventName].splice(i, 1);
+                    break;
+                }
+            };
+        }
+    },
+    // Searched events list for function and executes it
+    pub: function (eventName, data) {
+        if (this.events[eventName]) {
+            this.events[eventName].forEach(function(fn) {
+                fn(data);
+            });
+        }
+    }
+};
 
 /* js-yaml 3.3.0 https://github.com/nodeca/js-yaml */!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jsyaml=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
@@ -4345,82 +4376,81 @@ module.exports = yaml;
  * Article Controller
 ==================================== */
 
-function articleCtrl($scope, $stateParams, $http) {
-	'use strict';
+function articleCtrl($scope, $stateParams, $http, $markdown) {
+    'use strict';
 
 
-	/* ------------------------------------
-		#Find arrays
-	------------------------------------ */
+    /* ------------------------------------
+        #Find arrays
+    ------------------------------------ */
 
-	var $object = $stateParams;
+    var $object = $stateParams;
 
-	// Get correct array
-	var $node = $articles.filter(function(node) {
-		return $scope.convertURL(node.name) == $object.article;
-	})[0];
+    // Get correct array
+    var $node = $articles.filter(function(node) {
+        return node.url == $object.article;
+    })[0];
 
-	function urlMatch(array,url) {
+    function urlMatch(array,url) {
 
-		var url = $object.chapter;
+        var url = $object.chapter;
 
-		if (array) {
-			for (var i=0; i < array.length; i++) {
-				if($scope.convertURL(array[i]) === url) {
-					return array[i];
-				}
-			}
-		}
-	};
-
-	console.log($node.name);
+        if (array) {
+            for (var i=0; i < array.length; i++) {
+                if(array[i].url === url) {
+                    return array[i].name;
+                }
+            }
+        }
+    };
 
 
-	/* ------------------------------------
-		#Create Variables
-	------------------------------------ */
+    /* ------------------------------------
+        #Create Variables
+    ------------------------------------ */
 
-	var titles = {
-		article: $node.name,
-		chapter: urlMatch($node.chapters,$object.chapter)
-	}
+    var titles = {
+        article: $node.title || $node.name,
+        chapter: urlMatch($node.chapters,$object.chapter)
+    }
 
-	// Filename
-	var $file = 						'articles/' + $object.article + '/';
-	if ($object.chapter) 				$file += $object.chapter;
-	else 								$file += 'index';
+    // Filename
+    var $file = 						'articles/' + $object.article + '/';
+    if ($object.chapter) 				$file += $object.chapter;
+    else 								$file += 'index';
 
-	if ($node.markdown)					$file += '.md';
-	else								$file += '.html';
+    if ($node.markdown)					$file += '.md';
+    else								$file += '.html';
 
-	// $file = $file.replace(/ /g, '-').toLowerCase();
+    // $file = $file.replace(/ /g, '-').toLowerCase();
 
-	/* ------------------------------------
-		#Scopes
-	------------------------------------ */
+    /* ------------------------------------
+        #Scopes
+    ------------------------------------ */
 
-	$scope.title = {
-		article: titles.article,
-		chapter: titles.chapter
-	};
-	$scope.chapters = $node.chapters;
-	$scope.file = $file;
-	$scope.icon = $node.icon;
-	$scope.array = $node;
+    $scope.title = {
+        article: titles.article,
+        chapter: titles.chapter
+    };
+    $scope.chapters = $node.chapters;
+    $scope.file = $file;
+    $scope.icon = $node.icon;
+    $scope.array = $node;
 
-	if($node.icon) $scope.icon = $node.icon;
+    if($node.icon) $scope.icon = $node.icon;
 
-	$http.get($file)
-		.success(function(res) {
-			var $content = res;
-			if( $node.markdown ) {
-				$content = $scope.markdown($content);
-			}
-			$scope.content = $content;
-		})
-		.error(function(err) {
-			$scope.content = '<div class="error"><h3>404 - File Not Found</h3><code>' + $file + '</code></div>';
-		});
+    $http.get($file)
+        .success(function(data) {
+            var $content = data;
+            if( $node.markdown ) {
+                $content = $markdown($content);
+            }
+            $scope.markdown = '<pre><code class="markdown language-markdown">' + data + '</code></pre>';
+            $scope.content = $content;
+        })
+        .error(function(err) {
+            $scope.content = '<div class="error"><h3>404 - File Not Found</h3><code>' + $file + '</code></div>';
+        });
 }
 
 /* ====================================
@@ -4433,22 +4463,6 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
     var converted;
 
     $scope.articles  = $articles;
-
-    $scope.markdown = function(data) {
-        var showDown = new showdown.Converter();
-        showDown.setOption('tables', true)
-        return showDown.makeHtml(data);
-    }
-
-    $scope.convertURL = function(t) {
-        if (t) {
-            var text = t.replace(/[^\w\s]/gi, '').replace(/ /g, '-').toLowerCase();
-            return text;
-        } else {
-            console.log('%c $scope.convertURL: Error', 'background: #222; color: red;');
-            return null;
-        }
-    }
 };
 
 /* ====================================
@@ -4457,13 +4471,13 @@ function mainCtrl($scope, $rootScope, $stateParams, $http, $timeout) {
 function articleDir($timeout, $document) {
 
     function link(scope, element, attrs) {
-        var watcher = scope.$watch('content', function(newValue) {
-            if(newValue) {
-                element.html(newValue);
+        var watcher = scope.$watch('content', function(val) {
+            if(val) {
+                element.html(val);
                 $timeout(function() {
                     Prism.highlightAll();
                     materialButton();
-                    navigation();
+                    events.pub('navigation', "Navigation init");
                 });
             }
         });
@@ -4489,6 +4503,20 @@ function sidebarDir() {
         restrict: 'E',
         replace: true,
         templateUrl: 'app/includes/sidebar.html'
+    }
+}
+
+function markdownFtry() {
+    return function(data) {
+        var converter = new showdown.Converter({
+            noHeaderId: false,
+            simplifiedAutoLink: true,
+            tables: true
+        }),
+            text = data,
+            html = converter.makeHtml(text);
+
+        return html;
     }
 }
 
@@ -4540,7 +4568,7 @@ function config($stateProvider, $urlRouterProvider) {
         'use strict';
 
         // Store Dom elements
-        var $buttons     = $('.btn, .nav-item, button, .hamburger, .article__header');
+        var $buttons     = $('.btn, .nav-item, button, .hamburger');
         var circleClass  = 'btn-circle';
         var clickedClass = 'clicked';
         var fadeOutTime  = 250;
@@ -4581,96 +4609,95 @@ function config($stateProvider, $urlRouterProvider) {
     }
 })();
 
-;(function() {
+navigation = (function () {
+    'use strict';
 
-	navigation = function () {
-		'use strict';
+    /*  Initialize
+        ------------------------------------ */
+    function init(success) {
+        var $window = $(window),
+            $navigation = $('.navigation'),
+            $navLink = $navigation.find('a'),
+            $hamburger = $('.hamburger'),
+            $content = $('.site-content .inner');
 
-		var $window = $(window),
-			$navigation = $('.navigation'),
-			$hamburger = $('.hamburger'),
-			$content = $('.site-content .inner'),
-			navLink = $navigation.find('a'),
-			scrollTop = $window.scrollTop(),
-			navigationTop = $navigation.offset().top,
-			navigationBottom = $navigation.offset().top + $navigation.height();
-
-		/*  Initialize
-			------------------------------------ */
-		function init() {
-			events();
-		}
+        $hamburger.off('click').on('click', toggleMenu);
+        $navLink.off('click').on('click', removeMenu);
+    }
 
 
-		/*  Event listeners
-			------------------------------------ */
+    /*  Functions
+        ------------------------------------ */
 
-		function events() {
-			$hamburger.off('click').on('click', toggleMenu);
-			navLink.off('click').on('click', removeMenu);
-			// $window.off('scroll').on('scroll', stickyMenu);
-		}
+    function toggleMenu(event) {
+        $('html').toggleClass('navigation-is-active');
+    }
 
+    function removeMenu(event) {
+        $('html').removeClass('navigation-is-active');
+    }
 
-		/*  Functions
-			------------------------------------ */
-
-		function toggleMenu(event) {
-			$('html').toggleClass('navigation-is-active');
-		}
-
-		function removeMenu(event) {
-			$('html').removeClass('navigation-is-active');
-		}
-
-		function stickyMenu(event) {
-			scrollTop = $window.scrollTop();
-			if (scrollTop >= navigationTop) {
-				$navigation.addClass('is-fixed');
-			} else {
-				$navigation.removeClass('is-fixed');
-			}
-		}
-
-		return init();
-
-	}
+    events.on('navigation', init);
 
 })();
 
 (function() {
 
-	/* ------------------------------------
-	    Angular
-	------------------------------------ */
-	angular
-	    .module('myApp', ['ui.router','ngSanitize','ngAnimate'])
-	    .config(config)
-	    .controller('mainCtrl', mainCtrl)
-	    .controller('articleCtrl', articleCtrl)
-	    .directive('incSidebar', sidebarDir)
-	    .directive('ngConvert', articleDir);
+    /* ------------------------------------
+        Angular
+    ------------------------------------ */
+    angular
+        .module('myApp', ['ui.router','ngSanitize','ngAnimate','embedCodepen'])
+        .config(config)
+        .controller('mainCtrl', mainCtrl)
+        .controller('articleCtrl', articleCtrl)
+        .directive('incSidebar', sidebarDir)
+        .directive('contentWatch', articleDir)
+        .factory('$markdown', markdownFtry);
 
 
-	/* ------------------------------------
-	    Initialization
-	------------------------------------ */
-	fetchData().then(bootstrapApp);
+    /* ------------------------------------
+        Initialization
+    ------------------------------------ */
+    fetchData().then(bootstrapApp);
 
-	function fetchData() {
-		var initInjector = angular.injector(["ng"]);
-		var $http = initInjector.get("$http");
+    function stringToURL(t) {
+        var text = t.replace(/[^\w\s]/gi, '').replace(/ +(?= )/g,'').replace(/ /g, '-').toLowerCase();
 
-		return $http.get('articles/articles.yml').success(function(data) {
-			var YML = jsyaml.load(data);
-			return $articles = YML.articles;
-		});
-	}
+        return text;
+    }
 
-	function bootstrapApp() {
-		return angular.element(document).ready(function() {
-		    angular.bootstrap(document, ['myApp']);
-		});
-	}
+    function fetchData() {
+        var initInjector = angular.injector(["ng"]);
+        var $http = initInjector.get("$http");
+
+        return $http.get('articles/articles.yml').success(function(data) {
+            var YML = jsyaml.load(data);
+            var articles = YML.articles;
+
+            // Create URL's from names
+            for (i=0; i < articles.length; i++) {
+                articles[i].url = stringToURL(articles[i].name);
+
+                if ( articles[i].chapters) {
+                    for (f=0; f < articles[i].chapters.length; f++) {
+                        articles[i].chapters[f].url = stringToURL(articles[i].chapters[f].name);
+                    }
+                }
+            }
+
+            return $articles = articles;
+        });
+    }
+
+    function bootstrapApp() {
+        return angular.element(document).ready(function() {
+            angular.bootstrap(document, ['myApp']);
+        });
+    }
+
+    // setInterval(function() {
+    //     $('html').toggleClass('overlay-is-active');
+    // },1000);
 
 })();

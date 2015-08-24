@@ -1,90 +1,82 @@
-
-
 /* ==============================
-	Article styling
+    Article styling
 ============================== */
 
 .article {
-	max-width: $site-width;
 
-	/* ------------------------------
-		Elements
-	------------------------------ */
-	pre {
-	    margin: 0 -#{$gutter} $spacing-medium;
+    /* ------------------------------
+        Elements
+    ------------------------------ */
+    pre {
+        margin: 0 -#{$gutter} $spacing-large;
 
-	    @include bp(mobileonly) {
-			padding-left:    $spacing-medium;
-			padding-right:   $spacing-medium;
-	        margin-left:  -#{$spacing-medium};
-	        margin-right: -#{$spacing-medium};
-	    }
-	}
+        @include bp(mobileonly) {
+            padding-left:    $spacing-medium;
+            padding-right:   $spacing-medium;
+            margin-left:  -#{$spacing-medium};
+            margin-right: -#{$spacing-medium};
+        }
+    }
 
 
-	/* ------------------------------
-		Sections
-	------------------------------ */
-	&__header,
-	&__content,
-	&__footer {
-		@include padding(null $gutter);
-		@include bp(mobileonly) {
-			@include padding(null $spacing-medium);
-		}
-	}
+    /* ------------------------------
+        Sections
+    ------------------------------ */
+    &__header,
+    &__content,
+    &__footer {
+        @include padding(null $gutter);
+        position: relative;
+        @include bp(mobileonly) {
+            @include padding(null $spacing-medium);
+        }
+    }
 
-	&__header {
-		@include padding($spacing-large null);
-		margin-bottom: $spacing-large;
-		border-bottom: 1px solid $c-bg;
-		background: $c-main;
-		color: $white;
+    &__header {
+        @include padding($spacing-large null);
+        @include linear-gradient(left, $c-main, $c-sec);
+        margin-bottom: $spacing-large;
+        border-bottom: 1px solid $c-bg;
+        color: $white;
 
-		a  { color: currentcolor; }
-	}
+        a  { color: currentcolor; }
+    }
 
-	&__content {
-		padding-bottom: $spacing-large;
-	}
-
-	&__footer {
-		@include clearfix;
-		.prev { float: left; }
-		.next { float: right; }
-	}
-
-	/* ------------------------------
-		Components
-	------------------------------ */
-	&__title {
-		margin-bottom: 0;
-
-		&--side { margin-bottom: 0; font-style: italic;}
-	}
+    &__content {
+        padding-bottom: $spacing-large;
 
 
 
-	.icon {
-		@include size(55px);
-		@include position( absolute, 50% $gutter null null );
-		transform: translateY(-50%);
-		z-index: 2;
-		text-align: center;
-		font-size: 2.5em;
-		background: $white;
-		color: $c-main;
-		line-height: 1;
-		padding: 0;
-		display: block;
-		border-radius: 50%;
-		box-shadow: 0 1px 3px rgba($black, .25);
+        .error {
+            color: desaturate(red, 20%);
+            text-align: center;
+            font-weight: bold;
+        }
 
-		i {
-			width: 100%;
-			display: block;
-			@include position(absolute, 50% null null null);
-			transform: translateY(-50%);
-		}
-	}
+    }
+
+    &__footer {
+        a { color: $c-fg--light; }
+    }
+
+    /* ------------------------------
+        Components
+    ------------------------------ */
+    &__title {
+        margin-bottom: 0;
+
+        &--side { margin-bottom: 0; }
+    }
+
+    .icon {
+        @include size(55px);
+        @include position( absolute, 50% $gutter null null );
+        transform: translateY(-50%);
+        z-index: 2;
+        text-align: center;
+        font-size: 2.5em;
+
+        i { width: 100%; display: block; @include position(absolute, 50% null null null); transform: translateY(-50%); }
+    }
+
 }

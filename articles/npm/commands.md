@@ -20,3 +20,8 @@ Met de commando's kan je op het eind ook opties gebruiken.
 - `--save-dev` **&** `--save`
 
   Slaat _gulp_ op in _package.json_ zodat het door andere makelijk weer gedownload kan worden met `npm install`. De `--save` en `--save-dev` op het eind slaat het op in __package.json_. Gebruik `--save-dev` voor development componenten en `--save` voor distributie componenten.
+
+
+- `-g` **&** `--global`
+  
+  Installeerd het global, zodat het in de command prompt overal gebruikt kan worden in plaats dat het alleen in één folder kan. Bijvoorbeeld Gulp moet globaal geinstalleerd worden zodat acties als `gulp <functienaam>` kan werken.

@@ -7,7 +7,7 @@ Omdat Gulp geschreven is op Node.js, en Node.js op Javascript is gebaseerd, kan 
 
 ### Installatie
 
-Gulp moet niet alleen in het project ingestalleerd worden, maar ook global. Probeer `gulp`. Als er als waarschuwing _'gulp' is not recognized as an internal or external command, operable program or batch file._ krijgt. Dan moet het globaal
+Gulp moet niet alleen in het project ingestalleerd worden, maar ook global. Probeer `gulp`. Als er als waarschuwing _'gulp' is not recognized as an internal or external command, operable program or batch file._ krijgt. Dan moet het globaal geinstalleerd worden in de command prompt `npm install gulp -G`.
 
 
 [gulp]: http://gulpjs.com/

@@ -1,0 +1,23 @@
+.parent {
+  background: #F10000;
+  color: #F10000;
+  font-size: 20px; }
+  .parent .child {
+    color: #250000; }
+
+.col-1 {
+  width: 20%; }
+
+.col-2 {
+  width: 40%; }
+
+.col-3 {
+  width: 60%; }
+
+.col-4 {
+  width: 80%; }
+
+.col-5 {
+  width: 100%; }
+
+/*# sourceMappingURL=../maps/test.css.map */

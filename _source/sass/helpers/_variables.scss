@@ -1,0 +1,26 @@
+/* ------------------------------------
+    Variables
+------------------------------------ */
+$font-family	: 'Open Sans', $helvetica;
+$font-size		: 14px;
+
+$shadow			: 0 1px 3px 1px rgba($black, .2);
+$shadow--large  : 0 0 16px rgba($black, .1);
+
+// Sizes
+$site-width		: 960px;
+$site-width		: 760px;
+$gutter			: 30px;
+$sidebar-width	: 300px;
+
+$spacing-small	: 8px;
+$spacing-medium	: 18px;
+$spacing-large	: 35px;
+
+$bp-large		: 1200px;
+$bp-medium		: 992px;
+$bp-small		: 767px;
+
+$easing--fast	: 150ms ease-in-out;
+$easing			: 250ms ease-in-out;
+$easing--slow	: 500ms ease-in-out;

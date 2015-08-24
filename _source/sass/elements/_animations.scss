@@ -12,14 +12,29 @@
 
     &.ng-enter,
     &.ng-leave {
-        transition: all $easing;
+        transition: all 450ms $ease-in-out-quart;
         position: absolute !important;
         left: 0;
         right: 0;
+        overflow: hidden;
+        background: $white;
+        min-height: 100vh;
     }
 
-    &.ng-enter        { opacity: 0; transform: translateX(-100%); }
-    &.ng-enter-active { opacity: 1; transform: translateX(0); }
-    &.ng-leave        { opacity: 1; transform: translateX(0); }
-    &.ng-leave-active { opacity: 0; transform: translateX(100%); }
+    @include bp(mobileonly) {
+        &.ng-enter.ng-enter-active { transition-delay: -50ms; }
+        &.ng-enter        { opacity: 0; transform: translateX(-100%); }
+        &.ng-enter-active { opacity: 1; transform: none; }
+        &.ng-leave        { opacity: 1; transform: none; }
+        &.ng-leave-active { opacity: 0; transform: translateX(100%); }
+    }
+
+    @include bp(mobile) {
+        &.ng-enter.ng-enter-active { transition-delay: 100ms; }
+        &.ng-enter        { opacity: 0; transform: scale(1.01,1.05); }
+        &.ng-enter-active { opacity: 1; transform: none; }
+        &.ng-leave        { opacity: 1; transform: none; }
+        &.ng-leave-active { opacity: 0; transform: scale(1.01,1.05); }
+    }
+
 }

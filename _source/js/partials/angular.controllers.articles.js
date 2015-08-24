@@ -2,80 +2,79 @@
  * Article Controller
 ==================================== */
 
-function articleCtrl($scope, $stateParams, $http) {
-	'use strict';
+function articleCtrl($scope, $stateParams, $http, $markdown) {
+    'use strict';
 
 
-	/* ------------------------------------
-		#Find arrays
-	------------------------------------ */
+    /* ------------------------------------
+        #Find arrays
+    ------------------------------------ */
 
-	var $object = $stateParams;
+    var $object = $stateParams;
 
-	// Get correct array
-	var $node = $articles.filter(function(node) {
-		return $scope.convertURL(node.name) == $object.article;
-	})[0];
+    // Get correct array
+    var $node = $articles.filter(function(node) {
+        return node.url == $object.article;
+    })[0];
 
-	function urlMatch(array,url) {
+    function urlMatch(array,url) {
 
-		var url = $object.chapter;
+        var url = $object.chapter;
 
-		if (array) {
-			for (var i=0; i < array.length; i++) {
-				if($scope.convertURL(array[i]) === url) {
-					return array[i];
-				}
-			}
-		}
-	};
-
-	console.log($node.name);
+        if (array) {
+            for (var i=0; i < array.length; i++) {
+                if(array[i].url === url) {
+                    return array[i].name;
+                }
+            }
+        }
+    };
 
 
-	/* ------------------------------------
-		#Create Variables
-	------------------------------------ */
+    /* ------------------------------------
+        #Create Variables
+    ------------------------------------ */
 
-	var titles = {
-		article: $node.name,
-		chapter: urlMatch($node.chapters,$object.chapter)
-	}
+    var titles = {
+        article: $node.title || $node.name,
+        chapter: urlMatch($node.chapters,$object.chapter)
+    }
 
-	// Filename
-	var $file = 						'articles/' + $object.article + '/';
-	if ($object.chapter) 				$file += $object.chapter;
-	else 								$file += 'index';
+    // Filename
+    var $file = 						'articles/' + $object.article + '/';
+    if ($object.chapter) 				$file += $object.chapter;
+    else 								$file += 'index';
 
-	if ($node.markdown)					$file += '.md';
-	else								$file += '.html';
+    if ($node.markdown)					$file += '.md';
+    else								$file += '.html';
 
-	// $file = $file.replace(/ /g, '-').toLowerCase();
+    // $file = $file.replace(/ /g, '-').toLowerCase();
 
-	/* ------------------------------------
-		#Scopes
-	------------------------------------ */
+    /* ------------------------------------
+        #Scopes
+    ------------------------------------ */
 
-	$scope.title = {
-		article: titles.article,
-		chapter: titles.chapter
-	};
-	$scope.chapters = $node.chapters;
-	$scope.file = $file;
-	$scope.icon = $node.icon;
-	$scope.array = $node;
+    $scope.title = {
+        article: titles.article,
+        chapter: titles.chapter
+    };
+    $scope.chapters = $node.chapters;
+    $scope.file = $file;
+    $scope.icon = $node.icon;
+    $scope.array = $node;
 
-	if($node.icon) $scope.icon = $node.icon;
+    if($node.icon) $scope.icon = $node.icon;
 
-	$http.get($file)
-		.success(function(res) {
-			var $content = res;
-			if( $node.markdown ) {
-				$content = $scope.markdown($content);
-			}
-			$scope.content = $content;
-		})
-		.error(function(err) {
-			$scope.content = '<div class="error"><h3>404 - File Not Found</h3><code>' + $file + '</code></div>';
-		});
+    $http.get($file)
+        .success(function(data) {
+            var $content = data;
+            if( $node.markdown ) {
+                $content = $markdown($content);
+            }
+            $scope.markdown = '<pre><code class="markdown language-markdown">' + data + '</code></pre>';
+            $scope.content = $content;
+        })
+        .error(function(err) {
+            $scope.content = '<div class="error"><h3>404 - File Not Found</h3><code>' + $file + '</code></div>';
+        });
 }

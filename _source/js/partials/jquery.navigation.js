@@ -1,56 +1,31 @@
-;(function() {
+navigation = (function () {
+    'use strict';
 
-	navigation = function () {
-		'use strict';
+    /*  Initialize
+        ------------------------------------ */
+    function init(success) {
+        var $window = $(window),
+            $navigation = $('.navigation'),
+            $navLink = $navigation.find('a'),
+            $hamburger = $('.hamburger'),
+            $content = $('.site-content .inner');
 
-		var $window = $(window),
-			$navigation = $('.navigation'),
-			$hamburger = $('.hamburger'),
-			$content = $('.site-content .inner'),
-			navLink = $navigation.find('a'),
-			scrollTop = $window.scrollTop(),
-			navigationTop = $navigation.offset().top,
-			navigationBottom = $navigation.offset().top + $navigation.height();
-
-		/*  Initialize
-			------------------------------------ */
-		function init() {
-			events();
-		}
+        $hamburger.off('click').on('click', toggleMenu);
+        $navLink.off('click').on('click', removeMenu);
+    }
 
 
-		/*  Event listeners
-			------------------------------------ */
+    /*  Functions
+        ------------------------------------ */
 
-		function events() {
-			$hamburger.off('click').on('click', toggleMenu);
-			navLink.off('click').on('click', removeMenu);
-			// $window.off('scroll').on('scroll', stickyMenu);
-		}
+    function toggleMenu(event) {
+        $('html').toggleClass('navigation-is-active');
+    }
 
+    function removeMenu(event) {
+        $('html').removeClass('navigation-is-active');
+    }
 
-		/*  Functions
-			------------------------------------ */
-
-		function toggleMenu(event) {
-			$('html').toggleClass('navigation-is-active');
-		}
-
-		function removeMenu(event) {
-			$('html').removeClass('navigation-is-active');
-		}
-
-		function stickyMenu(event) {
-			scrollTop = $window.scrollTop();
-			if (scrollTop >= navigationTop) {
-				$navigation.addClass('is-fixed');
-			} else {
-				$navigation.removeClass('is-fixed');
-			}
-		}
-
-		return init();
-
-	}
+    events.on('navigation', init);
 
 })();

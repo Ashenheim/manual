@@ -16,28 +16,30 @@
         @include size(100%);
         @include position(fixed, 0 0);
         transform: translateX(-100%);
-        transition: all $easing;
+        transition: transform $easing;
+        z-index: 9;
 
         .navigation-is-active & {
-            transform: translateX(0);
+            transform: none;
         }
     }
 
 }
-.site-content {
-    background: $white;
-    max-width: $site-width;
 
-    @include bp(tablet) {
-        border-left: 1px solid $c-bg--dark;
-        border-right: 1px solid $c-bg--dark;
-        margin-left: $sidebar-width;
-    }
+
+.site-content {
+    background: $c-bg--light;
+    max-width: $site-width;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+    box-shadow: $shadow--large;
+
+    @include bp(tablet) { margin-left: $sidebar-width; }
 
     .inner {
         position: relative;
         padding-bottom: $spacing-large;
-        box-shadow: 0 0 5px rgba($black, 0.05);
     }
 
 }

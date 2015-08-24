@@ -38,15 +38,10 @@ Consectetur adipisicing elit. [Voluptas][node.js] error fugiat velit mollitia ra
 [image]: /articles/markdown/images/kitty.jpg
 ```
 
+```markup
+<h5 id="loremipsumdolorsitametgoogle"><a href="http://google.com">Lorem ipsum dolor sit amet</a></h5>
 
-##### [Lorem ipsum dolor sit amet][google]
+<p><img src="/articles/markdown/images/kitty.jpg" alt="kitty"></p>
 
-![kitty][image]
-
-Consectetur adipisicing elit. [Voluptas][node.js] error fugiat velit mollitia ratione eaque alias tenetur vel non vitae maxime, ut qui culpa reprehenderit, sed quibusdam esse aut provident?
-
-
-
-[google]: http://google.com
-[node.js]: https://nodejs.org
-[image]: /articles/markdown/images/kitty.jpg
+<p>Consectetur adipisicing elit. <a href="https://nodejs.org">Voluptas</a> error fugiat velit mollitia ratione eaque alias tenetur vel non vitae maxime, ut qui culpa reprehenderit, sed quibusdam esse aut provident?</p>
+```

@@ -1,0 +1,16 @@
+.overlay {
+    background: $c-bg--dark;
+    z-index: 9999;
+    overflow: auto;
+    display: none;
+    @include position(fixed, 0);
+    @include size(100%);
+
+    html.overlay-is-active & {
+        display: block;
+    }
+}
+
+html.overlay-is-active {
+    overflow: hidden;
+}

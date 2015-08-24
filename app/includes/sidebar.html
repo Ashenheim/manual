@@ -1,33 +1,37 @@
 <aside class="sidebar">
 
-	<div class="inner">
-		<nav class="navigation articles" role="navigation">
-			<ul>
-				<!-- ITEM -->
-				<li ng-repeat="node in articles" ui-sref-active="active" class="nav-item">
+    <div class="inner">
 
-					<span ng-if="node.icon" class="icon">
-						<i class="devicons devicons-{{node.icon}}"></i>
-					</span>
+        <nav class="navigation articles" role="navigation">
+            <ul>
+                <!-- ITEM -->
+                <li ng-repeat="node in articles" ui-sref-active="active" class="nav-item">
 
-					<div class="active-bar"></div>
+                    <span ng-if="node.icon" class="icon">
+                        <i class="devicons devicons-{{node.icon}}"></i>
+                    </span>
 
-					<a ui-sref="articles({ article: convertURL(node.name) })">
-						<span ng-if="!node.title" ng-bind="node.name"></span>
-						<span ng-if="node.title"  ng-bind="node.title"></span>
-						<span ng-if="node.chapters" class="more">+</span>
-					</a>
+                    <div class="active-bar"></div>
 
-					<ul ng-if="node.chapters" class="sub-navigation">
-						<li ng-repeat="nodeChild in node.chapters">
-							<a ui-sref="articles.chapters({ article: convertURL(node.name), chapter: convertURL(nodeChild) })" ng-bind="nodeChild"></a>
-						</li>
-					</ul>
+                    <a ui-sref="articles({ article: node.url })">
+                        <span ng-bind="node.title || node.name"></span>
+                    </a>
 
-				</li>
-				<!-- END -->
-			</ul>
-		</nav>
-	</div>
+                    <ul ng-if="node.chapters" class="sub-navigation">
+                        <li ng-repeat="nodeChild in node.chapters">
+                            <a ui-sref="articles.chapters({ article: node.url, chapter: nodeChild.url })" ng-bind="nodeChild.name"></a>
+                        </li>
+                    </ul>
+
+                </li>
+                <!-- END -->
+            </ul>
+        </nav>
+
+        <div class="settings">
+            <div class="settings__item">
+            </div>
+        </div>
+    </div>
 
 </aside>

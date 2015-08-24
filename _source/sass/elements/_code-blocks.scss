@@ -13,6 +13,7 @@ code {
     -ms-hyphens: none;
     hyphens: none;
 
+    &.no-wrap,
     &.language-markdown {
         white-space: pre-wrap !important;
     }
@@ -23,7 +24,7 @@ code {
     border-radius: 0.3em;
 }
 pre {
-    @include padding($gutter);
+    @include padding($spacing-medium $gutter);
     position: relative !important;
 
     // Prism language text

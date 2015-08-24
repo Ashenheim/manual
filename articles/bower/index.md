@@ -6,3 +6,7 @@ Net als NPM, is Bower een manier om dependencies, plugins en tools te beheren. M
 - CSS stylesheets, SASS mixins/libraries (reset.css, normalize.css, Bourbon, Bootstrap)
 
 ### Installatie
+
+In de command prompt, installeer Bower global
+
+`npm install bower -g`

@@ -2,12 +2,18 @@
     Dependencies
 ------------------------------------ */
 var gulp            = require('gulp');
+// Style
 var sass            = require('gulp-sass');
 var sourcemaps      = require('gulp-sourcemaps');
-var autoprefixer    = require('gulp-autoprefixer');
+var postcss         = require('gulp-postcss');
+var autoprefixer    = require('autoprefixer');
+var csswring        = require('csswring');
+var cssgrace        = require('cssgrace');
+// Javascript
 var concat          = require('gulp-concat');
 var uglify          = require('gulp-uglify');
 var ngAnnotate      = require('gulp-ng-annotate');
+// Build
 var plumber         = require('gulp-plumber');
 var browserSync     = require('browser-sync');
 
@@ -18,25 +24,26 @@ var browserSync     = require('browser-sync');
 
 var settings = {
     sass: {
-        outputStyle: 'compressed',
+        outputStyle: 'nested',
         errLogToConsole: false
     },
-    autoprefixer: {
-        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', "ie 9"],
-        cascade: false
-    }
+    postcss: [
+        autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', "ie 9"]}),
+        cssgrace,
+        // csswring
+    ]
 };
 
 var paths = {
-  source: {
-    sass : '_source/sass/',
-    js   : '_source/js/'
-  },
-  assets: {
-    css : 'assets/css/',
-    js  : 'assets/js/'
-  },
-  bower: 'bower_components/'
+    source: {
+        sass : '_source/sass/',
+        js   : '_source/js/'
+    },
+    assets: {
+        css : 'assets/css/',
+        js  : 'assets/js/'
+    },
+    bower: 'bower_components/'
 };
 
 var files = {
@@ -58,6 +65,7 @@ var files = {
             paths.bower + 'angular/angular.min.js',
             paths.bower + 'angular-sanitize/angular-sanitize.min.js',
             paths.bower + 'angular-animate/angular-animate.min.js',
+            paths.bower + 'angular-embed-codepen/dist/embed-codepen.min.js',
             paths.bower + 'angular-ui-router/release/angular-ui-router.min.js',
             paths.bower + 'jquery/dist/jquery.min.js',
             paths.bower + 'showdown/dist/showdown.min.js',
@@ -93,16 +101,17 @@ gulp.task('sass', function() {
     gulp.src(files.sass.src)
         .pipe(plumber({ errorHandler: onError }))
         .pipe(sourcemaps.init())
-            .pipe(sass( settings.sass ))
-            .pipe(autoprefixer(settings.autoprefixer))
+        .pipe(sass( settings.sass ))
+        .pipe(postcss(settings.postcss))
         .pipe(sourcemaps.write(
+            '../maps',
             {
                 includeContent: false,
                 sourceRoot: '../../_source/sass'
             }
         ))
         .pipe(gulp.dest(files.sass.dest))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 gulp.task('scripts', function() {

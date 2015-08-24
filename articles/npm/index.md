@@ -13,12 +13,8 @@ NPM kan ook per project onthouden welke pakketen zijn gebruikt door het bestand 
 
 1. Vind en download de .exe bestand van [Node.js]. En installeer deze.
 2. Open een command prompt en type in `npm -v`
-  - als er een versie nummer komt dan is Node.js + NPM succesvol geinstalleert.
-  - Als er iets komt zoals
-  
-    _"'npm' is not recognized as an internal or external command, operable program or batch file."_
-
-    moet de computer waarschijnlijk opnieuw geinstalleert worden.
+    - als er een versie nummer komt dan is Node.js + NPM succesvol geinstalleert.
+    - Zo niet, herstart de computer.
 
 
 

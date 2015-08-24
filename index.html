@@ -1,37 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Manual</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manual</title>
 
-	<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/89f2f44ba07ea3fff7e561c2142813b278c2d6c6/devicon.min.css">
-	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700'>
-	<link rel="stylesheet" href="/assets/css/global.css">
-	<link href="/favicon.ico" rel="icon" type="image/x-icon">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700'>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link href="/favicon.ico" rel="icon" type="image/x-icon">
 
 </head>
 <body ng-controller="mainCtrl">
 
-	<div class="site-wrap">
+    <div class="overlay">
+        <pre><code class="language-css no-wrap" ng-include="'/assets/css/test.css'"></code></pre>
+    </div>
 
-		<div class="hamburger">
-			<span class="line"></span>
-			<span class="line"></span>
-			<span class="line"></span>
-		</div>
+    <div class="site-wrap">
 
-		<main class="main">
+        <div class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
 
-			<inc-sidebar></inc-sidebar>
-			<div id="primary" class="site-content">
-				<div class="inner" ui-view>
-					<span class="loader"></span>
-				</div>
-			</div>
-		</main>
+        <main class="main">
 
-	</div>
-	<script src="/assets/js/global.js"></script>
+            <inc-sidebar></inc-sidebar>
+            <div id="primary" class="site-content">
+                <div class="inner" ui-view>
+                    <span class="loader"></span>
+                </div>
+            </div>
+        </main>
+
+    </div>
+    <script src="assets/js/global.js"></script>
 </body>
 </html>

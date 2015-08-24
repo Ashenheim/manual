@@ -1,16 +1,18 @@
 <article class="article" article-nav>
 
-	<header class="article__header">
-		<span ng-if="icon" class="icon">
-			<i class="devicons devicons-{{icon}}"></i>
-		</span>
-		<h2 class="article__title">
-			{{title.article}}
-		</h2>
-		<h6 class="article__title--side" ng-if="title.chapter">
-			{{title.chapter}}
-		</h6>
-	</header>
-	<div class="article__content" ng-convert content="content"></div>
+    <header class="article__header">
+        <span ng-if="icon" class="icon">
+            <i class="devicons devicons-{{icon}}"></i>
+        </span>
+        <h2 class="article__title" ng-bind="title.chapter || title.article"></h2>
+    </header>
+
+    <div class="article__content" content-watch content="content"></div>
+
+    <footer class="article__footer">
+        <p>
+            <small><a href="/{{file}}" ng-bind="'/' + file" target="_blank"></a></small>
+        </p>
+    </footer>
 
 </article>

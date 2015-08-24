@@ -4,13 +4,13 @@
 function articleDir($timeout, $document) {
 
     function link(scope, element, attrs) {
-        var watcher = scope.$watch('content', function(newValue) {
-            if(newValue) {
-                element.html(newValue);
+        var watcher = scope.$watch('content', function(val) {
+            if(val) {
+                element.html(val);
                 $timeout(function() {
                     Prism.highlightAll();
                     materialButton();
-                    navigation();
+                    events.pub('navigation', "Navigation init");
                 });
             }
         });

@@ -21,7 +21,7 @@
         min-height: 100vh;
     }
 
-    @include bp(mobileonly) {
+    @include media("screen", "<mobile") {
         &.ng-enter.ng-enter-active { transition-delay: -50ms; }
         &.ng-enter        { opacity: 0; transform: translateX(-100%); }
         &.ng-enter-active { opacity: 1; transform: none; }
@@ -29,7 +29,7 @@
         &.ng-leave-active { opacity: 0; transform: translateX(100%); }
     }
 
-    @include bp(mobile) {
+    @include media("screen", ">mobile") {
         &.ng-enter.ng-enter-active { transition-delay: 100ms; }
         &.ng-enter        { opacity: 0; transform: scale(1.01,1.05); }
         &.ng-enter-active { opacity: 1; transform: none; }

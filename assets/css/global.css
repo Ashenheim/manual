@@ -738,7 +738,7 @@ html {
 .site-wrap {
   position: relative;
   z-index: 1;
-  padding: 0 8px; }
+  padding: 8px; }
 
 ::-moz-selection {
   background: #EC1443;
@@ -851,7 +851,7 @@ small {
   background: #FFF;
   min-height: 100vh; }
 
-@media (max-width: 766px) {
+@media only screen and (max-width: 480px) {
   [ui-view].ng-enter.ng-enter-active {
     -webkit-transition-delay: -50ms;
             transition-delay: -50ms; }
@@ -880,7 +880,7 @@ small {
         -ms-transform: translateX(100%);
             transform: translateX(100%); } }
 
-@media (min-width: 767px) {
+@media only screen and (min-width: 481px) {
   [ui-view].ng-enter.ng-enter-active {
     -webkit-transition-delay: 100ms;
             transition-delay: 100ms; }
@@ -1237,10 +1237,10 @@ button {
     color: currentcolor; }
     .navigation a:hover {
       color: #cd002d; }
-      @media (max-width: 991px) {
+      @media only screen and (max-width: 767px) {
         .navigation a:hover {
           color: #FFF; } }
-  @media (min-width: 992px) {
+  @media only screen and (min-width: 768px) {
     .navigation .nav-item {
       border-bottom: 1px solid #EEEEEE; } }
   .navigation .nav-item .icon {
@@ -1255,19 +1255,19 @@ button {
   .navigation .nav-item .more {
     font-size: 12px;
     color: #EC1443; }
-    @media (max-width: 991px) {
+    @media only screen and (max-width: 767px) {
       .navigation .nav-item .more {
         display: none; } }
   .navigation li.clicked {
     background-image: -webkit-linear-gradient(left, transparent 98%, rgba(0, 0, 0, 0.03));
     background-image: linear-gradient(to right, transparent 98%, rgba(0, 0, 0, 0.03)); }
-  @media (max-width: 991px) {
+  @media only screen and (max-width: 767px) {
     .navigation .nav-item.active {
       background: rgba(0, 0, 0, 0.2);
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33000000', endColorstr='#33000000');
       color: #FFF; }
     :root .navigation .nav-item.active{} }
-  @media (min-width: 992px) {
+  @media only screen and (min-width: 768px) {
     .navigation .nav-item.active {
       background: #FFF;
       position: relative;
@@ -1308,10 +1308,10 @@ button {
           user-select: none; }
   .navigation-is-active .hamburger {
     background: #FFF; }
-  @media (min-width: 992px) {
+  @media only screen and (min-width: 768px) {
     .hamburger {
       display: none; } }
-  @media (max-width: 991px) {
+  @media only screen and (max-width: 767px) {
     .hamburger {
       position: fixed;
       right: 18px;
@@ -1349,7 +1349,7 @@ button {
             -ms-transform: translateY(-8px) rotate(-45deg);
                 transform: translateY(-8px) rotate(-45deg); }
 
-@media (min-width: 992px) {
+@media only screen and (min-width: 768px) {
   .active-bar {
     position: absolute;
     top: 0;
@@ -1379,7 +1379,7 @@ button {
     ------------------------------ */ }
   .article pre {
     margin: 0 -30px 35px; }
-    @media (max-width: 766px) {
+    @media only screen and (max-width: 480px) {
       .article pre {
         padding-left: 18px;
         padding-right: 18px;
@@ -1391,7 +1391,7 @@ button {
     padding-right: 30px;
     padding-left: 30px;
     position: relative; }
-    @media (max-width: 766px) {
+    @media only screen and (max-width: 480px) {
       .article__header,
       .article__content,
       .article__footer {
@@ -1401,9 +1401,9 @@ button {
     padding-top: 35px;
     padding-bottom: 35px;
     background-color: #EC1443;
-    background-image: -webkit-linear-gradient(left, #EC1443, #ec4814);
-    background-image: -webkit-linear-gradient(left, #EC1443, #ec4814, , , , , , , , );
-    background-image: linear-gradient(to right,#EC1443, #ec4814, , , , , , , , );
+    background-image: -webkit-linear-gradient(left, #EC1443, #ec7514);
+    background-image: -webkit-linear-gradient(left, #EC1443, #ec7514, , , , , , , , );
+    background-image: linear-gradient(to right,#EC1443, #ec7514, , , , , , , , );
     margin-bottom: 35px;
     border-bottom: 1px solid #F9F9F9;
     color: #FFF; }
@@ -1446,13 +1446,13 @@ button {
   position: relative;
   z-index: 3;
   overflow: auto; }
-  @media (min-width: 992px) {
+  @media only screen and (min-width: 768px) {
     .sidebar {
       width: 300px;
       height: 100%;
       position: fixed;
       top: 0; } }
-  @media (max-width: 991px) {
+  @media only screen and (max-width: 767px) {
     .sidebar {
       background: #EC1443;
       color: #FFF;
@@ -1480,8 +1480,8 @@ button {
   margin: 0 auto;
   position: relative;
   z-index: 3;
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1); }
-  @media (min-width: 992px) {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); }
+  @media only screen and (min-width: 768px) {
     .site-content {
       margin-left: 300px; } }
   .site-content .inner {

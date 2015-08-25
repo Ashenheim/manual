@@ -22,7 +22,7 @@ html {
 .site-wrap {
     position: relative;
     z-index: 1;
-    padding: 0 $spacing-small;
+    padding: $spacing-small;
 }
 
 ::selection {

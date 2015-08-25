@@ -24,7 +24,7 @@
         color: currentcolor;
         &:hover {
             color: $c-link--hover;
-            @include bp(tabletonly) {
+            @include media('screen','<tablet') {
                 color: $white;
             }
         }
@@ -36,7 +36,7 @@
     ------------------------------------ */
 
     .nav-item {
-        @include bp(tablet) {
+        @include media('screen','>tablet') {
             border-bottom: 1px solid $c-bg--dark;
         }
 
@@ -52,7 +52,7 @@
         .more {
             font-size: 12px;
             color: $c-main;
-            @include bp(tabletonly) {
+            @include media('screen','<tablet') {
                 display: none;
             }
         }
@@ -71,11 +71,11 @@
 
     .nav-item.active {
 
-        @include bp(tabletonly) {
+        @include media('screen','<tablet') {
             background: rgba($black, 0.2);
             color: $white;
         }
-        @include bp(tablet) {
+        @include media('screen','>tablet') {
             background: $white;
             position: relative;
             z-index: 1;
@@ -121,9 +121,9 @@ $hamburger-line: 4px;
 
     .navigation-is-active & { background: $white; }
 
-    @include bp(tablet) { display: none; }
+    @include media('screen','>tablet') { display: none; }
 
-    @include bp(tabletonly) {
+    @include media('screen','<tablet') {
         @include position(fixed, null 18px 18px null);
         z-index: 10;
     }
@@ -154,7 +154,7 @@ $hamburger-line: 4px;
 
 
 .active-bar {
-    @include bp(tablet) {
+    @include media('screen','>tablet') {
         @include position(absolute, 0 null 0 0);
         @include size(1px 100%);
         background: $c-bg--dark;

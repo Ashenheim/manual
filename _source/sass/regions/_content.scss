@@ -10,7 +10,7 @@
     pre {
         margin: 0 -#{$gutter} $spacing-large;
 
-        @include bp(mobileonly) {
+        @include media('screen','<mobile') {
             padding-left:    $spacing-medium;
             padding-right:   $spacing-medium;
             margin-left:  -#{$spacing-medium};
@@ -27,7 +27,7 @@
     &__footer {
         @include padding(null $gutter);
         position: relative;
-        @include bp(mobileonly) {
+        @include media('screen','<mobile') {
             @include padding(null $spacing-medium);
         }
     }

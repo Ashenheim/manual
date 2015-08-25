@@ -4,13 +4,13 @@
     z-index: 3;
     overflow: auto;
 
-    @include bp(tablet) {
+    @include media('screen','>tablet') {
         width: $sidebar-width;
         height: 100%;
         @include position(fixed, 0 null null null);
     }
 
-    @include bp(tabletonly) {
+    @include media('screen','<tablet') {
         background: $c-main;
         color: $white;
         @include size(100%);
@@ -35,7 +35,7 @@
     z-index: 3;
     box-shadow: $shadow--large;
 
-    @include bp(tablet) { margin-left: $sidebar-width; }
+    @include media('screen','>tablet') { margin-left: $sidebar-width; }
 
     .inner {
         position: relative;

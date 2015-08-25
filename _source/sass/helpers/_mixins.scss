@@ -1,33 +1,35 @@
-@mixin bp($breakpoint) {
-  @if $breakpoint == "mobileonly" {
-    @media (max-width: ($bp-small - 1)) {
-      @content;
-    }
-  }
-  @if $breakpoint == "tabletonly" {
-    @media (max-width: ($bp-medium - 1)) {
-      @content;
-    }
-  }
-  @if $breakpoint == "mobile" {
-    @media (min-width: $bp-small) {
-      @content;
-    }
-  }
- 
-  @else if $breakpoint == "tablet" {
-    @media (min-width: $bp-medium) {
-      @content;
-    }
-  }
- 
-  @else if $breakpoint == "desktop" {
-    @media (min-width: $bp-large) {
-      @content;
-    }
-  }
+$media-desktop:992px;
+$media-tablet: 767px;
+$media-mobile: 480px;
 
-  @else {
 
-  }
+@function translate-media-conditions($c) {
+    $conditionsMap: (
+        "screen": "only screen",
+        "print": "only print",
+        "retina": "(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 120dpi)",
+
+        ">desktop": "(min-width: #{$media-desktop + 1})",
+        "<desktop": "(max-width: #{$media-desktop})",
+        ">tablet":  "(min-width: #{$media-tablet + 1})",
+        "<tablet":  "(max-width: #{$media-tablet})",
+        ">mobile":  "(min-width: #{$media-mobile + 1})",
+        "<mobile":  "(max-width: #{$media-mobile})"
+    );
+    @return map-get( $conditionsMap, $c );
+}
+
+// The mdia mixin
+@mixin media($args...) {
+    $query: "";
+
+    // Loops through all $arguments passed, and if more then one is found add " and " between them
+    @each $arg in $args {
+        $op: "";
+        @if ( $query != "" ) {
+            $op: " and ";
+        }
+        $query: $query + $op + translate-media-conditions($arg);
+    }
+    @media #{$query}  { @content; }
 }

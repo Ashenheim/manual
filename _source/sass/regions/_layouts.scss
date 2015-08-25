@@ -1,30 +1,41 @@
 .sidebar {
     color: $c-fg--light;
-    padding: $spacing-small 0;
     position: relative;
     z-index: 3;
-    overflow: auto;
 
-    @include media('screen','>desktop') {
+    .inner {
+        overflow: auto;
+        height: calc(100% - #{$spacing-small * 2});
+    }
+
+    @include media('screen', '>desktop') {
         width: $sidebar-width;
+        padding: $spacing-small 0;
         height: 100%;
         @include position(fixed, 0 null null null);
     }
 
-    @include media('screen','<desktop') {
-        background: $c-main;
-        color: $white;
-        @include size(100%);
-        max-width: $sidebar-width;
-        @include position(fixed, 0 0);
+    @include media('screen', '<desktop') {
+        @include position(fixed, 0);
+        @include size( 100% );
         transform: translateX(-100%);
-        transition: transform $easing;
+        transition: transform $easing--fast;
         z-index: 10;
-        box-shadow: $shadow--large;
+
+        .inner {
+            margin: $spacing-small;
+            box-shadow: $shadow--large;
+            background: $c-main;
+            color: $white;
+        }
 
         .navigation-is-active & {
             transform: none;
         }
+    }
+
+    @include media('screen', '>mobile', '<desktop') {
+        max-width: $sidebar-width;
     }
 
 }

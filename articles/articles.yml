@@ -1,13 +1,11 @@
 articles:
 - name: NPM
   icon: npm
-  markdown: true
   chapters:
   - name: Commands
 
 - name: Sass
   icon: sass
-  markdown: true
   chapters:
   - name: Mixins
   - name: "@for & @each"
@@ -15,15 +13,18 @@ articles:
 
 - name: Bower
   icon: bower
-  markdown: true
 
 - name: Gulp
   icon: gulp
-  markdown: true
+
+- name: Grunt
+  icon: grunt
+
+- name: Jekyll
+  icon: jekyll
 
 - name: Markdown
   icon: markdown
-  markdown: true
   chapters:
   - name: Headings and Paragraphs
   - name: Links

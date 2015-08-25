@@ -4418,8 +4418,7 @@ function articleCtrl($scope, $stateParams, $http, $markdown) {
     if ($object.chapter) 				$file += $object.chapter;
     else 								$file += 'index';
 
-    if ($node.markdown)					$file += '.md';
-    else								$file += '.html';
+    $file += '.md';
 
     // $file = $file.replace(/ /g, '-').toLowerCase();
 
@@ -4435,17 +4434,12 @@ function articleCtrl($scope, $stateParams, $http, $markdown) {
     $scope.file = $file;
     $scope.icon = $node.icon;
     $scope.array = $node;
-
-    if($node.icon) $scope.icon = $node.icon;
+    $scope.icon = $node.icon;
 
     $http.get($file)
         .success(function(data) {
-            var $content = data;
-            if( $node.markdown ) {
-                $content = $markdown($content);
-            }
-            $scope.markdown = '<pre><code class="markdown language-markdown">' + data + '</code></pre>';
-            $scope.content = $content;
+            var content = $markdown(data);
+            $scope.content = content;
         })
         .error(function(err) {
             $scope.content = '<div class="error"><h3>404 - File Not Found</h3><code>' + $file + '</code></div>';

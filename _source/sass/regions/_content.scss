@@ -69,14 +69,12 @@
     }
 
     .icon {
-        @include size(55px);
-        @include position( absolute, 50% $gutter null null );
-        transform: translateY(-50%);
+        @include size(40px);
+        @include position( absolute, 30px $gutter null null );
+        fill: currentcolor;
         z-index: 2;
         text-align: center;
-        font-size: 2.5em;
-
-        i { width: 100%; display: block; @include position(absolute, 50% null null null); transform: translateY(-50%); }
+        font-size: 2em;
     }
 
 }

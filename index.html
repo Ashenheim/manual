@@ -11,6 +11,7 @@
 
 </head>
 <body ng-controller="mainCtrl">
+    <div style="display:none;" ng-include="'/assets/media/media.svg'"></div>
 
     <div class="site-wrap">
 
@@ -21,6 +22,7 @@
         </div>
 
         <main class="main">
+            <div class="overlay"></div>
             <inc-sidebar></inc-sidebar>
             <div id="primary" class="site-content">
                 <div class="inner" ui-view>

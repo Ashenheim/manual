@@ -5,14 +5,14 @@
 .site-content {
     overflow: hidden;
     position: relative;
-    min-height: 100vh;
+    min-height: calc(100vh - 20px);
 }
 
 [ui-view] {
 
     &.ng-enter,
     &.ng-leave {
-        transition: all 450ms $ease-in-out-quart;
+        transition: all 250ms $ease-in-quart;
         position: absolute !important;
         left: 0;
         right: 0;
@@ -30,11 +30,11 @@
     }
 
     @include media("screen", ">mobile") {
-        &.ng-enter.ng-enter-active { transition-delay: 100ms; }
-        &.ng-enter        { opacity: 0; transform: scale(1.01,1.05); }
+        &.ng-enter.ng-enter-active { transition-delay: 250ms; }
+        &.ng-enter        { opacity: 0; transform: scale(1.09,1.03); }
         &.ng-enter-active { opacity: 1; transform: none; }
         &.ng-leave        { opacity: 1; transform: none; }
-        &.ng-leave-active { opacity: 0; transform: scale(1.01,1.05); }
+        &.ng-leave-active { opacity: 0; transform: scale(1.09,1.03); }
     }
 
 }

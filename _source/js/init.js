@@ -10,6 +10,7 @@
         .controller('articleCtrl', articleCtrl)
         .directive('incSidebar', sidebarDir)
         .directive('contentWatch', articleDir)
+        .directive('svgInc', svgDir)
         .factory('$markdown', markdownFtry);
 
 

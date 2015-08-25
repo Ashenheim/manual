@@ -13,7 +13,11 @@ var cssgrace        = require('cssgrace');
 var concat          = require('gulp-concat');
 var uglify          = require('gulp-uglify');
 var ngAnnotate      = require('gulp-ng-annotate');
+// Media
+var svgstore        = require('gulp-svgstore');
+var svgmin          = require('gulp-svgmin');
 // Build
+var rename          = require('gulp-rename');
 var plumber         = require('gulp-plumber');
 var browserSync     = require('browser-sync');
 
@@ -37,11 +41,13 @@ var settings = {
 var paths = {
     source: {
         sass : '_source/sass/',
-        js   : '_source/js/'
+        js   : '_source/js/',
+        media: '_source/media/'
     },
     assets: {
         css : 'assets/css/',
-        js  : 'assets/js/'
+        js  : 'assets/js/',
+        media: 'assets/media/'
     },
     bower: 'bower_components/'
 };
@@ -59,6 +65,13 @@ var files = {
             '_source/sass/*.{scss,sass}'
         ],
         dest: 'assets/css/'
+    },
+    media: {
+        src: [
+            '_source/media/*.svg',
+            '_source/media/**/*.svg'
+        ],
+        dest: 'assets/media/'
     },
     js: {
         src: [
@@ -132,9 +145,29 @@ gulp.task('minify', function() {
 
 
 
+
+gulp.task('media', function() {
+    gulp.src( files.media.src )
+        .pipe(svgmin({
+            plugins: [
+                { removeViewBox: false },
+                { removeUselessStrokeAndFill: false },
+                { moveGroupAttrsToElems: false }
+            ]
+        }))
+        .pipe(gulp.dest( files.media.dest ))
+        .pipe(rename({prefix: 'icon-'}))
+        .pipe(svgstore())
+        .pipe(gulp.dest( files.media.dest ))
+        .pipe(browserSync.reload({stream:true}))
+});
+
+
+
 gulp.task('watch', function() {
     gulp.watch( files.sass.src, ['sass']);
     gulp.watch( files.js.src, ['scripts']);
+    gulp.watch( files.media.src, ['media']);
     gulp.watch( files.html.src ).on('change', browserSync.reload);
 });
 
@@ -166,4 +199,4 @@ gulp.task('browser-sync', function() {
 
 // Bundled tasks
 gulp.task('serve', ['watch', 'browser-sync'])
-gulp.task('default', ['sass', 'scripts', 'watch', 'browser-sync']);
+gulp.task('default', ['sass', 'scripts', 'media', 'watch', 'browser-sync']);

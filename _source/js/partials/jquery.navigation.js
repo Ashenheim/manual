@@ -7,11 +7,13 @@ navigation = (function () {
         var $window = $(window),
             $navigation = $('.navigation'),
             $navLink = $navigation.find('a'),
+            $overlay = $('.overlay'),
             $hamburger = $('.hamburger'),
             $content = $('.site-content .inner');
 
         $hamburger.off('click').on('click', toggleMenu);
         $navLink.off('click').on('click', removeMenu);
+        $overlay.off('click').on('click', removeMenu);
     }
 
 

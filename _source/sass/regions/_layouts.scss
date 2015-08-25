@@ -1,23 +1,26 @@
 .sidebar {
     color: $c-fg--light;
+    padding: $spacing-small 0;
     position: relative;
     z-index: 3;
     overflow: auto;
 
-    @include media('screen','>tablet') {
+    @include media('screen','>desktop') {
         width: $sidebar-width;
         height: 100%;
         @include position(fixed, 0 null null null);
     }
 
-    @include media('screen','<tablet') {
+    @include media('screen','<desktop') {
         background: $c-main;
         color: $white;
         @include size(100%);
+        max-width: $sidebar-width;
         @include position(fixed, 0 0);
         transform: translateX(-100%);
         transition: transform $easing;
-        z-index: 9;
+        z-index: 10;
+        box-shadow: $shadow--large;
 
         .navigation-is-active & {
             transform: none;
@@ -35,7 +38,7 @@
     z-index: 3;
     box-shadow: $shadow--large;
 
-    @include media('screen','>tablet') { margin-left: $sidebar-width; }
+    @include media('screen','>desktop') { margin-left: $sidebar-width; }
 
     .inner {
         position: relative;

@@ -1,16 +1,25 @@
+/* ------------------------------------
+    Overlay Styling
+------------------------------------ */
 .overlay {
-    background: $c-bg--dark;
-    z-index: 9999;
-    overflow: auto;
-    display: none;
     @include position(fixed, 0);
     @include size(100%);
+    background: rgba($c-fg, .9);
+    z-index: 9;
+    overflow: auto;
+    opacity: 0;
+    transform: translate(-100%);
+    transition: opacity $easing;
 
-    html.overlay-is-active & {
-        display: block;
+    html.overlay-is-active & { transform: none; opacity: 1; }
+
+    @include media('screen', '<desktop') {
+        html.navigation-is-active & { transform: none; opacity: 1; }
     }
 }
 
-html.overlay-is-active {
-    overflow: hidden;
+html.overlay-is-active { overflow: hidden; }
+
+@include media('screen', '<desktop') {
+    html.navigation-is-active { overflow: hidden; }
 }

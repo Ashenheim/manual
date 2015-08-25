@@ -7,9 +7,7 @@
                 <!-- ITEM -->
                 <li ng-repeat="node in articles" ui-sref-active="active" class="nav-item">
 
-                    <span ng-if="node.icon" class="icon">
-                        <i class="devicons devicons-{{node.icon}}"></i>
-                    </span>
+                    <svg-inc ng-if="node.icon" name="node.icon"></svg-inc>
 
                     <div class="active-bar"></div>
 
@@ -27,7 +25,7 @@
                 <!-- END -->
             </ul>
         </nav>
-        
+
     </div>
 
 </aside>

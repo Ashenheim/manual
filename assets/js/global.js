@@ -4505,6 +4505,24 @@ function sidebarDir() {
     }
 }
 
+/* ====================================
+    Sidebar Directive
+==================================== */
+function svgDir() {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            name: '='
+        },
+        templateUrl: 'app/templates/svg.tpl.html',
+        link: function(scope, element, attrs) {
+            scope.svgLink= '#icon-' + scope.name;
+            scope.svgClass = 'icon-' + scope.name;
+        }
+    }
+}
+
 function markdownFtry() {
     return function(data) {
         var converter = new showdown.Converter({
@@ -4617,11 +4635,13 @@ navigation = (function () {
         var $window = $(window),
             $navigation = $('.navigation'),
             $navLink = $navigation.find('a'),
+            $overlay = $('.overlay'),
             $hamburger = $('.hamburger'),
             $content = $('.site-content .inner');
 
         $hamburger.off('click').on('click', toggleMenu);
         $navLink.off('click').on('click', removeMenu);
+        $overlay.off('click').on('click', removeMenu);
     }
 
 
@@ -4652,6 +4672,7 @@ navigation = (function () {
         .controller('articleCtrl', articleCtrl)
         .directive('incSidebar', sidebarDir)
         .directive('contentWatch', articleDir)
+        .directive('svgInc', svgDir)
         .factory('$markdown', markdownFtry);
 
 

@@ -1,9 +1,7 @@
 <article class="article" article-nav>
 
     <header class="article__header">
-        <span ng-if="icon" class="icon">
-            <i class="devicons devicons-{{icon}}"></i>
-        </span>
+        <svg-inc ng-if="icon" name="icon"></svg-inc>
         <h2 class="article__title" ng-bind="title.chapter || title.article"></h2>
     </header>
 

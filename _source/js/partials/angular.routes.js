@@ -21,8 +21,7 @@ function config($stateProvider, $urlRouterProvider) {
         UI.Router
     ------------------------------------ */
 
-    $urlRouterProvider.otherwise($articles[0].name);
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise($articles[0].url);
 
     $stateProvider
         .state('home', {

@@ -8,7 +8,7 @@
         Elements
     ------------------------------ */
     pre {
-        margin: 0 -#{$gutter} $spacing-large;
+        margin:  $spacing-large -#{$gutter} 0;
 
         @include media('screen','<mobile') {
             padding-left:    $spacing-medium;
@@ -16,6 +16,11 @@
             margin-left:  -#{$spacing-medium};
             margin-right: -#{$spacing-medium};
         }
+    }
+
+    pre + pre {
+        margin-top: 0;
+        border-top: #111 1px solid;
     }
 
 

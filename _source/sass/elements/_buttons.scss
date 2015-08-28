@@ -3,7 +3,7 @@ button {
     background: $c-link;
     padding: $spacing-small $spacing-medium;
     border: 0;
-    color: $white;
+    color: $white !important;
     font-weight: bold;
     box-shadow: 0 1px 2px rgba($black, 0.2);
     overflow: hidden;

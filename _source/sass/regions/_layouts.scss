@@ -5,14 +5,16 @@
 
     .inner {
         overflow: auto;
-        height: calc(100% - #{$spacing-small * 2});
+        height: 100%;
     }
 
     @include media('screen', '>desktop') {
-        width: $sidebar-width;
-        padding: $spacing-small 0;
-        height: 100%;
         @include position(fixed, 0 null null null);
+        width: $sidebar-width;
+        height: 100%;
+        background: $white;
+        box-shadow: $shadow--large;
+        z-index: 8;
     }
 
     @include media('screen', '<desktop') {
@@ -33,7 +35,7 @@
             transform: none;
         }
     }
-
+    
     @include media('screen', '>mobile', '<desktop') {
         max-width: $sidebar-width;
     }
@@ -42,18 +44,23 @@
 
 
 .site-content {
-    background: $c-bg--light;
-    max-width: $site-width;
     margin: 0 auto;
     position: relative;
     z-index: 3;
-    box-shadow: $shadow--large;
 
     @include media('screen','>desktop') { margin-left: $sidebar-width; }
+    @include media('screen','<desktop') { padding: 0 $spacing-small; }
 
     .inner {
         position: relative;
         padding-bottom: $spacing-large;
+        max-width: $site-width;
+        min-height: 100vh;
+        margin: 0 $spacing-medium;
+        background: $c-bg--light;
+        box-shadow: $shadow--large;
+
+        @include media('screen', '<desktop') { margin: 0 auto; }
     }
 
 }

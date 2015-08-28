@@ -3,7 +3,6 @@
 ==================================== */
 var autoprefixer    = require('autoprefixer');
 var csswring        = require('csswring');
-var cssgrace        = require('cssgrace');
 
 var paths = {
     source: {
@@ -45,7 +44,6 @@ module.exports = {
             },
             postcss: [
                 autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', "ie 9"]}),
-                cssgrace,
                 csswring
             ]
         }

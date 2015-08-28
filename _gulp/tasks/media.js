@@ -27,4 +27,7 @@ gulp.task('media', function() {
         .pipe(svgstore())
         .pipe(gulp.dest( config.dest ))
         .pipe(browserSync.reload({stream:true}))
+        
+    gulp.src( '_source/media/*.{png,jpg,gif}')
+        .pipe(gulp.dest( config.dest));
 });

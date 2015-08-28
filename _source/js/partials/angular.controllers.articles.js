@@ -18,9 +18,6 @@ function articleCtrl($scope, $stateParams, $http, $markdown) {
     })[0];
 
     function urlMatch(array,url) {
-
-        var url = $object.chapter;
-
         if (array) {
             for (var i=0; i < array.length; i++) {
                 if(array[i].url === url) {
@@ -38,6 +35,30 @@ function articleCtrl($scope, $stateParams, $http, $markdown) {
     var titles = {
         article: $node.title || $node.name,
         chapter: urlMatch($node.chapters,$object.chapter)
+    }
+
+    // Navigation
+
+    if($node.chapters) {
+
+        var next,prev,currentIndex,nextIndex,prevIndex;
+
+        function getChapterIndex() {
+            var a = $node.chapters;
+            var b = $object.chapter;
+            var c;
+
+            for(var i = 0; i < a.length; i++) {
+                if(a[i].url === b) {
+                    return i;
+                }
+            }
+        };
+        currentIndex = getChapterIndex();
+        prevIndex = currentIndex - 1;
+        prev = $node.chapters[prevIndex];
+        nextIndex = currentIndex + 1;
+        next = $node.chapters[nextIndex];
     }
 
     // Filename
@@ -61,7 +82,10 @@ function articleCtrl($scope, $stateParams, $http, $markdown) {
     $scope.file = $file;
     $scope.icon = $node.icon;
     $scope.array = $node;
-    $scope.icon = $node.icon;
+    $scope.navigation = {
+        prev:prev,
+        next:next
+    };
 
     $http.get($file)
         .success(function(data) {

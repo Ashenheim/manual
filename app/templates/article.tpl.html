@@ -8,6 +8,11 @@
     <div class="article__content" content-watch content="content"></div>
 
     <footer class="article__footer">
+        <div ng-if="navigation.prev || navigation.next" class="article__navigation">
+            <a ng-if="navigation.prev.url" ui-sref="articles.chapters({ article: array.url, chapter: navigation.prev.url })" class="previous" ng-bind="navigation.prev.name"></a>
+            <a ng-if="navigation.next.url" ui-sref="articles.chapters({ article: array.url, chapter: navigation.next.url })" class="next" ng-bind="navigation.next.name"></a>
+        </div>
+
         <p>
             <small><a href="/{{file}}" ng-bind="'/' + file" target="_blank"></a></small>
         </p>

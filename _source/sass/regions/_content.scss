@@ -39,7 +39,7 @@
 
     &__header {
         @include padding($spacing-large null);
-        @include linear-gradient(left, $c-main, $c-sec);
+        background: $c-main;
         margin-bottom: $spacing-large;
         border-bottom: 1px solid $c-bg;
         color: $white;
@@ -50,8 +50,6 @@
     &__content {
         padding-bottom: $spacing-large;
 
-
-
         .error {
             color: desaturate(red, 20%);
             text-align: center;
@@ -61,7 +59,8 @@
     }
 
     &__footer {
-        a { color: $c-fg--light; }
+        border-top: 1px solid $c-bg--dark;
+        small a { color: $c-fg--light; opacity: .1; }
     }
 
     /* ------------------------------
@@ -80,6 +79,13 @@
         z-index: 2;
         text-align: center;
         font-size: 2em;
+    }
+
+    &__navigation {
+        @include clearfix;
+        padding: $gutter 0;
+        .previous { float: left; display: block; }
+        .next { float: right; display: block; }
     }
 
 }

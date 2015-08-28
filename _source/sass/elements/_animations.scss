@@ -3,16 +3,16 @@
 ==================================== */
 
 .site-content {
-    overflow: hidden;
     position: relative;
     min-height: calc(100vh - 20px);
+    overflow: hidden;
 }
 
 [ui-view] {
 
     &.ng-enter,
     &.ng-leave {
-        transition: all $easing;
+        transition: all 450ms $ease-in-out-cubic;
         position: absolute !important;
         left: 0;
         right: 0;
@@ -22,9 +22,9 @@
     }
 
     &.ng-enter.ng-enter-active { transition-delay: 150ms; }
-    &.ng-enter        { opacity: 0; }
-    &.ng-enter-active { opacity: 1; }
-    &.ng-leave        { opacity: 1; }
-    &.ng-leave-active { opacity: 0; }
+    &.ng-enter        { opacity: 0; transform: translateX(-300px); }
+    &.ng-enter-active { opacity: 1; transform: none; }
+    &.ng-leave        { opacity: 1; transform: none; }
+    &.ng-leave-active { opacity: 0; transform: translateX(300px); }
 
 }

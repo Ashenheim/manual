@@ -1,6 +1,6 @@
 // Colors
 // $c-main				: hsla(random(365), 75, 30, 1); // Random color (╯°□°）╯︵ ┻━┻
-$c-main        		: #EC1443;
+$c-main        			: #DA3610;
 // $c-main        		: #00c969;
 // $c-main        		: #00BCD4;
 // $c-main        		: #3F51B5;
@@ -8,11 +8,6 @@ $c-main        		: #EC1443;
 $c-main--light 		: lighten($c-main,10%);
 $c-main--lighter	: lighten(saturate($c-main,100%),30%);
 $c-main--dark  		: saturate(darken($c-main,10%),20%);
-
-$c-sec				: adjust-hue($c-main, 35);
-$c-sec--light 		: lighten($c-sec,10%);
-$c-sec--lighter		: lighten(saturate($c-sec,100%),30%);
-$c-sec--dark  		: saturate(darken($c-sec,10%),20%);
 
 $c-accent			: #CFD8DC;
 $c-accent--light	: #ECEFF1;

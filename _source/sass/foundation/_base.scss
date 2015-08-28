@@ -10,7 +10,7 @@ html,
 body {
     font-family: $font-family;
     font-size: $font-size;
-    background: $c-bg;
+    background: $c-bg url("../media/background-image.png") repeat top center;
     color: $c-fg;
 }
 
@@ -22,7 +22,7 @@ html {
 .site-wrap {
     position: relative;
     z-index: 1;
-    padding: $spacing-small;
+    // padding: $spacing-small;
 }
 
 ::selection {

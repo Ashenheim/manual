@@ -11,6 +11,9 @@ articles:
   - name: "@for & @each"
   - name: SASS Maps
 
+- name: Stylus
+  icon: stylus
+
 - name: Bower
   icon: bower
 
